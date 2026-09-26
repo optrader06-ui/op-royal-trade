@@ -35,12 +35,12 @@
 
 <div class="row">
 <span>Liquidity Sweep</span>
-<span class="yellow">WAITING</span>
+<span id="liquiditySweep" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>MSS + Displacement</span>
-<span class="yellow">WAITING</span>
+<span id="mssDisplacement" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
@@ -49,3 +49,251 @@
 </div>
 
 </div>
+
+<div class="section">Trade Signal</div>
+
+<div class="card">
+
+<div class="row">
+<span>Signal</span>
+<span id="tradeSignal" class="yellow">NO ACTIVE SIGNAL</span>
+</div>
+
+<div class="row">
+<span>Entry</span>
+<span id="entry" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Stop Loss</span>
+<span id="sl" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Take Profit</span>
+<span id="tp" class="yellow">WAITING</span>
+</div>
+
+</div>
+
+<div class="section">Engine Status</div>
+
+<div class="card">
+
+<div class="row">
+<span>Data</span>
+<span id="engineStatus" class="yellow">CONNECTING...</span>
+</div>
+
+</div>
+
+<script>
+const OP_WORKER="https://icy-snow-263a.optrader06.workers.dev";
+
+function setText(id,value){
+  const el=document.getElementById(id);
+  if(el)el.textContent=value;
+}
+
+async function loadXAU(){
+  try{
+    const url=OP_WORKER+
+      "/?symbol=XAU%2FUSD&interval=15min&outputsize=100";
+
+    const response=await fetch(url,{cache:"no-store"});
+    const data=await response.json();
+
+    if(!data.values||!Array.isArray(data.values)){
+      setText("engineStatus","DATA ERROR");
+      return;
+    }
+
+    const candles=data.values;
+
+    if(candles.length<10){
+      setText("engineStatus","WAITING DATA");
+      return;
+    }
+
+    const current=candles[0];
+    const previous=candles[1];
+
+    const high=Number(current.high);
+    const low=Number(current.low);
+    const close=Number(current.close);
+    const open=Number(current.open);
+
+    const prevHigh=Number(previous.high);
+    const prevLow=Number(previous.low);
+
+    if(
+      !Number.isFinite(high)||
+      !Number.isFinite(low)||
+      !Number.isFinite(close)||
+      !Number.isFinite(open)
+    ){
+      setText("engineStatus","INVALID DATA");
+      return;
+    }
+
+    let sweep="WAITING";
+
+    if(high>prevHigh&&close<prevHigh){
+      sweep="BEARISH SWEEP";
+    }
+
+    if(low<prevLow&&close>prevLow){
+      sweep="BULLISH SWEEP";
+    }
+
+    setText("liquiditySweep",sweep);
+
+    let mss="WAITING";
+    let displacement="WAITING";
+
+    if(sweep==="BULLISH SWEEP"&&close>prevHigh){
+      mss="BULLISH";
+    }
+
+    if(sweep==="BEARISH SWEEP"&&close<prevLow){
+      mss="BEARISH";
+    }
+
+    const range=high-low;
+    const body=Math.abs(close-open);
+
+    if(range>0){
+      const bodyStrength=body/range;
+
+      if(bodyStrength>=0.60){
+        if(close>open){
+          displacement="BULLISH";
+        }
+
+        if(close<open){
+          displacement="BEARISH";
+        }
+      }
+    }
+
+    let fvg="WAITING";
+    let fvgDirection="WAITING";
+
+    if(candles.length>=3){
+
+      const c1=candles[2];
+      const c3=candles[0];
+
+      const h1=Number(c1.high);
+      const l1=Number(c1.low);
+      const h3=Number(c3.high);
+      const l3=Number(c3.low);
+
+      if(l3>h1){
+        fvg="FORMED";
+        fvgDirection="BULLISH";
+      }
+
+      if(h3<l1){
+        fvg="FORMED";
+        fvgDirection="BEARISH";
+      }
+    }
+
+    setText("fvg",fvg);
+    setText("fvgDirection",fvgDirection);
+
+    let ob="WAITING";
+    let obDirection="WAITING";
+
+    if(displacement==="BULLISH"){
+      ob="FORMED";
+      obDirection="BULLISH";
+    }
+
+    if(displacement==="BEARISH"){
+      ob="FORMED";
+      obDirection="BEARISH";
+    }
+
+    setText("ob",ob);
+    setText("obDirection",obDirection);
+
+    let setup=false;
+
+    if(
+      sweep!=="WAITING"&&
+      mss!=="WAITING"&&
+      displacement!=="WAITING"&&
+      fvg==="FORMED"
+    ){
+      setup=true;
+    }
+
+    setText(
+      "mssDisplacement",
+      mss!=="WAITING"&&displacement!=="WAITING"
+      ?"CONFIRMED"
+      :"WAITING"
+    );
+
+    setText(
+      "setupStatus",
+      setup?"READY":"WAITING"
+    );
+
+    if(setup){
+
+      const entry=close;
+      let stop;
+      let target;
+
+      if(mss==="BULLISH"){
+        stop=low;
+        target=entry+(entry-stop)*2;
+
+        setText("tradeSignal","BUY");
+      }
+
+      if(mss==="BEARISH"){
+        stop=high;
+        target=entry-(stop-entry)*2;
+
+        setText("tradeSignal","SELL");
+      }
+
+      setText("entry",entry.toFixed(2));
+      setText("sl",stop.toFixed(2));
+      setText("tp",target.toFixed(2));
+
+    }else{
+
+      setText("tradeSignal","NO ACTIVE SIGNAL");
+      setText("entry","WAITING");
+      setText("sl","WAITING");
+      setText("tp","WAITING");
+    }
+
+    setText(
+      "engineStatus",
+      "LIVE • XAU/USD • 15M"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    setText(
+      "engineStatus",
+      "CONNECTION ERROR"
+    );
+  }
+}
+
+loadXAU();
+
+setInterval(loadXAU,60000);
+</script>
+
+</body>
+</html>
