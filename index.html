@@ -30,10 +30,10 @@ body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
 .signal{border-color:#19d37b}
 .signal-title{font-size:21px;font-weight:800;margin-bottom:12px}
 .level{display:flex;justify-content:space-between;margin:9px 0}
+.note{font-size:12px;color:#7f8998;line-height:1.5}
 .nav{position:fixed;bottom:0;left:0;right:0;background:#10151d;border-top:1px solid #252b35;display:flex;justify-content:space-around;padding:10px 4px;z-index:10}
 .nav div{text-align:center;color:#8e98a8;font-size:11px}
 .nav b{display:block;font-size:20px;margin-bottom:3px}
-.note{font-size:12px;color:#7f8998;line-height:1.5}
 </style>
 </head>
 
@@ -41,7 +41,7 @@ body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
 
 <div class="header">
 <div class="logo">OP ROYAL TRADE</div>
-<div class="sub">Smart Liquidity Trading System</div>
+<div class="sub">Liquidity → MSS → Displacement System</div>
 </div>
 
 <div class="container">
@@ -57,7 +57,7 @@ body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
 <div class="card market">
 <div>
 <div class="title" id="marketName">XAUUSD</div>
-<div class="price">LIQUIDITY ENGINE</div>
+<div class="price">SIGNAL ENGINE</div>
 </div>
 <div class="badge">ACTIVE</div>
 </div>
@@ -68,95 +68,101 @@ body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
 <div class="tv" id="chartBox"></div>
 </div>
 
-<div class="section">Liquidity Levels</div>
+<div class="section">Liquidity</div>
 
 <div class="card">
 
 <div class="row">
-<span>Previous Day High</span>
-<span id="pdh" class="yellow">WAITING</span>
+<span>PDH / PDL</span>
+<span id="pdhpdl" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>Previous Day Low</span>
-<span id="pdl" class="yellow">WAITING</span>
+<span>Asian High / Low</span>
+<span id="asian" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>Asian High</span>
-<span id="ah" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Asian Low</span>
-<span id="al" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Swing High</span>
-<span id="sh" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Swing Low</span>
-<span id="sl" class="yellow">WAITING</span>
+<span>Swing High / Low</span>
+<span id="swing" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Equal High / Low</span>
-<span id="eq" class="yellow">WAITING</span>
+<span id="equal" class="yellow">WAITING</span>
 </div>
-
-</div>
-
-<div class="section">Liquidity Sweep</div>
-
-<div class="card">
-
-<div class="row">
-<span>Buy-side Liquidity</span>
-<span id="buySweep" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sell-side Liquidity</span>
-<span id="sellSweep" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep Confirmation</span>
-<span id="sweepStatus" class="yellow">WAITING</span>
-</div>
-
-<p class="note">
-Sweep means price takes a liquidity level and then reverses.
-Actual confirmation will be connected to market candle data in the next stages.
-</p>
-
-</div>
-
-<div class="section">Smart Analysis</div>
-
-<div class="card">
 
 <div class="row">
 <span>Liquidity Sweep</span>
-<span id="analysisSweep" class="yellow">WAITING</span>
+<span id="sweep" class="yellow">WAITING</span>
+</div>
+
+</div>
+
+<div class="section">Market Structure</div>
+
+<div class="card">
+
+<div class="row">
+<span>Previous Structure</span>
+<span id="structure" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>MSS</span>
-<span class="yellow">WAITING</span>
+<span>MSS Direction</span>
+<span id="mssDirection" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS Confirmation</span>
+<span id="mss" class="yellow">WAITING</span>
+</div>
+
+</div>
+
+<div class="section">Displacement</div>
+
+<div class="card">
+
+<div class="row">
+<span>Candle Expansion</span>
+<span id="expansion" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Body Strength</span>
+<span id="bodyStrength" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Displacement</span>
-<span class="yellow">WAITING</span>
+<span id="displacement" class="yellow">WAITING</span>
+</div>
+
+</div>
+
+<div class="section">Signal Sequence</div>
+
+<div class="card">
+
+<div class="row">
+<span>1. Liquidity Sweep</span>
+<span id="s1" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>FVG / OB</span>
-<span class="yellow">WAITING</span>
+<span>2. MSS</span>
+<span id="s2" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>3. Displacement</span>
+<span id="s3" class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>4. FVG / OB</span>
+<span id="s4" class="yellow">WAITING</span>
 </div>
 
 </div>
@@ -165,21 +171,53 @@ Actual confirmation will be connected to market candle data in the next stages.
 
 <div class="card signal">
 
-<div class="signal-title green">NO ACTIVE SIGNAL</div>
+<div id="signalTitle" class="signal-title green">
+NO ACTIVE SIGNAL
+</div>
 
 <div class="level">
 <span>Entry</span>
-<b>—</b>
+<b id="entry">—</b>
 </div>
 
 <div class="level">
 <span>Stop Loss</span>
-<b class="red">—</b>
+<b id="stop" class="red">—</b>
 </div>
 
 <div class="level">
 <span>Take Profit</span>
-<b class="green">—</b>
+<b id="target" class="green">—</b>
+</div>
+
+<p class="note">
+A trade signal will only become active after the required sequence is confirmed.
+</p>
+
+</div>
+
+<div class="section">Engine Status</div>
+
+<div class="card">
+
+<div class="row">
+<span>Liquidity Engine</span>
+<span class="green">READY</span>
+</div>
+
+<div class="row">
+<span>MSS Engine</span>
+<span class="green">READY</span>
+</div>
+
+<div class="row">
+<span>Displacement Engine</span>
+<span class="green">READY</span>
+</div>
+
+<div class="row">
+<span>Signal Engine</span>
+<span class="green">READY</span>
 </div>
 
 </div>
@@ -239,6 +277,28 @@ box.appendChild(wrap);
 
 }
 
+function resetEngine(){
+
+var ids=[
+"pdhpdl","asian","swing","equal","sweep",
+"structure","mssDirection","mss",
+"expansion","bodyStrength","displacement",
+"s1","s2","s3","s4"
+];
+
+for(var i=0;i<ids.length;i++){
+document.getElementById(ids[i]).innerText="WAITING";
+document.getElementById(ids[i]).className="yellow";
+}
+
+document.getElementById("signalTitle").innerText="NO ACTIVE SIGNAL";
+document.getElementById("signalTitle").className="signal-title green";
+document.getElementById("entry").innerText="—";
+document.getElementById("stop").innerText="—";
+document.getElementById("target").innerText="—";
+
+}
+
 function changeMarket(symbol,name,id){
 
 document.getElementById("marketName").innerText=name;
@@ -250,23 +310,8 @@ document.getElementById("bank").classList.remove("active");
 
 document.getElementById(id).classList.add("active");
 
-resetLiquidity();
+resetEngine();
 loadChart(symbol);
-
-}
-
-function resetLiquidity(){
-
-var ids=["pdh","pdl","ah","al","sh","sl","eq","buySweep","sellSweep","sweepStatus","analysisSweep"];
-
-for(var i=0;i<ids.length;i++){
-
-var el=document.getElementById(ids[i]);
-
-el.innerText="WAITING";
-el.className="yellow";
-
-}
 
 }
 
