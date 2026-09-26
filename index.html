@@ -3,36 +3,10 @@
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OP ROYAL TRADE</title>
-
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
-.header{padding:20px 16px;background:#10151d;border-bottom:1px solid #252d38}
-.logo{font-size:24px;font-weight:800}
-.sub{color:#8e98a8;font-size:13px;margin-top:5px}
-.container{padding:14px;padding-bottom:80px}
-.section{font-size:19px;font-weight:700;margin:18px 0 12px}
-.card{background:#111720;border:1px solid #252d38;border-radius:16px;padding:15px;margin-bottom:13px}
-.market{display:flex;justify-content:space-between;align-items:center}
-.title{font-size:13px;color:#9ba5b5;margin-bottom:6px}
-.price{font-size:25px;font-weight:700}
-.badge{padding:7px 11px;border-radius:20px;background:#123b29;color:#19d37b;font-size:12px}
-.chart{height:430px;padding:0;overflow:hidden}
-.tv{height:100%;width:100%}
-.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #252b35}
-.row:last-child{border-bottom:0}
-.green{color:#19d37b}
-.red{color:#ff5263}
-.signal{border-color:#19d37b}
-.signal-title{font-size:21px;font-weight:800;margin-bottom:12px}
-.level{display:flex;justify-content:space-between;margin:9px 0}
-.status{color:#19d37b}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#10151d;border-top:1px solid #252b35;display:flex;justify-content:space-around;padding:10px 4px;z-index:10}
-.nav div{text-align:center;color:#8e98a8;font-size:11px}
-.nav b{display:block;font-size:20px;margin-bottom:3px}
+*{box-sizing:border-box}body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}.header{padding:20px 16px;background:#10151d;border-bottom:1px solid #252d38}.logo{font-size:24px;font-weight:800}.sub{color:#8e98a8;font-size:13px;margin-top:5px}.container{padding:14px;padding-bottom:80px}.section{font-size:19px;font-weight:700;margin:18px 0 12px}.selector{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}.selector button{border:1px solid #303946;background:#151b24;color:#aeb7c5;border-radius:12px;padding:12px 15px;white-space:nowrap;font-weight:700}.selector button.active{background:#19d37b;color:#07100b;border-color:#19d37b}.card{background:#111720;border:1px solid #252d38;border-radius:16px;padding:15px;margin-bottom:13px}.market{display:flex;justify-content:space-between;align-items:center}.title{font-size:13px;color:#9ba5b5;margin-bottom:6px}.price{font-size:24px;font-weight:700}.badge{padding:7px 11px;border-radius:20px;background:#123b29;color:#19d37b;font-size:12px}.chart{height:430px;padding:0;overflow:hidden}.tv{height:100%;width:100%}.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #252b35}.row:last-child{border-bottom:0}.green{color:#19d37b}.red{color:#ff5263}.signal{border-color:#19d37b}.signal-title{font-size:21px;font-weight:800;margin-bottom:12px}.level{display:flex;justify-content:space-between;margin:9px 0}.status{color:#19d37b}.nav{position:fixed;bottom:0;left:0;right:0;background:#10151d;border-top:1px solid #252b35;display:flex;justify-content:space-around;padding:10px 4px;z-index:10}.nav div{text-align:center;color:#8e98a8;font-size:11px}.nav b{display:block;font-size:20px;margin-bottom:3px}
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -44,99 +18,54 @@ body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
 
 <div class="section">Markets</div>
 
+<div class="selector">
+<button id="xau" class="active" onclick="changeMarket('OANDA:XAUUSD','XAUUSD','xau')">XAUUSD</button>
+<button id="nifty" onclick="changeMarket('NSE:NIFTY','NIFTY 50','nifty')">NIFTY 50</button>
+<button id="bank" onclick="changeMarket('NSE:BANKNIFTY','BANKNIFTY','bank')">BANKNIFTY</button>
+</div>
+
 <div class="card market">
 <div>
-<div class="title">XAUUSD</div>
-<div class="price">LIVE CHART</div>
+<div class="title" id="marketName">XAUUSD</div>
+<div class="price" id="marketStatus">LIVE CHART</div>
 </div>
-<div class="badge">XAUUSD</div>
+<div class="badge">MARKET</div>
 </div>
 
-<div class="section">XAUUSD Live Chart</div>
+<div class="section" id="chartTitle">XAUUSD Live Chart</div>
 
 <div class="card chart">
-<div class="tv">
-
-<div class="tradingview-widget-container" style="height:100%;width:100%">
-<div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-
-<script type="text/javascript"
-src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-async>
-
-{
-"autosize":true,
-"symbol":"OANDA:XAUUSD",
-"interval":"15",
-"timezone":"Asia/Kolkata",
-"theme":"dark",
-"style":"1",
-"locale":"en",
-"allow_symbol_change":true,
-"hide_top_toolbar":false,
-"hide_side_toolbar":true,
-"hide_legend":false,
-"hide_volume":false,
-"save_image":false,
-"calendar":false,
-"support_host":"https://www.tradingview.com"
-}
-
-</script>
-</div>
-
-</div>
+<div class="tv" id="chartBox"></div>
 </div>
 
 <div class="section">Smart Analysis</div>
 
 <div class="card">
-
 <div class="row">
 <span>Liquidity Sweep</span>
 <span class="status">WAITING</span>
 </div>
-
 <div class="row">
 <span>MSS</span>
 <span class="status">WAITING</span>
 </div>
-
 <div class="row">
 <span>Displacement</span>
 <span class="status">WAITING</span>
 </div>
-
 <div class="row">
 <span>FVG / OB</span>
 <span class="status">WAITING</span>
 </div>
-
 </div>
 
 <div class="section">Trade Signal</div>
 
 <div class="card signal">
-
-<div class="signal-title green">
-NO ACTIVE SIGNAL
-</div>
-
-<div class="level">
-<span>Entry</span>
-<b>—</b>
-</div>
-
-<div class="level">
-<span>Stop Loss</span>
-<b class="red">—</b>
-</div>
-
-<div class="level">
-<span>Take Profit</span>
-<b class="green">—</b>
-</div>
-
+<div class="signal-title green">NO ACTIVE SIGNAL</div>
+<div class="level"><span>Entry</span><b>—</b></div>
+<div class="level"><span>Stop Loss</span><b class="red">—</b></div>
+<div class="level"><span>Take Profit</span><b class="green">—</b></div>
 </div>
 
 </div>
@@ -147,6 +76,58 @@ NO ACTIVE SIGNAL
 <div><b>⚡</b>Signals</div>
 <div><b>⚙</b>Settings</div>
 </div>
+
+<script>
+function loadChart(symbol){
+var box=document.getElementById("chartBox");
+box.innerHTML="";
+var wrap=document.createElement("div");
+wrap.className="tradingview-widget-container";
+wrap.style.height="100%";
+wrap.style.width="100%";
+var widget=document.createElement("div");
+widget.className="tradingview-widget-container__widget";
+widget.style.height="100%";
+widget.style.width="100%";
+var script=document.createElement("script");
+script.type="text/javascript";
+script.src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+script.async=true;
+script.innerHTML=JSON.stringify({
+autosize:true,
+symbol:symbol,
+interval:"15",
+timezone:"Asia/Kolkata",
+theme:"dark",
+style:"1",
+locale:"en",
+allow_symbol_change:false,
+hide_top_toolbar:false,
+hide_side_toolbar:true,
+hide_legend:false,
+hide_volume:false,
+save_image:false,
+calendar:false,
+support_host:"https://www.tradingview.com"
+});
+wrap.appendChild(widget);
+wrap.appendChild(script);
+box.appendChild(wrap);
+}
+
+function changeMarket(symbol,name,id){
+document.getElementById("marketName").innerText=name;
+document.getElementById("chartTitle").innerText=name+" Live Chart";
+document.getElementById("marketStatus").innerText="LIVE CHART";
+document.getElementById("xau").classList.remove("active");
+document.getElementById("nifty").classList.remove("active");
+document.getElementById("bank").classList.remove("active");
+document.getElementById(id).classList.add("active");
+loadChart(symbol);
+}
+
+loadChart("OANDA:XAUUSD");
+</script>
 
 </body>
 </html>
