@@ -1,57 +1,51 @@
-export default {
-  async fetch(request, env) {
-    const cors = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
-    };
+<div class="section">FVG + Order Block</div>
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: cors
-      });
-    }
+<div class="card">
 
-    try {
-      const url = new URL(request.url);
+<div class="row">
+<span>Fair Value Gap</span>
+<span id="fvg" class="yellow">WAITING</span>
+</div>
 
-      const symbol = url.searchParams.get("symbol") || "XAU/USD";
-      const interval = url.searchParams.get("interval") || "15min";
-      const outputsize = url.searchParams.get("outputsize") || "100";
+<div class="row">
+<span>FVG Direction</span>
+<span id="fvgDirection" class="yellow">WAITING</span>
+</div>
 
-      const apiUrl =
-        "https://api.twelvedata.com/time_series" +
-        "?symbol=" + encodeURIComponent(symbol) +
-        "&interval=" + encodeURIComponent(interval) +
-        "&outputsize=" + encodeURIComponent(outputsize) +
-        "&apikey=" + encodeURIComponent(env.TWELVE_API_KEY);
+<div class="row">
+<span>Order Block</span>
+<span id="ob" class="yellow">WAITING</span>
+</div>
 
-      const apiResponse = await fetch(apiUrl);
-      const data = await apiResponse.json();
+<div class="row">
+<span>OB Direction</span>
+<span id="obDirection" class="yellow">WAITING</span>
+</div>
 
-      return new Response(JSON.stringify(data), {
-        status: apiResponse.status,
-        headers: {
-          ...cors,
-          "Content-Type": "application/json"
-        }
-      });
+<div class="row">
+<span>Entry Zone</span>
+<span id="entryZone" class="yellow">WAITING</span>
+</div>
 
-    } catch (error) {
-      return new Response(
-        JSON.stringify({
-          status: "error",
-          message: error.message
-        }),
-        {
-          status: 500,
-          headers: {
-            ...cors,
-            "Content-Type": "application/json"
-          }
-        }
-      );
-    }
-  }
-};
+</div>
+
+<div class="section">Final Setup Check</div>
+
+<div class="card">
+
+<div class="row">
+<span>Liquidity Sweep</span>
+<span class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS + Displacement</span>
+<span class="yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>FVG / OB</span>
+<span id="setupStatus" class="yellow">WAITING</span>
+</div>
+
+</div>
