@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OP ROYAL TRADE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b10;color:#fff;font-family:Arial,sans-serif}
+.header{padding:22px 18px;background:#10151d;border-bottom:1px solid #252b35}
+.logo{font-size:25px;font-weight:800}
+.sub{color:#8e98a8;font-size:13px;margin-top:5px}
+.container{padding:16px}
+.card{background:#111720;border:1px solid #252d38;border-radius:16px;padding:16px;margin-bottom:14px}
+.title{font-size:14px;color:#9ba5b5;margin-bottom:10px}
+.price{font-size:28px;font-weight:700}
+.green{color:#19d37b}
+.red{color:#ff5263}
+.market{display:flex;justify-content:space-between;align-items:center}
+.badge{padding:7px 11px;border-radius:20px;background:#123b29;color:#19d37b;font-size:12px}
+.section{font-size:18px;font-weight:700;margin:20px 0 12px}
+.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #252b35}
+.row:last-child{border-bottom:0}
+.status{color:#19d37b}
+.signal{border:1px solid #19d37b;background:#0d2119}
+.signal-title{font-size:22px;font-weight:800;margin-bottom:12px}
+.level{display:flex;justify-content:space-between;margin:9px 0}
+.button{width:100%;border:0;border-radius:12px;padding:14px;background:#fff;color:#000;font-size:16px;font-weight:700;margin-top:12px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#10151d;border-top:1px solid #252b35;display:flex;justify-content:space-around;padding:12px 5px}
+.nav div{text-align:center;color:#8e98a8;font-size:11px}
+.nav b{display:block;font-size:20px;margin-bottom:3px}
+.space{height:75px}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">OP ROYAL TRADE</div>
+<div class="sub">Smart Liquidity Trading System</div>
+</div>
+
+<div class="container">
+
+<div class="section">Markets</div>
+
+<div class="card market">
+<div>
+<div class="title">XAUUSD</div>
+<div class="price">$2,650.20</div>
+</div>
+<div class="badge">WATCH</div>
+</div>
+
+<div class="card market">
+<div>
+<div class="title">NIFTY 50</div>
+<div class="price">25,100</div>
+</div>
+<div class="badge">WATCH</div>
+</div>
+
+<div class="card market">
+<div>
+<div class="title">BANKNIFTY</div>
+<div class="price">54,200</div>
+</div>
+<div class="badge">WATCH</div>
+</div>
+
+<div class="section">XAUUSD Analysis</div>
+
+<div class="card">
+<div class="row">
+<span>Liquidity Sweep</span>
+<span class="status">✓ CONFIRMED</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span class="status">✓ CONFIRMED</span>
+</div>
+
+<div class="row">
+<span>Displacement</span>
+<span class="status">✓ CONFIRMED</span>
+</div>
+
+<div class="row">
+<span>FVG / OB</span>
+<span class="status">✓ READY</span>
+</div>
+</div>
+
+<div class="card signal">
+<div class="title">TRADE SIGNAL</div>
+<div class="signal-title green">BUY XAUUSD</div>
+
+<div class="level">
+<span>Entry</span>
+<b>2650.20</b>
+</div>
+
+<div class="level">
+<span>Stop Loss</span>
+<b class="red">2643.00</b>
+</div>
+
+<div class="level">
+<span>Take Profit 1</span>
+<b class="green">2660.00</b>
+</div>
+
+<div class="level">
+<span>Take Profit 2</span>
+<b class="green">2670.00</b>
+</div>
+
+<button class="button">🔔 SET ALERT</button>
+</div>
+
+<div class="section">System Status</div>
+
+<div class="card">
+<div class="row">
+<span>Liquidity Engine</span>
+<span class="status">ONLINE</span>
+</div>
+
+<div class="row">
+<span>Signal Engine</span>
+<span class="status">ONLINE</span>
+</div>
+
+<div class="row">
+<span>Notifications</span>
+<span class="status">READY</span>
+</div>
+</div>
+
+<div class="space"></div>
+</div>
+
+<div class="nav">
+<div><b>⌂</b>Home</div>
+<div><b>◈</b>Markets</div>
+<div><b>⚡</b>Signals</div>
+<div><b>⚙</b>Settings</div>
+</div>
+
+</body>
+</html>
