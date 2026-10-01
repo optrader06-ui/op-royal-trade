@@ -1,272 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>OP ROYAL TRADE</title>
 
 <style>
-
-*{
-box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
 margin:0;
-background:#070b10;
-color:#e9edf2;
+background:#080b10;
+color:#fff;
 font-family:Arial,sans-serif;
-padding:12px;
 }
-
 .container{
+width:100%;
 max-width:700px;
 margin:auto;
+padding:12px;
 }
-
 .header{
-background:#0d141c;
-border:1px solid #27313d;
-border-radius:16px;
-padding:18px;
-margin-bottom:12px;
 text-align:center;
+padding:12px 5px 16px;
 }
-
 .logo{
-font-size:24px;
-font-weight:bold;
-color:#f1c75b;
+font-size:25px;
+font-weight:800;
 letter-spacing:1px;
 }
-
 .sub{
 font-size:11px;
-color:#8995a3;
-margin-top:6px;
+color:#8f9aaa;
+margin-top:5px;
 }
-
 .card{
-background:#0d141c;
-border:1px solid #27313d;
+background:#11161e;
+border:1px solid #202833;
 border-radius:14px;
 padding:14px;
 margin-bottom:12px;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
 }
-
 .title{
 font-size:14px;
-font-weight:bold;
-color:#f1c75b;
+font-weight:700;
 margin-bottom:12px;
 }
-
 .row{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:9px 0;
-border-bottom:1px solid #1b242e;
+padding:8px 0;
+border-bottom:1px solid #1d242d;
 font-size:13px;
 }
-
-.row:last-child{
-border-bottom:0;
-}
-
+.row:last-child{border-bottom:0}
 .price{
-font-size:30px;
-font-weight:bold;
-text-align:center;
-margin:8px 0;
+font-size:29px;
+font-weight:800;
 }
-
 .live{
 font-size:11px;
-text-align:center;
-color:#35d07f;
+color:#22c55e;
+margin-top:3px;
 }
+.small{
+font-size:11px;
+color:#8f9aaa;
+line-height:1.5;
+}
+.green{color:#22c55e}
+.red{color:#ef4444}
+.yellow{color:#facc15}
+.blue{color:#38bdf8}
+.purple{color:#c084fc}
+.orange{color:#fb923c}
+.gray{color:#9ca3af}
 
 .chartBox{
-background:#080d13;
-border:1px solid #27313d;
+background:#090d13;
+border:1px solid #202833;
 border-radius:12px;
 padding:5px;
 overflow:hidden;
 }
-
 #chart{
 width:100%;
-height:350px;
+height:330px;
 display:block;
 }
 
-.small{
-font-size:10px;
-color:#7f8b98;
+.signal{
+padding:14px;
+border-radius:12px;
+text-align:center;
+font-size:19px;
+font-weight:800;
 margin-top:8px;
 }
-
-.green{
-color:#35d07f;
-}
-
-.red{
-color:#ff6262;
-}
-
-.yellow{
-color:#f1c75b;
-}
-
-.blue{
-color:#62a8ff;
-}
-
-.purple{
-color:#c084fc;
-}
-
-.orange{
-color:#ff9f43;
-}
-
-.gray{
-color:#8995a3;
-}
-
-.signal{
-text-align:center;
-padding:15px;
-border-radius:12px;
-font-size:22px;
-font-weight:bold;
-background:#111923;
-border:1px solid #27313d;
-}
-
 .buy{
-color:#35d07f;
-border-color:#35d07f;
+background:rgba(34,197,94,.12);
+border:1px solid #22c55e;
+color:#22c55e;
 }
-
 .sell{
-color:#ff6262;
-border-color:#ff6262;
+background:rgba(239,68,68,.12);
+border:1px solid #ef4444;
+color:#ef4444;
 }
-
 .wait{
-color:#f1c75b;
+background:rgba(250,204,21,.08);
+border:1px solid #facc15;
+color:#facc15;
 }
 
 .tradeGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
+gap:9px;
 }
-
 .tradeBox{
-background:#101821;
-border:1px solid #27313d;
+background:#0c1118;
+border:1px solid #202833;
 border-radius:10px;
 padding:12px;
-text-align:center;
 }
-
 .tradeLabel{
 font-size:10px;
-color:#8995a3;
+color:#8f9aaa;
 margin-bottom:5px;
 }
-
 .tradeValue{
-font-size:16px;
-font-weight:bold;
+font-size:17px;
+font-weight:800;
 }
 
 .notifyBox{
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#101821;
-border:1px solid #27313d;
+background:#0c1118;
+border:1px solid #202833;
 border-radius:10px;
 padding:12px;
-margin-top:10px;
 }
-
 .notifyText{
 font-size:13px;
+font-weight:700;
 }
-
 .toggle{
-width:54px;
-height:30px;
-background:#27313d;
+width:48px;
+height:25px;
+background:#303744;
 border-radius:20px;
 position:relative;
 cursor:pointer;
 }
-
-.toggle::after{
+.toggle:after{
 content:"";
-width:24px;
-height:24px;
-background:#8995a3;
+width:19px;
+height:19px;
+background:#fff;
 border-radius:50%;
 position:absolute;
 top:3px;
 left:3px;
 transition:.2s;
 }
-
 .toggle.on{
-background:#35d07f;
+background:#16a34a;
 }
-
-.toggle.on::after{
-left:27px;
-background:#ffffff;
+.toggle.on:after{
+left:26px;
 }
 
 button{
 width:100%;
 border:0;
 border-radius:10px;
-padding:13px;
-background:#f1c75b;
-color:#080b0f;
-font-weight:bold;
-font-size:14px;
-margin-top:10px;
+padding:12px;
+margin-top:9px;
+background:#18212d;
+color:#fff;
+font-weight:700;
+font-size:13px;
+cursor:pointer;
+}
+button:active{
+transform:scale(.98);
 }
 
 .status{
-font-size:12px;
 text-align:center;
-color:#8995a3;
+font-size:11px;
+color:#8f9aaa;
 margin-top:8px;
 }
 
 .legend{
 display:flex;
-gap:8px;
 flex-wrap:wrap;
+gap:8px;
 font-size:10px;
-color:#8995a3;
-margin-top:8px;
+color:#8f9aaa;
+padding:8px 2px;
 }
-
 .legend span{
-padding:4px 6px;
-border:1px solid #27313d;
-border-radius:6px;
+display:flex;
+align-items:center;
+gap:4px;
 }
-
+.dot{
+width:8px;
+height:8px;
+border-radius:50%;
+display:inline-block;
+}
 </style>
-
 </head>
 
 <body>
@@ -274,59 +224,36 @@ border-radius:6px;
 <div class="container">
 
 <div class="header">
-
-<div class="logo">
-OP ROYAL TRADE
+<div class="logo">OP ROYAL TRADE</div>
+<div class="sub">BIG PLAYER LIQUIDITY SYSTEM • XAU/USD • 15M</div>
 </div>
 
-<div class="sub">
-BIG PLAYER LIQUIDITY SYSTEM • XAU/USD • 15M
-</div>
+<div class="card">
+<div class="title">XAU/USD MARKET</div>
 
+<div class="price" id="price">WAITING</div>
+<div class="live" id="liveText">● CONNECTING...</div>
+
+<div class="row">
+<span>Last Candle</span>
+<span id="lastTime" class="gray">WAITING</span>
+</div>
 </div>
 
 
 <div class="card">
 
-<div class="title">
-XAU/USD MARKET
-</div>
-
-<div id="price" class="price">
-----
-</div>
-
-<div id="live" class="live">
-CONNECTING...
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="title">
-XAU/USD • 15M SMART MONEY CHART
-</div>
+<div class="title">SMART MONEY CHART</div>
 
 <div class="chartBox">
-
 <canvas id="chart"></canvas>
-
 </div>
 
 <div class="legend">
-
-<span>🟡 Liquidity</span>
-<span>🟢 Sweep</span>
-<span>🔵 MSS</span>
-<span>🟣 FVG</span>
-<span>🟠 HTF</span>
-
-</div>
-
-<div class="small">
-HTF Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
+<span><i class="dot" style="background:#22c55e"></i>BUY</span>
+<span><i class="dot" style="background:#ef4444"></i>SELL</span>
+<span><i class="dot" style="background:#facc15"></i>SWEEP</span>
+<span><i class="dot" style="background:#38bdf8"></i>MSS</span>
 </div>
 
 </div>
@@ -334,58 +261,56 @@ HTF Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
 
 <div class="card">
 
-<div class="title">
-HTF LIQUIDITY MAP
-</div>
+<div class="title">HTF LIQUIDITY MAP</div>
 
 <div class="row">
 <span>1H High</span>
-<span id="h1High" class="orange">----</span>
+<span id="h1High" class="blue">WAITING</span>
 </div>
 
 <div class="row">
 <span>1H Low</span>
-<span id="h1Low" class="orange">----</span>
+<span id="h1Low" class="blue">WAITING</span>
 </div>
 
 <div class="row">
 <span>4H High</span>
-<span id="h4High" class="orange">----</span>
+<span id="h4High" class="purple">WAITING</span>
 </div>
 
 <div class="row">
 <span>4H Low</span>
-<span id="h4Low" class="orange">----</span>
+<span id="h4Low" class="purple">WAITING</span>
 </div>
 
 <div class="row">
 <span>Previous Day High</span>
-<span id="pdh" class="yellow">----</span>
+<span id="pdh" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Previous Day Low</span>
-<span id="pdl" class="yellow">----</span>
+<span id="pdl" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Asian High</span>
-<span id="asianHigh" class="yellow">----</span>
+<span id="asianHigh" class="orange">WAITING</span>
 </div>
 
 <div class="row">
 <span>Asian Low</span>
-<span id="asianLow" class="yellow">----</span>
+<span id="asianLow" class="orange">WAITING</span>
 </div>
 
 <div class="row">
 <span>Swing High</span>
-<span id="swingHigh" class="yellow">----</span>
+<span id="swingHigh" class="gray">WAITING</span>
 </div>
 
 <div class="row">
 <span>Swing Low</span>
-<span id="swingLow" class="yellow">----</span>
+<span id="swingLow" class="gray">WAITING</span>
 </div>
 
 </div>
@@ -393,9 +318,7 @@ HTF LIQUIDITY MAP
 
 <div class="card">
 
-<div class="title">
-BIG PLAYER CONFIRMATION
-</div>
+<div class="title">BIG PLAYER CONFIRMATION</div>
 
 <div class="row">
 <span>Liquidity Sweep</span>
@@ -413,7 +336,7 @@ BIG PLAYER CONFIRMATION
 </div>
 
 <div class="row">
-<span>Fair Value Gap</span>
+<span>FVG</span>
 <span id="fvg" class="yellow">WAITING</span>
 </div>
 
@@ -432,13 +355,7 @@ BIG PLAYER CONFIRMATION
 
 <div class="card">
 
-<div class="title">
-FINAL SETUP CHECK
-</div>
-
-<div id="signal" class="signal wait">
-WAITING FOR SETUP
-</div>
+<div class="title">FINAL SETUP CHECK</div>
 
 <div class="row">
 <span>Liquidity Sweep</span>
@@ -451,8 +368,12 @@ WAITING FOR SETUP
 </div>
 
 <div class="row">
-<span>FVG / Order Block</span>
+<span>FVG / OB</span>
 <span id="finalFvg" class="yellow">WAITING</span>
+</div>
+
+<div id="signal" class="signal wait">
+NO ACTIVE SIGNAL
 </div>
 
 </div>
@@ -460,69 +381,39 @@ WAITING FOR SETUP
 
 <div class="card">
 
-<div class="title">
-TRADE PLAN
-</div>
+<div class="title">TRADE PLAN</div>
 
 <div class="tradeGrid">
 
 <div class="tradeBox">
-
-<div class="tradeLabel">
-ENTRY
-</div>
-
-<div id="entry" class="tradeValue blue">
-----
-</div>
-
+<div class="tradeLabel">ENTRY</div>
+<div id="entry" class="tradeValue yellow">WAITING</div>
 </div>
 
 <div class="tradeBox">
-
-<div class="tradeLabel">
-STOP LOSS
-</div>
-
-<div id="sl" class="tradeValue red">
-----
-</div>
-
+<div class="tradeLabel">STOP LOSS</div>
+<div id="sl" class="tradeValue red">WAITING</div>
 </div>
 
 <div class="tradeBox">
-
-<div class="tradeLabel">
-TP1
-</div>
-
-<div id="tp1" class="tradeValue green">
-----
-</div>
-
+<div class="tradeLabel">TAKE PROFIT 1</div>
+<div id="tp1" class="tradeValue green">WAITING</div>
 </div>
 
 <div class="tradeBox">
-
-<div class="tradeLabel">
-TP2
+<div class="tradeLabel">TAKE PROFIT 2</div>
+<div id="tp2" class="tradeValue green">WAITING</div>
 </div>
 
-<div id="tp2" class="tradeValue green">
-----
+<div class="tradeBox">
+<div class="tradeLabel">RISK / REWARD</div>
+<div id="rr" class="tradeValue blue">WAITING</div>
 </div>
 
+<div class="tradeBox">
+<div class="tradeLabel">DIRECTION</div>
+<div id="direction" class="tradeValue yellow">WAITING</div>
 </div>
-
-</div>
-
-<div class="row">
-
-<span>Risk / Reward</span>
-
-<span id="rr" class="yellow">
-----
-</span>
 
 </div>
 
@@ -531,14 +422,12 @@ TP2
 
 <div class="card">
 
-<div class="title">
-TRADE NOTIFICATION
-</div>
+<div class="title">🔔 TRADE NOTIFICATION</div>
 
 <div class="notifyBox">
 
 <div class="notifyText">
-🔔 Trade Signal Notification
+Trade Signal Notification
 </div>
 
 <div id="notifyToggle"
@@ -548,9 +437,16 @@ onclick="toggleNotifications()">
 
 </div>
 
-<div id="notifyStatus"
-class="small">
+<div id="notifyStatus" class="small">
 Notifications OFF
+</div>
+
+<button onclick="testNotification()">
+🔔 TEST NOTIFICATION
+</button>
+
+<div id="testStatus" class="status">
+Press test button after turning notifications ON.
 </div>
 
 </div>
@@ -558,38 +454,36 @@ Notifications OFF
 
 <div class="card">
 
-<div class="title">
-ENGINE STATUS
+<div class="title">ENGINE STATUS</div>
+
+<div class="row">
+<span>System</span>
+<span id="engine" class="green">STARTING</span>
 </div>
 
 <div class="row">
-<span>Data Feed</span>
-<span id="feed" class="green">
-LIVE
-</span>
+<span>Data</span>
+<span class="green">Twelve Data</span>
 </div>
 
 <div class="row">
-<span>Last Update</span>
-<span id="update" class="gray">
-----
-</span>
+<span>Symbol</span>
+<span>XAU/USD</span>
 </div>
 
 <div class="row">
-<span>Auto Refresh</span>
-<span class="green">
-30 SEC
-</span>
+<span>Timeframe</span>
+<span>15M</span>
+</div>
+
+<div class="row">
+<span>Last Scan</span>
+<span id="scanTime" class="gray">WAITING</span>
 </div>
 
 <button onclick="loadData()">
-SCAN NOW
+🔄 SCAN NOW
 </button>
-
-<div id="status" class="status">
-Ready
-</div>
 
 </div>
 
@@ -598,123 +492,64 @@ Ready
 
 <script>
 
-const WORKER=
-"https://icy-snow-263a.optrader06.workers.dev";
-
+const WORKER="https://icy-snow-263a.optrader06.workers.dev";
 
 let candles=[];
 
-let analysisData={};
-
 let notificationsEnabled=
-localStorage.getItem(
-"opRoyalNotifications"
-)==="true";
+localStorage.getItem("opRoyalNotifications")==="true";
 
 let lastNotifiedSignal=
-localStorage.getItem(
-"opRoyalLastSignal"
-)||"";
+localStorage.getItem("opRoyalLastSignal")||"";
 
 
-function max(arr){
+function $(id){
+return document.getElementById(id);
+}
 
-return Math.max.apply(null,arr);
+
+function fmt(v){
+
+if(v===null || v===undefined || isNaN(v)){
+return "WAITING";
+}
+
+return Number(v).toFixed(2);
 
 }
 
 
-function min(arr){
+function setText(id,value){
 
-return Math.min.apply(null,arr);
+if($(id)){
+$(id).textContent=value;
+}
 
 }
 
-
-function avg(arr){
-
-if(!arr.length)return 0;
-
-return arr.reduce(
-(a,b)=>a+b,
-0
-)/arr.length;
-
-}
-
-
-function format(n){
-
-if(
-n===undefined||
-n===null||
-isNaN(n)
-){
-
-return "----";
-
-}
-
-return Number(n).toFixed(2);
-
-}
-
-
-function setText(
-id,
-text,
-className
-){
-
-const el=
-document.getElementById(id);
-
-if(!el)return;
-
-el.innerText=text;
-
-el.className=
-className||"yellow";
-
-}
-
-
-/* NOTIFICATION SETUP */
 
 function updateNotificationUI(){
 
-const toggle=
-document.getElementById(
-"notifyToggle"
-);
-
-const status=
-document.getElementById(
-"notifyStatus"
-);
-
+const toggle=$("notifyToggle");
+const status=$("notifyStatus");
 
 if(notificationsEnabled){
 
 toggle.classList.add("on");
 
-status.innerText=
-"Notifications ON";
+status.textContent=
+"Notifications ON • Trade signal alerts enabled";
 
-status.className=
-"small green";
+status.className="small green";
 
-}
-
-else{
+}else{
 
 toggle.classList.remove("on");
 
-status.innerText=
+status.textContent=
 "Notifications OFF";
 
-status.className=
-"small";
+status.className="small";
 
 }
 
@@ -723,13 +558,7 @@ status.className=
 
 async function toggleNotifications(){
 
-if(
-!notificationsEnabled
-){
-
-if(
-!("Notification" in window)
-){
+if(!("Notification" in window)){
 
 alert(
 "This browser does not support notifications."
@@ -740,73 +569,144 @@ return;
 }
 
 
-if(
-Notification.permission!=="granted"
-){
-
-const permission=
-await Notification.requestPermission();
-
-
-if(
-permission!=="granted"
-){
-
-alert(
-"Notification permission allow karo."
-);
-
-return;
-
-}
-
-}
-
-
-notificationsEnabled=true;
-
-
-localStorage.setItem(
-"opRoyalNotifications",
-"true"
-);
-
-
-try{
-
-new Notification(
-"OP ROYAL TRADE",
-{
-body:
-"Trade notifications ON"
-}
-);
-
-}
-
-catch(e){}
-
-}
-
-else{
+if(notificationsEnabled){
 
 notificationsEnabled=false;
-
 
 localStorage.setItem(
 "opRoyalNotifications",
 "false"
 );
 
+updateNotificationUI();
+
+return;
+
 }
 
+
+try{
+
+let permission=Notification.permission;
+
+if(permission==="default"){
+
+permission=
+await Notification.requestPermission();
+
+}
+
+if(permission==="granted"){
+
+notificationsEnabled=true;
+
+localStorage.setItem(
+"opRoyalNotifications",
+"true"
+);
 
 updateNotificationUI();
 
+new Notification(
+"OP ROYAL TRADE",
+{
+body:
+"🔔 Trade notifications are now ON.",
+icon:""
+}
+);
+
+}else{
+
+alert(
+"Notification permission allow karo."
+);
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
 }
 
 
-/* SEND TRADE NOTIFICATION */
+async function testNotification(){
+
+const status=$("testStatus");
+
+if(!("Notification" in window)){
+
+status.textContent=
+"❌ Browser notification supported nahi hai.";
+
+status.className="status red";
+
+return;
+
+}
+
+
+try{
+
+let permission=Notification.permission;
+
+if(permission==="default"){
+
+permission=
+await Notification.requestPermission();
+
+}
+
+
+if(permission==="granted"){
+
+notificationsEnabled=true;
+
+localStorage.setItem(
+"opRoyalNotifications",
+"true"
+);
+
+updateNotificationUI();
+
+new Notification(
+"🔔 OP ROYAL TEST NOTIFICATION",
+{
+body:
+"Notification system working! XAU/USD trade alerts ready."
+}
+);
+
+status.textContent=
+"✅ TEST NOTIFICATION SENT";
+
+status.className="status green";
+
+}else{
+
+status.textContent=
+"❌ Notification permission denied.";
+
+status.className="status red";
+
+}
+
+}catch(error){
+
+console.log(error);
+
+status.textContent=
+"❌ Notification error";
+
+status.className="status red";
+
+}
+
+}
+
 
 function sendTradeNotification(
 signal,
@@ -816,47 +716,40 @@ tp1,
 tp2
 ){
 
-if(
-!notificationsEnabled
-){
-
+if(!notificationsEnabled){
 return;
-
 }
 
-
-if(
-signal!=="BUY"&&
-signal!=="SELL"
-){
-
+if(signal!=="BUY" && signal!=="SELL"){
 return;
-
 }
 
 
 const signalKey=
-signal+
-"_"+format(entry);
+signal+"_"+Number(entry).toFixed(2);
 
 
-if(
-signalKey===lastNotifiedSignal
-){
-
+if(lastNotifiedSignal===signalKey){
 return;
-
 }
 
 
-lastNotifiedSignal=
-signalKey;
-
+lastNotifiedSignal=signalKey;
 
 localStorage.setItem(
 "opRoyalLastSignal",
 signalKey
 );
+
+
+if(!("Notification" in window)){
+return;
+}
+
+
+if(Notification.permission!=="granted"){
+return;
+}
 
 
 const title=
@@ -869,416 +762,278 @@ signal==="BUY"
 
 const body=
 "XAU/USD 15M\n"+
-"Entry: "+format(entry)+
-"\nSL: "+format(sl)+
-"\nTP1: "+format(tp1)+
-"\nTP2: "+format(tp2);
+"Entry: "+fmt(entry)+"\n"+
+"SL: "+fmt(sl)+"\n"+
+"TP1: "+fmt(tp1)+"\n"+
+"TP2: "+fmt(tp2);
 
 
-if(
-"Notification" in window&&
-Notification.permission==="granted"
-){
-
-try{
-
-const notification=
 new Notification(
 title,
 {
 body:body,
-tag:"op-royal-trade"
+icon:""
 }
 );
 
-
-notification.onclick=
-function(){
-
-window.focus();
-
-};
-
 }
 
-catch(error){
 
-console.log(
-"Notification error",
-error
+function avgBody(data,count){
+
+let arr=data.slice(
+Math.max(0,data.length-count),
+data.length
 );
 
+if(!arr.length){
+return 0;
 }
 
-}
+let total=0;
 
-}
+arr.forEach(c=>{
 
-
-async function loadData(){
-
-try{
-
-document.getElementById(
-"status"
-).innerText=
-"Scanning XAU/USD...";
-
-
-const url=
-WORKER+
-"/api.twelvedata.com/time_series?symbol=XAU/USD&interval=15min&outputsize=120";
-
-
-const response=
-await fetch(url);
-
-
-const data=
-await response.json();
-
-
-if(!data.values){
-
-throw new Error(
-"No market data"
+total+=Math.abs(
+Number(c.close)-Number(c.open)
 );
 
-}
+});
 
-
-candles=
-data.values.map(x=>({
-
-time:x.datetime,
-
-open:Number(x.open),
-
-high:Number(x.high),
-
-low:Number(x.low),
-
-close:Number(x.close),
-
-volume:Number(
-x.volume||0
-)
-
-})).reverse();
-
-
-if(!candles.length){
-
-throw new Error(
-"Empty candles"
-);
-
-}
-
-
-analyze();
-
-
-document.getElementById(
-"feed"
-).innerText="LIVE";
-
-
-document.getElementById(
-"feed"
-).className="green";
-
-
-document.getElementById(
-"update"
-).innerText=
-new Date().toLocaleTimeString();
-
-
-document.getElementById(
-"status"
-).innerText=
-"Scan complete";
-
-}
-
-catch(error){
-
-console.log(error);
-
-
-document.getElementById(
-"feed"
-).innerText=
-"ERROR";
-
-
-document.getElementById(
-"feed"
-).className=
-"red";
-
-
-document.getElementById(
-"status"
-).innerText=
-"Data connection error";
-
-}
+return total/arr.length;
 
 }
 
 
 function analyze(){
 
+if(!candles.length){
+return;
+}
+
+
 const last=
-candles[
-candles.length-1
-];
+candles[candles.length-1];
+
+const prev=
+candles[candles.length-2];
+
+const c3=
+candles[candles.length-3];
 
 
-/* HTF APPROXIMATION */
-
-const h1=
-candles.slice(-4);
-
-
-const h4=
-candles.slice(-16);
-
-
-const h1High=
-max(
-h1.map(c=>c.high)
-);
-
-
-const h1Low=
-min(
-h1.map(c=>c.low)
-);
-
-
-const h4High=
-max(
-h4.map(c=>c.high)
-);
-
-
-const h4Low=
-min(
-h4.map(c=>c.low)
-);
+const currentPrice=
+Number(last.close);
 
 
 setText(
 "price",
-format(last.close),
-"price"
+fmt(currentPrice)
 );
-
 
 setText(
-"h1High",
-format(h1High),
-"orange"
-);
-
-
-setText(
-"h1Low",
-format(h1Low),
-"orange"
-);
-
-
-setText(
-"h4High",
-format(h4High),
-"orange"
-);
-
-
-setText(
-"h4Low",
-format(h4Low),
-"orange"
-);
-
-
-/* PREVIOUS DAY */
-
-const today=
+"lastTime",
 new Date(
-last.time
-).toISOString().slice(0,10);
+Number(last.datetime)*1000
+).toLocaleTimeString()
+);
+
+setText(
+"liveText",
+"● DATA LIVE"
+);
+
+$("liveText").className=
+"live";
+
+
+/* =========================
+   HTF APPROXIMATION
+========================= */
+
+const h1Data=
+candles.slice(
+Math.max(0,candles.length-4)
+);
+
+const h4Data=
+candles.slice(
+Math.max(0,candles.length-16)
+);
+
+
+const h1High=
+Math.max(...h1Data.map(c=>Number(c.high)));
+
+const h1Low=
+Math.min(...h1Data.map(c=>Number(c.low)));
+
+const h4High=
+Math.max(...h4Data.map(c=>Number(c.high)));
+
+const h4Low=
+Math.min(...h4Data.map(c=>Number(c.low)));
+
+
+setText("h1High",fmt(h1High));
+setText("h1Low",fmt(h1Low));
+setText("h4High",fmt(h4High));
+setText("h4Low",fmt(h4Low));
+
+
+/* =========================
+   PREVIOUS DAY
+========================= */
+
+const lastDay=
+new Date(
+Number(last.datetime)*1000
+).getUTCDate();
 
 
 const previousDay=
-candles.filter(c=>
-c.time.slice(0,10)!==
-today
-);
+candles.filter(c=>{
+
+const d=
+new Date(
+Number(c.datetime)*1000
+).getUTCDate();
+
+return d!==lastDay;
+
+});
 
 
-let pdh=0;
-
-let pdl=Infinity;
-
+let pdh=h4High;
+let pdl=h4Low;
 
 if(previousDay.length){
 
 pdh=
-max(
-previousDay.map(c=>c.high)
+Math.max(
+...previousDay.map(c=>Number(c.high))
 );
 
 pdl=
-min(
-previousDay.map(c=>c.low)
+Math.min(
+...previousDay.map(c=>Number(c.low))
 );
 
 }
 
-
-setText(
-"pdh",
-format(pdh),
-"yellow"
-);
+setText("pdh",fmt(pdh));
+setText("pdl",fmt(pdl));
 
 
-setText(
-"pdl",
-format(pdl),
-"yellow"
-);
-
-
-/* ASIAN */
+/* =========================
+   ASIAN SESSION
+========================= */
 
 const asian=
 candles.filter(c=>{
 
 const d=
-new Date(c.time);
+new Date(
+Number(c.datetime)*1000
+);
 
 const hour=
 d.getUTCHours();
 
-return hour>=0&&hour<8;
+return hour>=0 && hour<8;
 
 });
 
 
-let ah=0;
+let asianHigh=
+asian.length
+?
+Math.max(...asian.map(c=>Number(c.high)))
+:
+h1High;
 
-let al=Infinity;
-
-
-if(asian.length){
-
-ah=
-max(
-asian.map(c=>c.high)
-);
-
-al=
-min(
-asian.map(c=>c.low)
-);
-
-}
+let asianLow=
+asian.length
+?
+Math.min(...asian.map(c=>Number(c.low)))
+:
+h1Low;
 
 
 setText(
 "asianHigh",
-format(ah),
-"yellow"
+fmt(asianHigh)
 );
-
 
 setText(
 "asianLow",
-format(al),
-"yellow"
+fmt(asianLow)
 );
 
 
-/* SWING */
+/* =========================
+   SWING
+========================= */
 
-const recent=
-candles.slice(-30);
-
+const swingData=
+candles.slice(
+Math.max(0,candles.length-30)
+);
 
 const swingHigh=
-max(
-recent.slice(0,-3)
-.map(c=>c.high)
+Math.max(
+...swingData.map(c=>Number(c.high))
 );
-
 
 const swingLow=
-min(
-recent.slice(0,-3)
-.map(c=>c.low)
+Math.min(
+...swingData.map(c=>Number(c.low))
 );
-
 
 setText(
 "swingHigh",
-format(swingHigh),
-"yellow"
+fmt(swingHigh)
 );
-
 
 setText(
 "swingLow",
-format(swingLow),
-"yellow"
+fmt(swingLow)
 );
 
 
-/* LIQUIDITY */
+/* =========================
+   LIQUIDITY
+========================= */
 
-let bullSweep=false;
-
-let bearSweep=false;
-
-
-const lowLevels=[
+const lowLiquidity=[
 h1Low,
 h4Low,
 pdl,
-al,
+asianLow,
 swingLow
-].filter(
-x=>isFinite(x)&&x>0
-);
+];
 
-
-const highLevels=[
+const highLiquidity=[
 h1High,
 h4High,
 pdh,
-ah,
+asianHigh,
 swingHigh
-].filter(
-x=>isFinite(x)&&x>0
-);
+];
 
 
-for(
-const level of lowLevels
-){
+let bullSweep=false;
+let bearSweep=false;
+
+
+for(const level of lowLiquidity){
 
 if(
-last.low<level&&
-last.close>level
+Number(last.low)<level &&
+Number(last.close)>level
 ){
 
 bullSweep=true;
-
 break;
 
 }
@@ -1286,17 +1041,14 @@ break;
 }
 
 
-for(
-const level of highLevels
-){
+for(const level of highLiquidity){
 
 if(
-last.high>level&&
-last.close<level
+Number(last.high)>level &&
+Number(last.close)<level
 ){
 
 bearSweep=true;
-
 break;
 
 }
@@ -1304,352 +1056,374 @@ break;
 }
 
 
-let sweepText=
-"WAITING";
-
-let sweepClass=
-"yellow";
-
+let sweepText="WAITING";
 
 if(bullSweep){
 
-sweepText=
-"BULLISH SWEEP";
+sweepText="BULLISH SWEEP";
 
-sweepClass=
-"green";
+}else if(bearSweep){
 
-}
-
-else if(bearSweep){
-
-sweepText=
-"BEARISH SWEEP";
-
-sweepClass=
-"red";
+sweepText="BEARISH SWEEP";
 
 }
-
 
 setText(
 "sweep",
-sweepText,
-sweepClass
+sweepText
 );
 
+$("sweep").className=
+bullSweep
+?
+"green"
+:
+bearSweep
+?
+"red"
+:
+"yellow";
 
-setText(
-"finalSweep",
-sweepText,
-sweepClass
+
+/* =========================
+   MSS
+========================= */
+
+const oldData=
+candles.slice(
+Math.max(0,candles.length-8),
+candles.length-1
 );
-
-
-/* MSS */
 
 const oldHigh=
-max(
-candles.slice(-8,-1)
-.map(c=>c.high)
+Math.max(
+...oldData.map(c=>Number(c.high))
 );
 
-
 const oldLow=
-min(
-candles.slice(-8,-1)
-.map(c=>c.low)
+Math.min(
+...oldData.map(c=>Number(c.low))
 );
 
 
 const bullMSS=
-bullSweep&&
-last.close>oldHigh;
-
+bullSweep &&
+currentPrice>oldHigh;
 
 const bearMSS=
-bearSweep&&
-last.close<oldLow;
+bearSweep &&
+currentPrice<oldLow;
 
 
-let mssText=
-"WAITING";
-
-let mssClass=
-"yellow";
-
+let mssText="WAITING";
 
 if(bullMSS){
 
-mssText=
-"BULLISH MSS";
+mssText="BULLISH MSS";
 
-mssClass=
-"green";
+}else if(bearMSS){
 
-}
-
-else if(bearMSS){
-
-mssText=
-"BEARISH MSS";
-
-mssClass=
-"red";
+mssText="BEARISH MSS";
 
 }
 
+setText("mss",mssText);
 
-setText(
-"mss",
-mssText,
-mssClass
-);
-
-
-/* DISPLACEMENT */
-
-const bodies=
-candles.slice(-21,-1)
-.map(c=>
-Math.abs(
-c.close-c.open
-)
-);
-
-
-const averageBody=
-avg(bodies);
-
-
-const currentBody=
-Math.abs(
-last.close-last.open
-);
-
-
-const displacement=
-currentBody>
-averageBody*1.4;
-
-
-let displacementText=
-"WAITING";
-
-let displacementClass=
+$("mss").className=
+bullMSS
+?
+"green"
+:
+bearMSS
+?
+"red"
+:
 "yellow";
 
 
-if(displacement){
+/* =========================
+   DISPLACEMENT
+========================= */
 
-if(
-last.close>
-last.open
-){
+const avg=
+avgBody(
+candles.slice(0,-1),
+20
+);
 
-displacementText=
-"BULLISH DISPLACEMENT";
+const body=
+Math.abs(
+Number(last.close)-Number(last.open)
+);
 
-displacementClass=
-"green";
-
-}
-
-else{
-
-displacementText=
-"BEARISH DISPLACEMENT";
-
-displacementClass=
-"red";
-
-}
-
-}
+const displacement=
+body>avg*1.4;
 
 
 setText(
 "displacement",
-displacementText,
-displacementClass
+displacement
+?
+"CONFIRMED"
+:
+"WAITING"
 );
 
-
-/* FVG */
-
-const candle3=
-candles[
-candles.length-3
-];
-
-
-const bullFVG=
-last.low>
-candle3.high;
-
-
-const bearFVG=
-last.high<
-candle3.low;
-
-
-let fvgText=
-"WAITING";
-
-let fvgClass=
+$("displacement").className=
+displacement
+?
+"green"
+:
 "yellow";
 
+
+/* =========================
+   FVG
+========================= */
+
+const bullFVG=
+Number(last.low)>
+Number(c3.high);
+
+const bearFVG=
+Number(last.high)<
+Number(c3.low);
+
+
+let fvgText="WAITING";
 
 if(bullFVG){
 
-fvgText=
-"BULLISH FVG";
+fvgText="BULLISH FVG";
 
-fvgClass=
-"green";
+}else if(bearFVG){
 
-}
-
-else if(bearFVG){
-
-fvgText=
-"BEARISH FVG";
-
-fvgClass=
-"red";
+fvgText="BEARISH FVG";
 
 }
-
 
 setText(
 "fvg",
-fvgText,
-fvgClass
+fvgText
 );
 
-
-/* ORDER BLOCK */
-
-const bullOB=
-bullMSS&&
-displacement&&
-last.close>last.open;
-
-
-const bearOB=
-bearMSS&&
-displacement&&
-last.close<last.open;
-
-
-let obText=
-"WAITING";
-
-let obClass=
+$("fvg").className=
+bullFVG
+?
+"green"
+:
+bearFVG
+?
+"red"
+:
 "yellow";
 
 
+/* =========================
+   ORDER BLOCK
+========================= */
+
+const bullOB=
+bullMSS &&
+displacement &&
+Number(last.close)>Number(last.open);
+
+const bearOB=
+bearMSS &&
+displacement &&
+Number(last.close)<Number(last.open);
+
+
+let obText="WAITING";
+
 if(bullOB){
 
-obText=
-"BULLISH OB";
+obText="BULLISH OB";
 
-obClass=
-"green";
+}else if(bearOB){
 
-}
-
-else if(bearOB){
-
-obText=
-"BEARISH OB";
-
-obClass=
-"red";
+obText="BEARISH OB";
 
 }
-
 
 setText(
 "ob",
-obText,
-obClass
+obText
 );
 
+$("ob").className=
+bullOB
+?
+"green"
+:
+bearOB
+?
+"red"
+:
+"yellow";
 
-/* VOLUME */
+
+/* =========================
+   VOLUME
+========================= */
 
 const volumes=
-candles.slice(-21,-1)
-.map(c=>c.volume)
-.filter(v=>v>0);
+candles.slice(
+Math.max(0,candles.length-21),
+candles.length-1
+)
+.map(c=>Number(c.volume)||0);
 
 
-const averageVolume=
-avg(volumes);
+let avgVolume=0;
 
+if(volumes.length){
+
+avgVolume=
+volumes.reduce(
+(a,b)=>a+b,
+0
+)/volumes.length;
+
+}
+
+const currentVolume=
+Number(last.volume)||0;
 
 const highVolume=
-last.volume>
-averageVolume*1.5&&
-averageVolume>0;
+currentVolume>avgVolume*1.5;
 
 
 setText(
 "volume",
-highVolume?
-"HIGH VOLUME":
-"NORMAL",
-highVolume?
-"green":
-"gray"
+highVolume
+?
+"HIGH VOLUME"
+:
+"NORMAL"
 );
 
+$("volume").className=
+highVolume
+?
+"green"
+:
+"gray";
 
-/* FINAL SETUP */
 
-const bullishSetup=
-bullSweep&&
-bullMSS&&
-displacement&&
-bullFVG&&
+/* =========================
+   FINAL SETUP
+========================= */
+
+const buySignal=
+bullSweep &&
+bullMSS &&
+displacement &&
+bullFVG &&
 bullOB;
 
 
-const bearishSetup=
-bearSweep&&
-bearMSS&&
-displacement&&
-bearFVG&&
+const sellSignal=
+bearSweep &&
+bearMSS &&
+displacement &&
+bearFVG &&
 bearOB;
 
 
-let signal=
-"WAIT";
+setText(
+"finalSweep",
+bullSweep
+?
+"BULLISH SWEEP"
+:
+bearSweep
+?
+"BEARISH SWEEP"
+:
+"WAITING"
+);
 
-let entry=0;
+$("finalSweep").className=
+bullSweep
+?
+"green"
+:
+bearSweep
+?
+"red"
+:
+"yellow";
 
-let sl=0;
 
-let tp1=0;
+setText(
+"finalMss",
+(bullMSS||bearMSS) && displacement
+?
+"CONFIRMED"
+:
+"WAITING"
+);
 
-let tp2=0;
+$("finalMss").className=
+(bullMSS||bearMSS) && displacement
+?
+"green"
+:
+"yellow";
 
 
-if(bullishSetup){
+setText(
+"finalFvg",
+(bullFVG&&bullOB)
+?
+"BULLISH FVG / OB"
+:
+(bearFVG&&bearOB)
+?
+"BEARISH FVG / OB"
+:
+"WAITING"
+);
+
+$("finalFvg").className=
+(bullFVG&&bullOB)
+?
+"green"
+:
+(bearFVG&&bearOB)
+?
+"red"
+:
+"yellow";
+
+
+/* =========================
+   TRADE PLAN
+========================= */
+
+let signal="WAIT";
+
+let entry=null;
+let sl=null;
+let tp1=null;
+let tp2=null;
+let risk=null;
+
+
+if(buySignal){
 
 signal="BUY";
 
-entry=
-last.close;
+entry=currentPrice;
 
 sl=
 Math.min(
-last.low,
-candle3.low
+Number(last.low),
+Number(c3.low)
 )-1.5;
 
-const risk=
+risk=
 entry-sl;
 
 tp1=
@@ -1660,20 +1434,20 @@ entry+risk*3;
 
 }
 
-else if(bearishSetup){
+
+if(sellSignal){
 
 signal="SELL";
 
-entry=
-last.close;
+entry=currentPrice;
 
 sl=
 Math.max(
-last.high,
-candle3.high
+Number(last.high),
+Number(c3.high)
 )+1.5;
 
-const risk=
+risk=
 sl-entry;
 
 tp1=
@@ -1685,170 +1459,108 @@ entry-risk*3;
 }
 
 
-/* FINAL MSS */
-
-let finalMss=
-"WAITING";
-
-let finalMssClass=
-"yellow";
-
-
-if(
-bullMSS&&
-displacement
-){
-
-finalMss=
-"BULLISH MSS + DISPLACEMENT";
-
-finalMssClass=
-"green";
-
-}
-
-else if(
-bearMSS&&
-displacement
-){
-
-finalMss=
-"BEARISH MSS + DISPLACEMENT";
-
-finalMssClass=
-"red";
-
-}
-
-
-setText(
-"finalMss",
-finalMss,
-finalMssClass
-);
-
-
-/* FINAL FVG */
-
-let finalFvg=
-"WAITING";
-
-let finalFvgClass=
-"yellow";
-
-
-if(
-bullFVG&&
-bullOB
-){
-
-finalFvg=
-"BULLISH FVG + OB";
-
-finalFvgClass=
-"green";
-
-}
-
-else if(
-bearFVG&&
-bearOB
-){
-
-finalFvg=
-"BEARISH FVG + OB";
-
-finalFvgClass=
-"red";
-
-}
-
-
-setText(
-"finalFvg",
-finalFvg,
-finalFvgClass
-);
-
-
-/* SIGNAL */
-
-const signalBox=
-document.getElementById(
-"signal"
-);
-
-
-signalBox.className=
-"signal";
-
-
 if(signal==="BUY"){
 
-signalBox.innerText=
+$("signal").textContent=
 "🟢 BUY SIGNAL";
 
-signalBox.classList.add(
-"buy"
+$("signal").className=
+"signal buy";
+
+setText(
+"direction",
+"BUY"
 );
 
-}
+$("direction").className=
+"tradeValue green";
 
-else if(signal==="SELL"){
+}else if(signal==="SELL"){
 
-signalBox.innerText=
+$("signal").textContent=
 "🔴 SELL SIGNAL";
 
-signalBox.classList.add(
-"sell"
+$("signal").className=
+"signal sell";
+
+setText(
+"direction",
+"SELL"
 );
+
+$("direction").className=
+"tradeValue red";
+
+}else{
+
+$("signal").textContent=
+"NO ACTIVE SIGNAL";
+
+$("signal").className=
+"signal wait";
+
+setText(
+"direction",
+"WAITING"
+);
+
+$("direction").className=
+"tradeValue yellow";
 
 }
 
-else{
 
-signalBox.innerText=
-"WAITING FOR SETUP";
-
-signalBox.classList.add(
-"wait"
+setText(
+"entry",
+entry!==null
+?
+fmt(entry)
+:
+"WAITING"
 );
 
-}
+setText(
+"sl",
+sl!==null
+?
+fmt(sl)
+:
+"WAITING"
+);
+
+setText(
+"tp1",
+tp1!==null
+?
+fmt(tp1)
+:
+"WAITING"
+);
+
+setText(
+"tp2",
+tp2!==null
+?
+fmt(tp2)
+:
+"WAITING"
+);
+
+setText(
+"rr",
+signal!=="WAIT"
+?
+"1 : 2 / 1 : 3"
+:
+"WAITING"
+);
 
 
-/* TRADE PLAN */
+/* =========================
+   NOTIFICATION
+========================= */
 
-if(
-signal==="BUY"||
-signal==="SELL"
-){
-
-document.getElementById(
-"entry"
-).innerText=
-format(entry);
-
-document.getElementById(
-"sl"
-).innerText=
-format(sl);
-
-document.getElementById(
-"tp1"
-).innerText=
-format(tp1);
-
-document.getElementById(
-"tp2"
-).innerText=
-format(tp2);
-
-document.getElementById(
-"rr"
-).innerText=
-"1 : 2 / 1 : 3";
-
+if(signal==="BUY" || signal==="SELL"){
 
 sendTradeNotification(
 signal,
@@ -1860,360 +1572,114 @@ tp2
 
 }
 
-else{
 
-document.getElementById(
-"entry"
-).innerText=
-"WAITING";
+/* =========================
+   CHART
+========================= */
 
-document.getElementById(
-"sl"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"tp1"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"tp2"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"rr"
-).innerText=
-"----";
-
-}
-
-
-/* CHART DATA */
-
-analysisData={
-
-h1High:h1High,
-
-h1Low:h1Low,
-
-h4High:h4High,
-
-h4Low:h4Low,
-
-pdh:pdh,
-
-pdl:pdl,
-
-ah:ah,
-
-al:al,
-
-swingHigh:swingHigh,
-
-swingLow:swingLow,
-
-bullSweep:bullSweep,
-
-bearSweep:bearSweep,
-
-bullMSS:bullMSS,
-
-bearMSS:bearMSS,
-
-bullFVG:bullFVG,
-
-bearFVG:bearFVG,
-
-signal:signal,
-
-entry:entry,
-
-sl:sl,
-
-tp1:tp1,
-
-tp2:tp2
-
-};
-
-
-drawChart();
-
-}
-
-
-/* CHART */
-
-function drawChart(){
-
-const canvas=
-document.getElementById(
-"chart"
+drawChart(
+h1High,
+h1Low,
+h4High,
+h4Low,
+pdh,
+pdl,
+asianHigh,
+asianLow,
+entry,
+sl,
+tp1,
+tp2,
+bullSweep,
+bearSweep
 );
 
-
-if(
-!canvas||
-!candles.length
-){
-
-return;
-
 }
 
 
-const ctx=
-canvas.getContext("2d");
+function drawChart(
+h1High,
+h1Low,
+h4High,
+h4Low,
+pdh,
+pdl,
+asianHigh,
+asianLow,
+entry,
+sl,
+tp1,
+tp2,
+bullSweep,
+bearSweep
+){
 
-
-const dpr=
-window.devicePixelRatio||1;
-
+const canvas=$("chart");
 
 const rect=
 canvas.getBoundingClientRect();
 
+const dpr=
+window.devicePixelRatio||1;
 
 canvas.width=
 rect.width*dpr;
 
 canvas.height=
-rect.height*dpr;
+330*dpr;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.scale(dpr,dpr);
+
+const width=rect.width;
+const height=330;
 
 
-ctx.setTransform(
-dpr,
+ctx.fillStyle="#090d13";
+
+ctx.fillRect(
 0,
 0,
-dpr,
-0,
-0
+width,
+height
 );
 
 
-const W=
-rect.width;
-
-const H=
-rect.height;
-
-
-ctx.clearRect(
-0,
-0,
-W,
-H
-);
+if(!candles.length){
+return;
+}
 
 
 const data=
-candles.slice(-50);
-
-
-let hi=
-max(
-data.map(c=>c.high)
+candles.slice(
+Math.max(0,candles.length-45)
 );
 
 
-let lo=
-min(
-data.map(c=>c.low)
-);
-
-
-const range=
-hi-lo||1;
-
-
-const pad=
-range*.08;
-
-
-hi+=pad;
-
-lo-=pad;
-
-
-function y(price){
-
-return H-
-(
-(price-lo)/
-(hi-lo)
-)*H;
-
-}
-
-
-/* CANDLES */
-
-const candleWidth=
-W/data.length;
-
-
-for(
-let i=0;
-i<data.length;
-i++
-){
-
-const c=
-data[i];
-
-
-const x=
-i*candleWidth+
-candleWidth/2;
-
-
-const yo=
-y(c.open);
-
-const yc=
-y(c.close);
-
-const yh=
-y(c.high);
-
-const yl=
-y(c.low);
-
-
-const up=
-c.close>=c.open;
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-x,
-yh
-);
-
-ctx.lineTo(
-x,
-yl
-);
-
-
-ctx.strokeStyle=
-up?
-"#35d07f":
-"#ff6262";
-
-
-ctx.stroke();
-
-
-ctx.fillStyle=
-up?
-"#35d07f":
-"#ff6262";
-
-
-ctx.fillRect(
-x-candleWidth*.30,
-Math.min(yo,yc),
-candleWidth*.60,
+let maxPrice=
 Math.max(
-2,
-Math.abs(yc-yo)
-)
+...data.map(c=>Number(c.high)),
+h1High||0,
+h4High||0,
+pdh||0
 );
 
-}
-
-
-/* HTF LEVELS */
-
-function line(
-price,
-label,
-dash
-){
-
-if(
-!price||
-isNaN(price)
-){
-
-return;
-
-}
-
-
-const yy=
-y(price);
-
-
-if(
-yy<0||
-yy>H
-){
-
-return;
-
-}
-
-
-ctx.setLineDash(
-dash?
-[4,4]:
-[6,6]
+let minPrice=
+Math.min(
+...data.map(c=>Number(c.low)),
+h1Low||Infinity,
+h4Low||Infinity,
+pdl||Infinity
 );
 
 
-ctx.strokeStyle=
-dash?
-"#ff9f43":
-"#f1c75b";
+if(entry!==null){
 
-
-ctx.beginPath();
-
-ctx.moveTo(
-0,
-yy
-);
-
-ctx.lineTo(
-W,
-yy
-);
-
-ctx.stroke();
-
-
-ctx.setLineDash([]);
-
-
-ctx.font=
-"9px Arial";
-
-
-ctx.fillStyle=
-dash?
-"#ff9f43":
-"#f1c75b";
-
-
-ctx.fillText(
-label+" "+format(price),
-5,
-yy-4
-);
-
-}
-
-
-line(
-analysisData.h1High,
-"1H H",
-true
-);
-
-line(
-an
+maxPrice=
+Math.max(
+maxPrice,
+entry,
+tp1||entry,
+tp2||en
