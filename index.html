@@ -27,7 +27,7 @@ margin:auto;
 }
 
 .header{
-background:linear-gradient(135deg,#111923,#0b1118);
+background:#0d141c;
 border:1px solid #27313d;
 border-radius:16px;
 padding:18px;
@@ -38,8 +38,8 @@ text-align:center;
 .logo{
 font-size:24px;
 font-weight:bold;
-letter-spacing:1px;
 color:#f1c75b;
+letter-spacing:1px;
 }
 
 .sub{
@@ -76,8 +76,37 @@ font-size:13px;
 border-bottom:0;
 }
 
-.value{
+.price{
+font-size:30px;
 font-weight:bold;
+text-align:center;
+margin:8px 0;
+}
+
+.live{
+font-size:11px;
+text-align:center;
+color:#35d07f;
+}
+
+.chartBox{
+background:#080d13;
+border:1px solid #27313d;
+border-radius:12px;
+padding:5px;
+overflow:hidden;
+}
+
+#chart{
+width:100%;
+height:350px;
+display:block;
+}
+
+.small{
+font-size:10px;
+color:#7f8b98;
+margin-top:8px;
 }
 
 .green{
@@ -96,49 +125,20 @@ color:#f1c75b;
 color:#62a8ff;
 }
 
+.purple{
+color:#c084fc;
+}
+
 .gray{
 color:#8995a3;
 }
 
-.price{
-font-size:30px;
-font-weight:bold;
-text-align:center;
-margin:8px 0;
-}
-
-.live{
-font-size:11px;
-text-align:center;
-color:#35d07f;
-}
-
-.chartBox{
-background:#0b1016;
-border:1px solid #27313d;
-border-radius:14px;
-padding:8px;
-overflow:hidden;
-}
-
-#chart{
-width:100%;
-height:320px;
-display:block;
-}
-
-.small{
-font-size:10px;
-color:#7f8b98;
-}
-
 .signal{
 text-align:center;
-padding:14px;
+padding:15px;
 border-radius:12px;
 font-size:22px;
 font-weight:bold;
-margin-bottom:12px;
 background:#111923;
 border:1px solid #27313d;
 }
@@ -159,7 +159,7 @@ color:#f1c75b;
 
 .tradeGrid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:1fr 1fr;
 gap:8px;
 }
 
@@ -194,15 +194,26 @@ font-size:14px;
 margin-top:10px;
 }
 
-button:active{
-transform:scale(.98);
-}
-
 .status{
 font-size:12px;
 text-align:center;
 color:#8995a3;
 margin-top:8px;
+}
+
+.legend{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+font-size:10px;
+color:#8995a3;
+margin-top:8px;
+}
+
+.legend span{
+padding:4px 6px;
+border:1px solid #27313d;
+border-radius:6px;
 }
 
 </style>
@@ -246,7 +257,7 @@ CONNECTING...
 <div class="card">
 
 <div class="title">
-XAU/USD • 15M CHART
+XAU/USD • 15M SMART MONEY CHART
 </div>
 
 <div class="chartBox">
@@ -255,10 +266,24 @@ XAU/USD • 15M CHART
 
 </div>
 
-<div class="small" style="margin-top:8px">
+<div class="legend">
 
-Liquidity → Sweep → MSS → Displacement → FVG → Entry
+<span>🟡 Liquidity</span>
 
+<span>🟢 Bull Sweep</span>
+
+<span>🔴 Bear Sweep</span>
+
+<span>🔵 MSS</span>
+
+<span>🟣 FVG</span>
+
+<span>🟠 OB</span>
+
+</div>
+
+<div class="small">
+Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
 </div>
 
 </div>
@@ -386,11 +411,9 @@ ENTRY
 
 <div id="entry" class="tradeValue blue">
 ----
-
 </div>
 
 </div>
-
 
 <div class="tradeBox">
 
@@ -400,11 +423,9 @@ STOP LOSS
 
 <div id="sl" class="tradeValue red">
 ----
-
 </div>
 
 </div>
-
 
 <div class="tradeBox">
 
@@ -414,11 +435,9 @@ TP1
 
 <div id="tp1" class="tradeValue green">
 ----
-
 </div>
 
 </div>
-
 
 <div class="tradeBox">
 
@@ -428,21 +447,18 @@ TP2
 
 <div id="tp2" class="tradeValue green">
 ----
-
 </div>
 
 </div>
 
 </div>
 
-
-<div class="row" style="margin-top:8px">
+<div class="row">
 
 <span>Risk / Reward</span>
 
 <span id="rr" class="yellow">
 ----
-
 </span>
 
 </div>
@@ -492,9 +508,12 @@ Ready
 
 <script>
 
-const WORKER="https://icy-snow-263a.optrader06.workers.dev";
+const WORKER=
+"https://icy-snow-263a.optrader06.workers.dev";
 
 let candles=[];
+
+let analysisData={};
 
 
 function max(arr){
@@ -525,7 +544,11 @@ return arr.reduce(
 
 function format(n){
 
-if(n===undefined || n===null || isNaN(n)){
+if(
+n===undefined||
+n===null||
+isNaN(n)
+){
 
 return "----";
 
@@ -536,15 +559,21 @@ return Number(n).toFixed(2);
 }
 
 
-function setText(id,text,className){
+function setText(
+id,
+text,
+className
+){
 
-const el=document.getElementById(id);
+const el=
+document.getElementById(id);
 
 if(!el)return;
 
 el.innerText=text;
 
-el.className=className||"yellow";
+el.className=
+className||"yellow";
 
 }
 
@@ -554,24 +583,33 @@ async function loadData(){
 try{
 
 document.getElementById("status").innerText=
-"Loading market data...";
+"Scanning XAU/USD...";
+
 
 const url=
 WORKER+
 "/api.twelvedata.com/time_series?symbol=XAU/USD&interval=15min&outputsize=120";
 
-const response=await fetch(url);
 
-const data=await response.json();
+const response=
+await fetch(url);
+
+
+const data=
+await response.json();
+
 
 if(!data.values){
 
-throw new Error("No market data");
+throw new Error(
+"No market data"
+);
 
 }
 
 
-candles=data.values.map(x=>({
+candles=
+data.values.map(x=>({
 
 time:x.datetime,
 
@@ -583,29 +621,39 @@ low:Number(x.low),
 
 close:Number(x.close),
 
-volume:Number(x.volume||0)
+volume:Number(
+x.volume||0
+)
 
 })).reverse();
 
 
 if(!candles.length){
 
-throw new Error("Empty candles");
+throw new Error(
+"Empty candles"
+);
 
 }
 
 
 analyze();
 
-document.getElementById("feed").innerText="LIVE";
 
-document.getElementById("feed").className="green";
+document.getElementById("feed").innerText=
+"LIVE";
+
+document.getElementById("feed").className=
+"green";
+
 
 document.getElementById("update").innerText=
 new Date().toLocaleTimeString();
 
+
 document.getElementById("status").innerText=
-"Market scanned successfully";
+"Scan complete";
+
 
 }
 
@@ -613,10 +661,13 @@ catch(error){
 
 console.log(error);
 
+
 document.getElementById("feed").innerText=
 "ERROR";
 
-document.getElementById("feed").className="red";
+document.getElementById("feed").className=
+"red";
+
 
 document.getElementById("status").innerText=
 "Data connection error";
@@ -631,24 +682,18 @@ function analyze(){
 const last=
 candles[candles.length-1];
 
-const previous=
-candles[candles.length-2];
-
-
-document.getElementById("price").innerText=
-format(last.close);
-
 
 const today=
-new Date(last.time).toISOString().slice(0,10);
+new Date(
+last.time
+).toISOString().slice(0,10);
 
 
-const previousDayCandles=
-candles.filter(c=>{
-
-return c.time.slice(0,10)!==today;
-
-});
+const previousDay=
+candles.filter(c=>
+c.time.slice(0,10)!==
+today
+);
 
 
 let pdh=0;
@@ -656,17 +701,78 @@ let pdh=0;
 let pdl=Infinity;
 
 
-if(previousDayCandles.length){
+if(previousDay.length){
 
-pdh=max(
-previousDayCandles.map(c=>c.high)
+pdh=
+max(
+previousDay.map(c=>c.high)
 );
 
-pdl=min(
-previousDayCandles.map(c=>c.low)
+pdl=
+min(
+previousDay.map(c=>c.low)
 );
 
 }
+
+
+const asian=
+candles.filter(c=>{
+
+const d=
+new Date(c.time);
+
+const h=
+d.getUTCHours();
+
+return h>=0&&h<8;
+
+});
+
+
+let ah=0;
+
+let al=Infinity;
+
+
+if(asian.length){
+
+ah=
+max(
+asian.map(c=>c.high)
+);
+
+al=
+min(
+asian.map(c=>c.low)
+);
+
+}
+
+
+const recent=
+candles.slice(-30);
+
+
+const swingHigh=
+max(
+recent.slice(0,-3)
+.map(c=>c.high)
+);
+
+
+const swingLow=
+min(
+recent.slice(0,-3)
+.map(c=>c.low)
+);
+
+
+setText(
+"price",
+format(last.close),
+"price"
+);
 
 
 setText(
@@ -683,36 +789,6 @@ format(pdl),
 );
 
 
-const asian=
-candles.filter(c=>{
-
-const d=new Date(c.time);
-
-const hour=d.getUTCHours();
-
-return hour>=0 && hour<8;
-
-});
-
-
-let ah=0;
-
-let al=Infinity;
-
-
-if(asian.length){
-
-ah=max(
-asian.map(c=>c.high)
-);
-
-al=min(
-asian.map(c=>c.low)
-);
-
-}
-
-
 setText(
 "asianHigh",
 format(ah),
@@ -724,22 +800,6 @@ setText(
 "asianLow",
 format(al),
 "yellow"
-);
-
-
-const recent=
-candles.slice(-30);
-
-
-const swingHigh=
-max(
-recent.slice(0,-3).map(c=>c.high)
-);
-
-
-const swingLow=
-min(
-recent.slice(0,-3).map(c=>c.low)
 );
 
 
@@ -768,20 +828,26 @@ const lowLevels=[
 pdl,
 al,
 swingLow
-].filter(x=>isFinite(x)&&x>0);
+].filter(
+x=>isFinite(x)&&x>0
+);
 
 
 const highLevels=[
 pdh,
 ah,
 swingHigh
-].filter(x=>isFinite(x)&&x>0);
+].filter(
+x=>isFinite(x)&&x>0
+);
 
 
-for(const level of lowLevels){
+for(
+const level of lowLevels
+){
 
 if(
-last.low<level &&
+last.low<level&&
 last.close>level
 ){
 
@@ -794,10 +860,12 @@ break;
 }
 
 
-for(const level of highLevels){
+for(
+const level of highLevels
+){
 
 if(
-last.high>level &&
+last.high>level&&
 last.close<level
 ){
 
@@ -807,28 +875,33 @@ break;
 
 }
 
-
 }
 
 
-let sweepText="WAITING";
+let sweepText=
+"WAITING";
 
-let sweepClass="yellow";
+let sweepClass=
+"yellow";
 
 
 if(bullSweep){
 
-sweepText="BULLISH SWEEP";
+sweepText=
+"BULLISH SWEEP";
 
-sweepClass="green";
+sweepClass=
+"green";
 
 }
 
 else if(bearSweep){
 
-sweepText="BEARISH SWEEP";
+sweepText=
+"BEARISH SWEEP";
 
-sweepClass="red";
+sweepClass=
+"red";
 
 }
 
@@ -851,44 +924,52 @@ sweepClass
 
 const oldHigh=
 max(
-candles.slice(-8,-1).map(c=>c.high)
+candles.slice(-8,-1)
+.map(c=>c.high)
 );
 
 
 const oldLow=
 min(
-candles.slice(-8,-1).map(c=>c.low)
+candles.slice(-8,-1)
+.map(c=>c.low)
 );
 
 
-let bullMSS=
-bullSweep &&
+const bullMSS=
+bullSweep&&
 last.close>oldHigh;
 
 
-let bearMSS=
-bearSweep &&
+const bearMSS=
+bearSweep&&
 last.close<oldLow;
 
 
-let mssText="WAITING";
+let mssText=
+"WAITING";
 
-let mssClass="yellow";
+let mssClass=
+"yellow";
 
 
 if(bullMSS){
 
-mssText="BULLISH MSS";
+mssText=
+"BULLISH MSS";
 
-mssClass="green";
+mssClass=
+"green";
 
 }
 
 else if(bearMSS){
 
-mssText="BEARISH MSS";
+mssText=
+"BEARISH MSS";
 
-mssClass="red";
+mssClass=
+"red";
 
 }
 
@@ -903,8 +984,11 @@ mssClass
 /* DISPLACEMENT */
 
 const bodies=
-candles.slice(-21,-1).map(c=>
-Math.abs(c.close-c.open)
+candles.slice(-21,-1)
+.map(c=>
+Math.abs(
+c.close-c.open
+)
 );
 
 
@@ -913,7 +997,9 @@ avg(bodies);
 
 
 const currentBody=
-Math.abs(last.close-last.open);
+Math.abs(
+last.close-last.open
+);
 
 
 const displacement=
@@ -921,9 +1007,11 @@ currentBody>
 averageBody*1.4;
 
 
-let displacementText="WAITING";
+let displacementText=
+"WAITING";
 
-let displacementClass="yellow";
+let displacementClass=
+"yellow";
 
 
 if(displacement){
@@ -933,7 +1021,8 @@ if(last.close>last.open){
 displacementText=
 "BULLISH DISPLACEMENT";
 
-displacementClass="green";
+displacementClass=
+"green";
 
 }
 
@@ -942,7 +1031,8 @@ else{
 displacementText=
 "BEARISH DISPLACEMENT";
 
-displacementClass="red";
+displacementClass=
+"red";
 
 }
 
@@ -959,35 +1049,45 @@ displacementClass
 /* FVG */
 
 const candle3=
-candles[candles.length-3];
+candles[
+candles.length-3
+];
 
 
-let bullFVG=
-last.low>candle3.high;
+const bullFVG=
+last.low>
+candle3.high;
 
 
-let bearFVG=
-last.high<candle3.low;
+const bearFVG=
+last.high<
+candle3.low;
 
 
-let fvgText="WAITING";
+let fvgText=
+"WAITING";
 
-let fvgClass="yellow";
+let fvgClass=
+"yellow";
 
 
 if(bullFVG){
 
-fvgText="BULLISH FVG";
+fvgText=
+"BULLISH FVG";
 
-fvgClass="green";
+fvgClass=
+"green";
 
 }
 
 else if(bearFVG){
 
-fvgText="BEARISH FVG";
+fvgText=
+"BEARISH FVG";
 
-fvgClass="red";
+fvgClass=
+"red";
 
 }
 
@@ -1001,36 +1101,42 @@ fvgClass
 
 /* ORDER BLOCK */
 
-let bullOB=
-bullMSS &&
-displacement &&
+const bullOB=
+bullMSS&&
+displacement&&
 last.close>last.open;
 
 
-let bearOB=
-bearMSS &&
-displacement &&
+const bearOB=
+bearMSS&&
+displacement&&
 last.close<last.open;
 
 
-let obText="WAITING";
+let obText=
+"WAITING";
 
-let obClass="yellow";
+let obClass=
+"yellow";
 
 
 if(bullOB){
 
-obText="BULLISH OB";
+obText=
+"BULLISH OB";
 
-obClass="green";
+obClass=
+"green";
 
 }
 
 else if(bearOB){
 
-obText="BEARISH OB";
+obText=
+"BEARISH OB";
 
-obClass="red";
+obClass=
+"red";
 
 }
 
@@ -1055,20 +1161,25 @@ avg(volumes);
 
 
 const highVolume=
-last.volume>averageVolume*1.5 &&
+last.volume>
+averageVolume*1.5&&
 averageVolume>0;
 
 
-let volumeText="NORMAL";
+let volumeText=
+"NORMAL";
 
-let volumeClass="gray";
+let volumeClass=
+"gray";
 
 
 if(highVolume){
 
-volumeText="HIGH VOLUME";
+volumeText=
+"HIGH VOLUME";
 
-volumeClass="green";
+volumeClass=
+"green";
 
 }
 
@@ -1080,83 +1191,27 @@ volumeClass
 );
 
 
-/* FINAL FVG / OB */
+/* FINAL CONDITIONS */
 
-let finalFvgText="WAITING";
-
-let finalFvgClass="yellow";
-
-
-if(
-bullFVG &&
-bullOB
-){
-
-finalFvgText="BULLISH FVG + OB";
-
-finalFvgClass="green";
-
-}
-
-else if(
-bearFVG &&
-bearOB
-){
-
-finalFvgText="BEARISH FVG + OB";
-
-finalFvgClass="red";
-
-}
+const bullishSetup=
+bullSweep&&
+bullMSS&&
+displacement&&
+bullFVG&&
+bullOB;
 
 
-setText(
-"finalFvg",
-finalFvgText,
-finalFvgClass
-);
+const bearishSetup=
+bearSweep&&
+bearMSS&&
+displacement&&
+bearFVG&&
+bearOB;
 
 
-let finalMssText="WAITING";
+let signal=
+"WAIT";
 
-let finalMssClass="yellow";
-
-
-if(
-bullMSS &&
-displacement
-){
-
-finalMssText=
-"BULLISH MSS + DISPLACEMENT";
-
-finalMssClass="green";
-
-}
-
-else if(
-bearMSS &&
-displacement
-){
-
-finalMssText=
-"BEARISH MSS + DISPLACEMENT";
-
-finalMssClass="red";
-
-}
-
-
-setText(
-"finalMss",
-finalMssText,
-finalMssClass
-);
-
-
-/* FINAL TRADE */
-
-let signal="WAIT";
 
 let entry=0;
 
@@ -1167,33 +1222,16 @@ let tp1=0;
 let tp2=0;
 
 
-/*
-BUY:
-Liquidity sweep
-+
-MSS
-+
-Displacement
-+
-FVG
-+
-OB
-*/
+if(bullishSetup){
 
+signal=
+"BUY";
 
-if(
-bullSweep &&
-bullMSS &&
-displacement &&
-bullFVG &&
-bullOB
-){
+entry=
+last.close;
 
-signal="BUY";
-
-entry=last.close;
-
-sl=Math.min(
+sl=
+Math.min(
 last.low,
 candle3.low
 )-1.5;
@@ -1210,33 +1248,16 @@ entry+risk*3;
 }
 
 
-/*
-SELL:
-Liquidity sweep
-+
-MSS
-+
-Displacement
-+
-FVG
-+
-OB
-*/
+else if(bearishSetup){
 
+signal=
+"SELL";
 
-else if(
-bearSweep &&
-bearMSS &&
-displacement &&
-bearFVG &&
-bearOB
-){
+entry=
+last.close;
 
-signal="SELL";
-
-entry=last.close;
-
-sl=Math.max(
+sl=
+Math.max(
 last.high,
 candle3.high
 )+1.5;
@@ -1253,10 +1274,96 @@ entry-risk*3;
 }
 
 
-/* SIGNAL UI */
+/* FINAL STATUS */
+
+let finalMss=
+"WAITING";
+
+let finalMssClass=
+"yellow";
+
+
+if(
+bullMSS&&
+displacement
+){
+
+finalMss=
+"BULLISH MSS + DISPLACEMENT";
+
+finalMssClass=
+"green";
+
+}
+
+else if(
+bearMSS&&
+displacement
+){
+
+finalMss=
+"BEARISH MSS + DISPLACEMENT";
+
+finalMssClass=
+"red";
+
+}
+
+
+setText(
+"finalMss",
+finalMss,
+finalMssClass
+);
+
+
+let finalFvg=
+"WAITING";
+
+let finalFvgClass=
+"yellow";
+
+
+if(
+bullFVG&&
+bullOB
+){
+
+finalFvg=
+"BULLISH FVG + OB";
+
+finalFvgClass=
+"green";
+
+}
+
+else if(
+bearFVG&&
+bearOB
+){
+
+finalFvg=
+"BEARISH FVG + OB";
+
+finalFvgClass=
+"red";
+
+}
+
+
+setText(
+"finalFvg",
+finalFvg,
+finalFvgClass
+);
+
+
+/* SIGNAL BOX */
 
 const signalBox=
-document.getElementById("signal");
+document.getElementById(
+"signal"
+);
 
 
 signalBox.className=
@@ -1268,7 +1375,9 @@ if(signal==="BUY"){
 signalBox.innerText=
 "🟢 BUY SIGNAL";
 
-signalBox.classList.add("buy");
+signalBox.classList.add(
+"buy"
+);
 
 }
 
@@ -1277,7 +1386,9 @@ else if(signal==="SELL"){
 signalBox.innerText=
 "🔴 SELL SIGNAL";
 
-signalBox.classList.add("sell");
+signalBox.classList.add(
+"sell"
+);
 
 }
 
@@ -1286,68 +1397,149 @@ else{
 signalBox.innerText=
 "WAITING FOR SETUP";
 
-signalBox.classList.add("wait");
+signalBox.classList.add(
+"wait"
+);
 
 }
 
 
-/* TRADE LEVELS */
+/* TRADE PLAN */
 
-if(signal==="BUY"||signal==="SELL"){
+if(
+signal==="BUY"||
+signal==="SELL"
+){
 
-document.getElementById("entry").innerText=
+document.getElementById(
+"entry"
+).innerText=
 format(entry);
 
-document.getElementById("sl").innerText=
+
+document.getElementById(
+"sl"
+).innerText=
 format(sl);
 
-document.getElementById("tp1").innerText=
+
+document.getElementById(
+"tp1"
+).innerText=
 format(tp1);
 
-document.getElementById("tp2").innerText=
+
+document.getElementById(
+"tp2"
+).innerText=
 format(tp2);
 
-document.getElementById("rr").innerText=
+
+document.getElementById(
+"rr"
+).innerText=
 "1 : 2 / 1 : 3";
 
 }
 
 else{
 
-document.getElementById("entry").innerText=
+document.getElementById(
+"entry"
+).innerText=
 "WAITING";
 
-document.getElementById("sl").innerText=
+
+document.getElementById(
+"sl"
+).innerText=
 "WAITING";
 
-document.getElementById("tp1").innerText=
+
+document.getElementById(
+"tp1"
+).innerText=
 "WAITING";
 
-document.getElementById("tp2").innerText=
+
+document.getElementById(
+"tp2"
+).innerText=
 "WAITING";
 
-document.getElementById("rr").innerText=
+
+document.getElementById(
+"rr"
+).innerText=
 "----";
 
 }
 
 
-/* DRAW CHART */
+/* SAVE FOR CHART */
+
+analysisData={
+
+pdh:pdh,
+
+pdl:pdl,
+
+ah:ah,
+
+al:al,
+
+swingHigh:swingHigh,
+
+swingLow:swingLow,
+
+bullSweep:bullSweep,
+
+bearSweep:bearSweep,
+
+bullMSS:bullMSS,
+
+bearMSS:bearMSS,
+
+bullFVG:bullFVG,
+
+bearFVG:bearFVG,
+
+bullOB:bullOB,
+
+bearOB:bearOB,
+
+signal:signal,
+
+entry:entry,
+
+sl:sl,
+
+tp1:tp1,
+
+tp2:tp2
+
+};
+
 
 drawChart();
 
 }
 
 
-/* CHART */
+/* CHART DRAWING */
 
 function drawChart(){
 
 const canvas=
-document.getElementById("chart");
+document.getElementById(
+"chart"
+);
 
 
-if(!canvas||!candles.length){
+if(
+!canvas||
+!candles.length
+){
 
 return;
 
@@ -1384,9 +1576,12 @@ dpr,
 );
 
 
-const W=rect.width;
+const W=
+rect.width;
 
-const H=rect.height;
+
+const H=
+rect.height;
 
 
 ctx.clearRect(
@@ -1403,25 +1598,18 @@ candles.slice(-50);
 
 let hi=
 max(
-data.map(x=>x.high)
+data.map(c=>c.high)
 );
 
 
 let lo=
 min(
-data.map(x=>x.low)
+data.map(c=>c.low)
 );
 
 
-let range=
-hi-lo;
-
-
-if(range===0){
-
-range=1;
-
-}
+const range=
+hi-lo||1;
 
 
 const pad=
@@ -1436,7 +1624,45 @@ lo-=pad;
 function y(price){
 
 return H-
-((price-lo)/(hi-lo))*H;
+(
+(price-lo)/
+(hi-lo)
+)*H;
+
+}
+
+
+/* GRID */
+
+ctx.strokeStyle=
+"#151e27";
+
+ctx.lineWidth=1;
+
+
+for(
+let i=1;
+i<5;
+i++
+){
+
+const yy=
+H*i/5;
+
+
+ctx.beginPath();
+
+ctx.moveTo(
+0,
+yy
+);
+
+ctx.lineTo(
+W,
+yy
+);
+
+ctx.stroke();
 
 }
 
@@ -1451,7 +1677,8 @@ i<data.length;
 i++
 ){
 
-const c=data[i];
+const c=
+data[i];
 
 
 const x=
@@ -1459,13 +1686,20 @@ i*candleWidth+
 candleWidth/2;
 
 
-const yo=y(c.open);
+const yo=
+y(c.open);
 
-const yc=y(c.close);
 
-const yh=y(c.high);
+const yc=
+y(c.close);
 
-const yl=y(c.low);
+
+const yh=
+y(c.high);
+
+
+const yl=
+y(c.low);
 
 
 const up=
@@ -1474,27 +1708,24 @@ c.close>=c.open;
 
 ctx.beginPath();
 
-ctx.moveTo(x,yh);
+ctx.moveTo(
+x,
+yh
+);
 
-ctx.lineTo(x,yl);
+ctx.lineTo(
+x,
+yl
+);
+
 
 ctx.strokeStyle=
 up?
 "#35d07f":
 "#ff6262";
 
+
 ctx.stroke();
-
-
-const bodyTop=
-Math.min(yo,yc);
-
-
-const bodyHeight=
-Math.max(
-2,
-Math.abs(yc-yo)
-);
 
 
 ctx.fillStyle=
@@ -1503,19 +1734,35 @@ up?
 "#ff6262";
 
 
+const top=
+Math.min(
+yo,
+yc
+);
+
+
+const height=
+Math.max(
+2,
+Math.abs(
+yc-yo
+)
+);
+
+
 ctx.fillRect(
-x-candleWidth*0.32,
-bodyTop,
-candleWidth*0.64,
-bodyHeight
+x-candleWidth*.30,
+top,
+candleWidth*.60,
+height
 );
 
 }
 
 
-/* LEVEL LINE */
+/* LEVELS */
 
-function line(
+function levelLine(
 price,
 label
 ){
@@ -1530,7 +1777,8 @@ return;
 }
 
 
-const yy=y(price);
+const yy=
+y(price);
 
 
 if(
@@ -1548,16 +1796,21 @@ ctx.setLineDash(
 );
 
 
-ctx.beginPath();
-
-ctx.moveTo(0,yy);
-
-ctx.lineTo(W,yy);
-
-
 ctx.strokeStyle=
 "#f1c75b";
 
+
+ctx.beginPath();
+
+ctx.moveTo(
+0,
+yy
+);
+
+ctx.lineTo(
+W,
+yy
+);
 
 ctx.stroke();
 
@@ -1582,68 +1835,332 @@ yy-4
 }
 
 
-line(
-Number(
-document.getElementById("pdh").innerText
-),
+levelLine(
+analysisData.pdh,
 "PDH"
 );
 
 
-line(
-Number(
-document.getElementById("pdl").innerText
-),
+levelLine(
+analysisData.pdl,
 "PDL"
 );
 
 
-line(
-Number(
-document.getElementById("asianHigh").innerText
-),
+levelLine(
+analysisData.ah,
 "AH"
 );
 
 
-line(
-Number(
-document.getElementById("asianLow").innerText
-),
+levelLine(
+analysisData.al,
 "AL"
 );
 
 
-/* TRADE LINES */
+/* FVG ZONE */
 
-const entry=
-parseFloat(
-document.getElementById("entry").innerText
+if(
+analysisData.bullFVG
+){
+
+const top=
+y(
+candles[
+candles.length-3
+].high
 );
 
 
-const sl=
-parseFloat(
-document.getElementById("sl").innerText
+const bottom=
+y(
+candles[
+candles.length-1
+].low
 );
 
 
-const tp1=
-parseFloat(
-document.getElementById("tp1").innerText
+ctx.fillStyle=
+"rgba(192,132,252,0.16)";
+
+
+ctx.fillRect(
+W*.55,
+Math.min(
+top,
+bottom
+),
+W*.45,
+Math.abs(
+bottom-top
+)
 );
 
 
-const tp2=
-parseFloat(
-document.getElementById("tp2").innerText
+ctx.fillStyle=
+"#c084fc";
+
+
+ctx.font=
+"10px Arial";
+
+
+ctx.fillText(
+"BULL FVG",
+W*.56,
+Math.min(
+top,
+bottom
+)+12
 );
 
+}
+
+
+if(
+analysisData.bearFVG
+){
+
+const top=
+y(
+candles[
+candles.length-1
+].high
+);
+
+
+const bottom=
+y(
+candles[
+candles.length-3
+].low
+);
+
+
+ctx.fillStyle=
+"rgba(192,132,252,0.16)";
+
+
+ctx.fillRect(
+W*.55,
+Math.min(
+top,
+bottom
+),
+W*.45,
+Math.abs(
+bottom-top
+)
+);
+
+
+ctx.fillStyle=
+"#c084fc";
+
+
+ctx.font=
+"10px Arial";
+
+
+ctx.fillText(
+"BEAR FVG",
+W*.56,
+Math.min(
+top,
+bottom
+)+12
+);
+
+}
+
+
+/* MSS MARKER */
+
+const last=
+candles[
+candles.length-1
+];
+
+
+const markerX=
+W-candleWidth/2;
+
+
+if(
+analysisData.bullMSS
+){
+
+const yy=
+y(last.low);
+
+
+ctx.fillStyle=
+"#62a8ff";
+
+
+ctx.beginPath();
+
+ctx.arc(
+markerX,
+yy,
+5,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+
+ctx.font=
+"bold 10px Arial";
+
+ctx.fillText(
+"MSS",
+markerX-25,
+yy+18
+);
+
+}
+
+
+if(
+analysisData.bearMSS
+){
+
+const yy=
+y(last.high);
+
+
+ctx.fillStyle=
+"#62a8ff";
+
+
+ctx.beginPath();
+
+ctx.arc(
+markerX,
+yy,
+5,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+
+ctx.font=
+"bold 10px Arial";
+
+ctx.fillText(
+"MSS",
+markerX-25,
+yy-10
+);
+
+}
+
+
+/* SWEEP MARKER */
+
+if(
+analysisData.bullSweep
+){
+
+const yy=
+y(last.low);
+
+
+ctx.fillStyle=
+"#35d07f";
+
+
+ctx.beginPath();
+
+ctx.moveTo(
+markerX,
+yy+15
+);
+
+ctx.lineTo(
+markerX-7,
+yy+5
+);
+
+ctx.lineTo(
+markerX+7,
+yy+5
+);
+
+ctx.closePath();
+
+ctx.fill();
+
+
+ctx.font=
+"bold 10px Arial";
+
+ctx.fillText(
+"SWEEP",
+markerX-25,
+yy+30
+);
+
+}
+
+
+if(
+analysisData.bearSweep
+){
+
+const yy=
+y(last.high);
+
+
+ctx.fillStyle=
+"#ff6262";
+
+
+ctx.beginPath();
+
+ctx.moveTo(
+markerX,
+yy-15
+);
+
+ctx.lineTo(
+markerX-7,
+yy-5
+);
+
+ctx.lineTo(
+markerX+7,
+yy-5
+);
+
+ctx.closePath();
+
+ctx.fill();
+
+
+ctx.font=
+"bold 10px Arial";
+
+ctx.fillText(
+"SWEEP",
+markerX-25,
+yy-20
+);
+
+}
+
+
+/* TRADE LEVELS */
 
 function tradeLine(
 price,
 label,
-textColor
+stroke
 ){
 
 if(
@@ -1656,7 +2173,8 @@ return;
 }
 
 
-const yy=y(price);
+const yy=
+y(price);
 
 
 if(
@@ -1669,20 +2187,26 @@ return;
 }
 
 
-ctx.beginPath();
-
-ctx.moveTo(0,yy);
-
-ctx.lineTo(W,yy);
-
-
 ctx.strokeStyle=
-textColor;
-
+stroke;
 
 ctx.lineWidth=2;
 
+
+ctx.beginPath();
+
+ctx.moveTo(
+0,
+yy
+);
+
+ctx.lineTo(
+W,
+yy
+);
+
 ctx.stroke();
+
 
 ctx.lineWidth=1;
 
@@ -1690,9 +2214,8 @@ ctx.lineWidth=1;
 ctx.font=
 "bold 10px Arial";
 
-
 ctx.fillStyle=
-textColor;
+stroke;
 
 
 ctx.fillText(
@@ -1705,28 +2228,28 @@ yy-5
 
 
 tradeLine(
-entry,
+analysisData.entry,
 "ENTRY",
 "#62a8ff"
 );
 
 
 tradeLine(
-sl,
+analysisData.sl,
 "SL",
 "#ff6262"
 );
 
 
 tradeLine(
-tp1,
+analysisData.tp1,
 "TP1",
 "#35d07f"
 );
 
 
 tradeLine(
-tp2,
+analysisData.tp2,
 "TP2",
 "#35d07f"
 );
@@ -1740,8 +2263,6 @@ drawChart
 );
 
 
-/* START */
-
 loadData();
 
 
@@ -1753,4 +2274,4 @@ loadData,
 </script>
 
 </body>
-</html>
+  </html>
