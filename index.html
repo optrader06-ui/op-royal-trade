@@ -1,51 +1,491 @@
-<div class="section">FVG + Order Block</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OP ROYAL XAUUSD</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b0f14;
+color:#fff;
+padding:14px;
+}
+.app{
+max-width:520px;
+margin:auto;
+}
+.header{
+background:linear-gradient(135deg,#151d27,#0e131a);
+border:1px solid #263342;
+border-radius:18px;
+padding:18px;
+text-align:center;
+margin-bottom:12px;
+}
+.logo{
+font-size:25px;
+font-weight:800;
+letter-spacing:1px;
+}
+.sub{
+font-size:12px;
+color:#8d9aaa;
+margin-top:5px;
+}
+.price-card{
+background:#111821;
+border:1px solid #263342;
+border-radius:18px;
+padding:20px;
+text-align:center;
+margin-bottom:12px;
+}
+.label{
+font-size:12px;
+color:#8d9aaa;
+}
+.price{
+font-size:38px;
+font-weight:800;
+margin:8px 0;
+}
+.live{
+display:inline-block;
+font-size:11px;
+padding:5px 10px;
+border-radius:20px;
+background:#123c2a;
+color:#46e49a;
+}
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:12px;
+}
+.card{
+background:#111821;
+border:1px solid #263342;
+border-radius:15px;
+padding:15px;
+}
+.card-title{
+font-size:11px;
+color:#8d9aaa;
+margin-bottom:8px;
+}
+.value{
+font-size:20px;
+font-weight:700;
+}
+.bull{color:#42df92}
+.bear{color:#ff6262}
+.wait{color:#ffc857}
+.signal{
+text-align:center;
+padding:22px;
+border-radius:18px;
+margin-bottom:12px;
+border:1px solid #263342;
+background:#111821;
+}
+.signal-title{
+font-size:12px;
+color:#8d9aaa;
+}
+.signal-main{
+font-size:32px;
+font-weight:900;
+margin:8px 0;
+}
+.buy{
+color:#42df92;
+}
+.sell{
+color:#ff6262;
+}
+.waiting{
+color:#ffc857;
+}
+.trade-box{
+background:#111821;
+border:1px solid #263342;
+border-radius:18px;
+padding:17px;
+margin-bottom:12px;
+}
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 0;
+border-bottom:1px solid #202b37;
+}
+.row:last-child{
+border-bottom:0;
+}
+.row span:first-child{
+color:#8d9aaa;
+font-size:13px;
+}
+.row span:last-child{
+font-weight:800;
+font-size:16px;
+}
+.status{
+text-align:center;
+background:#111821;
+border:1px solid #263342;
+border-radius:15px;
+padding:14px;
+font-size:13px;
+}
+.refresh{
+width:100%;
+border:0;
+border-radius:13px;
+padding:14px;
+margin-top:12px;
+font-size:15px;
+font-weight:700;
+background:#e6b84c;
+color:#111;
+}
+.footer{
+text-align:center;
+font-size:10px;
+color:#667384;
+margin-top:14px;
+line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="header">
+<div class="logo">OP ROYAL</div>
+<div class="sub">XAUUSD LIVE TRADE DASHBOARD</div>
+</div>
+
+<div class="price-card">
+<div class="label">XAU / USD</div>
+<div id="price" class="price">----</div>
+<div id="live" class="live">CONNECTING</div>
+</div>
+
+<div class="grid">
 
 <div class="card">
-
-<div class="row">
-<span>Fair Value Gap</span>
-<span id="fvg" class="yellow">WAITING</span>
+<div class="card-title">MARKET TREND</div>
+<div id="trend" class="value wait">WAIT</div>
 </div>
-
-<div class="row">
-<span>FVG Direction</span>
-<span id="fvgDirection" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Order Block</span>
-<span id="ob" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>OB Direction</span>
-<span id="obDirection" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Entry Zone</span>
-<span id="entryZone" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-<div class="section">Final Setup Check</div>
 
 <div class="card">
+<div class="card-title">SIGNAL</div>
+<div id="smallSignal" class="value wait">WAIT</div>
+</div>
+
+<div class="card">
+<div class="card-title">5 MIN</div>
+<div id="t5" class="value wait">WAIT</div>
+</div>
+
+<div class="card">
+<div class="card-title">15 MIN</div>
+<div id="t15" class="value wait">WAIT</div>
+</div>
+
+<div class="card">
+<div class="card-title">1 HOUR</div>
+<div id="t1h" class="value wait">WAIT</div>
+</div>
+
+<div class="card">
+<div class="card-title">RISK / REWARD</div>
+<div id="rr" class="value">1 : 2</div>
+</div>
+
+</div>
+
+<div class="signal">
+<div class="signal-title">TRADE SIGNAL</div>
+<div id="signal" class="signal-main waiting">WAIT</div>
+<div id="confidence" class="label">Waiting for market confirmation</div>
+</div>
+
+<div class="trade-box">
 
 <div class="row">
-<span>Liquidity Sweep</span>
-<span class="yellow">WAITING</span>
+<span>ENTRY</span>
+<span id="entry">WAITING</span>
 </div>
 
 <div class="row">
-<span>MSS + Displacement</span>
-<span class="yellow">WAITING</span>
+<span>STOP LOSS</span>
+<span id="sl">WAITING</span>
 </div>
 
 <div class="row">
-<span>FVG / OB</span>
-<span id="setupStatus" class="yellow">WAITING</span>
+<span>TAKE PROFIT</span>
+<span id="tp">WAITING</span>
+</div>
+
+<div class="row">
+<span>SETUP</span>
+<span id="setup">NO TRADE</span>
 </div>
 
 </div>
+
+<div class="status">
+<div id="status">● Connecting to live market data...</div>
+</div>
+
+<button class="refresh" onclick="loadMarket()">
+REFRESH MARKET
+</button>
+
+<div class="footer">
+OP ROYAL XAUUSD ENGINE<br>
+Signal is algorithmic market analysis — not financial advice.
+</div>
+
+</div>
+
+<script>
+
+const WORKER_URL =
+"https://icy-snow-263a.optrader.workers.dev";
+
+let lastPrice = null;
+
+function formatPrice(x){
+return Number(x).toFixed(2);
+}
+
+function setText(id,text,cls){
+const el=document.getElementById(id);
+el.textContent=text;
+el.className="value "+(cls||"");
+}
+
+function resetTrade(){
+document.getElementById("entry").textContent="WAITING";
+document.getElementById("sl").textContent="WAITING";
+document.getElementById("tp").textContent="WAITING";
+document.getElementById("setup").textContent="NO TRADE";
+}
+
+function makeSignal(price){
+
+/*
+ SIMPLE NEW ENGINE
+
+ This first version intentionally uses a simple
+ price-momentum model.
+
+ Later the engine can be upgraded with:
+ liquidity sweep
+ MSS
+ displacement
+ FVG
+ order block
+*/
+
+if(!lastPrice){
+lastPrice=price;
+return;
+}
+
+const difference=price-lastPrice;
+const move=Math.abs(difference);
+
+let direction="WAIT";
+let confidence=50;
+
+if(move >= 0.50){
+
+if(difference > 0){
+direction="BUY";
+confidence=70+Math.min(20,Math.round(move*10));
+}else{
+direction="SELL";
+confidence=70+Math.min(20,Math.round(move*10));
+}
+
+}
+
+lastPrice=price;
+
+const signal=document.getElementById("signal");
+const small=document.getElementById("smallSignal");
+const trend=document.getElementById("trend");
+const confidenceEl=document.getElementById("confidence");
+
+if(direction==="BUY"){
+
+signal.textContent="BUY";
+signal.className="signal-main buy";
+
+small.textContent="BUY";
+small.className="value bull";
+
+trend.textContent="BULLISH";
+trend.className="value bull";
+
+confidenceEl.textContent=
+"Momentum confirmation • "+confidence+"%";
+
+document.getElementById("entry").textContent=
+formatPrice(price);
+
+const sl=price-4.00;
+const tp=price+8.00;
+
+document.getElementById("sl").textContent=
+formatPrice(sl);
+
+document.getElementById("tp").textContent=
+formatPrice(tp);
+
+document.getElementById("setup").textContent=
+"BUY SETUP";
+
+}
+
+else if(direction==="SELL"){
+
+signal.textContent="SELL";
+signal.className="signal-main sell";
+
+small.textContent="SELL";
+small.className="value bear";
+
+trend.textContent="BEARISH";
+trend.className="value bear";
+
+confidenceEl.textContent=
+"Momentum confirmation • "+confidence+"%";
+
+document.getElementById("entry").textContent=
+formatPrice(price);
+
+const sl=price+4.00;
+const tp=price-8.00;
+
+document.getElementById("sl").textContent=
+formatPrice(sl);
+
+document.getElementById("tp").textContent=
+formatPrice(tp);
+
+document.getElementById("setup").textContent=
+"SELL SETUP";
+
+}
+
+else{
+
+signal.textContent="WAIT";
+signal.className="signal-main waiting";
+
+small.textContent="WAIT";
+small.className="value wait";
+
+trend.textContent="WAIT";
+trend.className="value wait";
+
+confidenceEl.textContent=
+"Waiting for confirmation";
+
+resetTrade();
+
+}
+
+}
+
+async function loadMarket(){
+
+const live=document.getElementById("live");
+const status=document.getElementById("status");
+
+live.textContent="LOADING";
+status.textContent="● Loading live XAUUSD data...";
+
+try{
+
+const url=
+WORKER_URL+
+"?symbol=XAU/USD&interval=15min&outputsize=10";
+
+const response=await fetch(url);
+
+if(!response.ok){
+throw new Error("HTTP "+response.status);
+}
+
+const data=await response.json();
+
+let price=null;
+
+/*
+ Twelve Data normally returns values
+ inside data.values[0].close
+*/
+
+if(data.values && data.values.length){
+
+price=parseFloat(data.values[0].close);
+
+}
+
+if(!price){
+
+throw new Error("Price unavailable");
+
+}
+
+document.getElementById("price").textContent=
+formatPrice(price);
+
+live.textContent="LIVE";
+status.textContent=
+"● LIVE • XAU/USD • 15M";
+
+setText("t15","LIVE","bull");
+setText("t5","SCAN","wait");
+setText("t1h","SCAN","wait");
+
+makeSignal(price);
+
+}
+catch(error){
+
+console.log(error);
+
+live.textContent="ERROR";
+status.textContent=
+"● DATA ERROR — Check Worker connection";
+
+document.getElementById("price").textContent=
+"----";
+
+}
+
+}
+
+loadMarket();
+
+setInterval(loadMarket,30000);
+
+</script>
+
+</body>
+</html>
