@@ -129,6 +129,10 @@ color:#62a8ff;
 color:#c084fc;
 }
 
+.orange{
+color:#ff9f43;
+}
+
 .gray{
 color:#8995a3;
 }
@@ -182,6 +186,51 @@ font-size:16px;
 font-weight:bold;
 }
 
+.notifyBox{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#101821;
+border:1px solid #27313d;
+border-radius:10px;
+padding:12px;
+margin-top:10px;
+}
+
+.notifyText{
+font-size:13px;
+}
+
+.toggle{
+width:54px;
+height:30px;
+background:#27313d;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+}
+
+.toggle::after{
+content:"";
+width:24px;
+height:24px;
+background:#8995a3;
+border-radius:50%;
+position:absolute;
+top:3px;
+left:3px;
+transition:.2s;
+}
+
+.toggle.on{
+background:#35d07f;
+}
+
+.toggle.on::after{
+left:27px;
+background:#ffffff;
+}
+
 button{
 width:100%;
 border:0;
@@ -203,7 +252,7 @@ margin-top:8px;
 
 .legend{
 display:flex;
-gap:10px;
+gap:8px;
 flex-wrap:wrap;
 font-size:10px;
 color:#8995a3;
@@ -269,21 +318,15 @@ XAU/USD • 15M SMART MONEY CHART
 <div class="legend">
 
 <span>🟡 Liquidity</span>
-
-<span>🟢 Bull Sweep</span>
-
-<span>🔴 Bear Sweep</span>
-
+<span>🟢 Sweep</span>
 <span>🔵 MSS</span>
-
 <span>🟣 FVG</span>
-
-<span>🟠 OB</span>
+<span>🟠 HTF</span>
 
 </div>
 
 <div class="small">
-Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
+HTF Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
 </div>
 
 </div>
@@ -292,7 +335,27 @@ Liquidity → Sweep → MSS → Displacement → FVG → OB → Entry
 <div class="card">
 
 <div class="title">
-LIQUIDITY MAP
+HTF LIQUIDITY MAP
+</div>
+
+<div class="row">
+<span>1H High</span>
+<span id="h1High" class="orange">----</span>
+</div>
+
+<div class="row">
+<span>1H Low</span>
+<span id="h1Low" class="orange">----</span>
+</div>
+
+<div class="row">
+<span>4H High</span>
+<span id="h4High" class="orange">----</span>
+</div>
+
+<div class="row">
+<span>4H Low</span>
+<span id="h4Low" class="orange">----</span>
 </div>
 
 <div class="row">
@@ -469,6 +532,33 @@ TP2
 <div class="card">
 
 <div class="title">
+TRADE NOTIFICATION
+</div>
+
+<div class="notifyBox">
+
+<div class="notifyText">
+🔔 Trade Signal Notification
+</div>
+
+<div id="notifyToggle"
+class="toggle"
+onclick="toggleNotifications()">
+</div>
+
+</div>
+
+<div id="notifyStatus"
+class="small">
+Notifications OFF
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
 ENGINE STATUS
 </div>
 
@@ -511,9 +601,20 @@ Ready
 const WORKER=
 "https://icy-snow-263a.optrader06.workers.dev";
 
+
 let candles=[];
 
 let analysisData={};
+
+let notificationsEnabled=
+localStorage.getItem(
+"opRoyalNotifications"
+)==="true";
+
+let lastNotifiedSignal=
+localStorage.getItem(
+"opRoyalLastSignal"
+)||"";
 
 
 function max(arr){
@@ -578,11 +679,249 @@ className||"yellow";
 }
 
 
+/* NOTIFICATION SETUP */
+
+function updateNotificationUI(){
+
+const toggle=
+document.getElementById(
+"notifyToggle"
+);
+
+const status=
+document.getElementById(
+"notifyStatus"
+);
+
+
+if(notificationsEnabled){
+
+toggle.classList.add("on");
+
+status.innerText=
+"Notifications ON";
+
+status.className=
+"small green";
+
+}
+
+else{
+
+toggle.classList.remove("on");
+
+status.innerText=
+"Notifications OFF";
+
+status.className=
+"small";
+
+}
+
+}
+
+
+async function toggleNotifications(){
+
+if(
+!notificationsEnabled
+){
+
+if(
+!("Notification" in window)
+){
+
+alert(
+"This browser does not support notifications."
+);
+
+return;
+
+}
+
+
+if(
+Notification.permission!=="granted"
+){
+
+const permission=
+await Notification.requestPermission();
+
+
+if(
+permission!=="granted"
+){
+
+alert(
+"Notification permission allow karo."
+);
+
+return;
+
+}
+
+}
+
+
+notificationsEnabled=true;
+
+
+localStorage.setItem(
+"opRoyalNotifications",
+"true"
+);
+
+
+try{
+
+new Notification(
+"OP ROYAL TRADE",
+{
+body:
+"Trade notifications ON"
+}
+);
+
+}
+
+catch(e){}
+
+}
+
+else{
+
+notificationsEnabled=false;
+
+
+localStorage.setItem(
+"opRoyalNotifications",
+"false"
+);
+
+}
+
+
+updateNotificationUI();
+
+}
+
+
+/* SEND TRADE NOTIFICATION */
+
+function sendTradeNotification(
+signal,
+entry,
+sl,
+tp1,
+tp2
+){
+
+if(
+!notificationsEnabled
+){
+
+return;
+
+}
+
+
+if(
+signal!=="BUY"&&
+signal!=="SELL"
+){
+
+return;
+
+}
+
+
+const signalKey=
+signal+
+"_"+format(entry);
+
+
+if(
+signalKey===lastNotifiedSignal
+){
+
+return;
+
+}
+
+
+lastNotifiedSignal=
+signalKey;
+
+
+localStorage.setItem(
+"opRoyalLastSignal",
+signalKey
+);
+
+
+const title=
+signal==="BUY"
+?
+"🟢 OP ROYAL BUY SIGNAL"
+:
+"🔴 OP ROYAL SELL SIGNAL";
+
+
+const body=
+"XAU/USD 15M\n"+
+"Entry: "+format(entry)+
+"\nSL: "+format(sl)+
+"\nTP1: "+format(tp1)+
+"\nTP2: "+format(tp2);
+
+
+if(
+"Notification" in window&&
+Notification.permission==="granted"
+){
+
+try{
+
+const notification=
+new Notification(
+title,
+{
+body:body,
+tag:"op-royal-trade"
+}
+);
+
+
+notification.onclick=
+function(){
+
+window.focus();
+
+};
+
+}
+
+catch(error){
+
+console.log(
+"Notification error",
+error
+);
+
+}
+
+}
+
+}
+
+
 async function loadData(){
 
 try{
 
-document.getElementById("status").innerText=
+document.getElementById(
+"status"
+).innerText=
 "Scanning XAU/USD...";
 
 
@@ -640,20 +979,26 @@ throw new Error(
 analyze();
 
 
-document.getElementById("feed").innerText=
-"LIVE";
-
-document.getElementById("feed").className=
-"green";
+document.getElementById(
+"feed"
+).innerText="LIVE";
 
 
-document.getElementById("update").innerText=
+document.getElementById(
+"feed"
+).className="green";
+
+
+document.getElementById(
+"update"
+).innerText=
 new Date().toLocaleTimeString();
 
 
-document.getElementById("status").innerText=
+document.getElementById(
+"status"
+).innerText=
 "Scan complete";
-
 
 }
 
@@ -662,14 +1007,21 @@ catch(error){
 console.log(error);
 
 
-document.getElementById("feed").innerText=
+document.getElementById(
+"feed"
+).innerText=
 "ERROR";
 
-document.getElementById("feed").className=
+
+document.getElementById(
+"feed"
+).className=
 "red";
 
 
-document.getElementById("status").innerText=
+document.getElementById(
+"status"
+).innerText=
 "Data connection error";
 
 }
@@ -680,8 +1032,81 @@ document.getElementById("status").innerText=
 function analyze(){
 
 const last=
-candles[candles.length-1];
+candles[
+candles.length-1
+];
 
+
+/* HTF APPROXIMATION */
+
+const h1=
+candles.slice(-4);
+
+
+const h4=
+candles.slice(-16);
+
+
+const h1High=
+max(
+h1.map(c=>c.high)
+);
+
+
+const h1Low=
+min(
+h1.map(c=>c.low)
+);
+
+
+const h4High=
+max(
+h4.map(c=>c.high)
+);
+
+
+const h4Low=
+min(
+h4.map(c=>c.low)
+);
+
+
+setText(
+"price",
+format(last.close),
+"price"
+);
+
+
+setText(
+"h1High",
+format(h1High),
+"orange"
+);
+
+
+setText(
+"h1Low",
+format(h1Low),
+"orange"
+);
+
+
+setText(
+"h4High",
+format(h4High),
+"orange"
+);
+
+
+setText(
+"h4Low",
+format(h4Low),
+"orange"
+);
+
+
+/* PREVIOUS DAY */
 
 const today=
 new Date(
@@ -716,16 +1141,32 @@ previousDay.map(c=>c.low)
 }
 
 
+setText(
+"pdh",
+format(pdh),
+"yellow"
+);
+
+
+setText(
+"pdl",
+format(pdl),
+"yellow"
+);
+
+
+/* ASIAN */
+
 const asian=
 candles.filter(c=>{
 
 const d=
 new Date(c.time);
 
-const h=
+const hour=
 d.getUTCHours();
 
-return h>=0&&h<8;
+return hour>=0&&hour<8;
 
 });
 
@@ -750,6 +1191,22 @@ asian.map(c=>c.low)
 }
 
 
+setText(
+"asianHigh",
+format(ah),
+"yellow"
+);
+
+
+setText(
+"asianLow",
+format(al),
+"yellow"
+);
+
+
+/* SWING */
+
 const recent=
 candles.slice(-30);
 
@@ -769,41 +1226,6 @@ recent.slice(0,-3)
 
 
 setText(
-"price",
-format(last.close),
-"price"
-);
-
-
-setText(
-"pdh",
-format(pdh),
-"yellow"
-);
-
-
-setText(
-"pdl",
-format(pdl),
-"yellow"
-);
-
-
-setText(
-"asianHigh",
-format(ah),
-"yellow"
-);
-
-
-setText(
-"asianLow",
-format(al),
-"yellow"
-);
-
-
-setText(
 "swingHigh",
 format(swingHigh),
 "yellow"
@@ -817,7 +1239,7 @@ format(swingLow),
 );
 
 
-/* LIQUIDITY SWEEP */
+/* LIQUIDITY */
 
 let bullSweep=false;
 
@@ -825,6 +1247,8 @@ let bearSweep=false;
 
 
 const lowLevels=[
+h1Low,
+h4Low,
 pdl,
 al,
 swingLow
@@ -834,6 +1258,8 @@ x=>isFinite(x)&&x>0
 
 
 const highLevels=[
+h1High,
+h4High,
 pdh,
 ah,
 swingHigh
@@ -1016,7 +1442,10 @@ let displacementClass=
 
 if(displacement){
 
-if(last.close>last.open){
+if(
+last.close>
+last.open
+){
 
 displacementText=
 "BULLISH DISPLACEMENT";
@@ -1166,32 +1595,18 @@ averageVolume*1.5&&
 averageVolume>0;
 
 
-let volumeText=
-"NORMAL";
-
-let volumeClass=
-"gray";
-
-
-if(highVolume){
-
-volumeText=
-"HIGH VOLUME";
-
-volumeClass=
-"green";
-
-}
-
-
 setText(
 "volume",
-volumeText,
-volumeClass
+highVolume?
+"HIGH VOLUME":
+"NORMAL",
+highVolume?
+"green":
+"gray"
 );
 
 
-/* FINAL CONDITIONS */
+/* FINAL SETUP */
 
 const bullishSetup=
 bullSweep&&
@@ -1212,7 +1627,6 @@ bearOB;
 let signal=
 "WAIT";
 
-
 let entry=0;
 
 let sl=0;
@@ -1224,8 +1638,7 @@ let tp2=0;
 
 if(bullishSetup){
 
-signal=
-"BUY";
+signal="BUY";
 
 entry=
 last.close;
@@ -1247,11 +1660,9 @@ entry+risk*3;
 
 }
 
-
 else if(bearishSetup){
 
-signal=
-"SELL";
+signal="SELL";
 
 entry=
 last.close;
@@ -1274,7 +1685,7 @@ entry-risk*3;
 }
 
 
-/* FINAL STATUS */
+/* FINAL MSS */
 
 let finalMss=
 "WAITING";
@@ -1317,6 +1728,8 @@ finalMssClass
 );
 
 
+/* FINAL FVG */
+
 let finalFvg=
 "WAITING";
 
@@ -1358,7 +1771,7 @@ finalFvgClass
 );
 
 
-/* SIGNAL BOX */
+/* SIGNAL */
 
 const signalBox=
 document.getElementById(
@@ -1416,29 +1829,34 @@ document.getElementById(
 ).innerText=
 format(entry);
 
-
 document.getElementById(
 "sl"
 ).innerText=
 format(sl);
-
 
 document.getElementById(
 "tp1"
 ).innerText=
 format(tp1);
 
-
 document.getElementById(
 "tp2"
 ).innerText=
 format(tp2);
 
-
 document.getElementById(
 "rr"
 ).innerText=
 "1 : 2 / 1 : 3";
+
+
+sendTradeNotification(
+signal,
+entry,
+sl,
+tp1,
+tp2
+);
 
 }
 
@@ -1449,24 +1867,20 @@ document.getElementById(
 ).innerText=
 "WAITING";
 
-
 document.getElementById(
 "sl"
 ).innerText=
 "WAITING";
-
 
 document.getElementById(
 "tp1"
 ).innerText=
 "WAITING";
 
-
 document.getElementById(
 "tp2"
 ).innerText=
 "WAITING";
-
 
 document.getElementById(
 "rr"
@@ -1476,9 +1890,17 @@ document.getElementById(
 }
 
 
-/* SAVE FOR CHART */
+/* CHART DATA */
 
 analysisData={
+
+h1High:h1High,
+
+h1Low:h1Low,
+
+h4High:h4High,
+
+h4Low:h4Low,
 
 pdh:pdh,
 
@@ -1504,10 +1926,6 @@ bullFVG:bullFVG,
 
 bearFVG:bearFVG,
 
-bullOB:bullOB,
-
-bearOB:bearOB,
-
 signal:signal,
 
 entry:entry,
@@ -1526,7 +1944,7 @@ drawChart();
 }
 
 
-/* CHART DRAWING */
+/* CHART */
 
 function drawChart(){
 
@@ -1561,7 +1979,6 @@ canvas.getBoundingClientRect();
 canvas.width=
 rect.width*dpr;
 
-
 canvas.height=
 rect.height*dpr;
 
@@ -1578,7 +1995,6 @@ dpr,
 
 const W=
 rect.width;
-
 
 const H=
 rect.height;
@@ -1613,7 +2029,7 @@ hi-lo||1;
 
 
 const pad=
-range*0.08;
+range*.08;
 
 
 hi+=pad;
@@ -1632,40 +2048,7 @@ return H-
 }
 
 
-/* GRID */
-
-ctx.strokeStyle=
-"#151e27";
-
-ctx.lineWidth=1;
-
-
-for(
-let i=1;
-i<5;
-i++
-){
-
-const yy=
-H*i/5;
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-0,
-yy
-);
-
-ctx.lineTo(
-W,
-yy
-);
-
-ctx.stroke();
-
-}
-
+/* CANDLES */
 
 const candleWidth=
 W/data.length;
@@ -1689,14 +2072,11 @@ candleWidth/2;
 const yo=
 y(c.open);
 
-
 const yc=
 y(c.close);
 
-
 const yh=
 y(c.high);
-
 
 const yl=
 y(c.low);
@@ -1734,37 +2114,25 @@ up?
 "#ff6262";
 
 
-const top=
-Math.min(
-yo,
-yc
-);
-
-
-const height=
-Math.max(
-2,
-Math.abs(
-yc-yo
-)
-);
-
-
 ctx.fillRect(
 x-candleWidth*.30,
-top,
+Math.min(yo,yc),
 candleWidth*.60,
-height
+Math.max(
+2,
+Math.abs(yc-yo)
+)
 );
 
 }
 
 
-/* LEVELS */
+/* HTF LEVELS */
 
-function levelLine(
+function line(
 price,
-label
+label,
+dash
 ){
 
 if(
@@ -1792,11 +2160,15 @@ return;
 
 
 ctx.setLineDash(
-[5,5]
+dash?
+[4,4]:
+[6,6]
 );
 
 
 ctx.strokeStyle=
+dash?
+"#ff9f43":
 "#f1c75b";
 
 
@@ -1819,10 +2191,12 @@ ctx.setLineDash([]);
 
 
 ctx.font=
-"10px Arial";
+"9px Arial";
 
 
 ctx.fillStyle=
+dash?
+"#ff9f43":
 "#f1c75b";
 
 
@@ -1835,443 +2209,11 @@ yy-4
 }
 
 
-levelLine(
-analysisData.pdh,
-"PDH"
+line(
+analysisData.h1High,
+"1H H",
+true
 );
 
-
-levelLine(
-analysisData.pdl,
-"PDL"
-);
-
-
-levelLine(
-analysisData.ah,
-"AH"
-);
-
-
-levelLine(
-analysisData.al,
-"AL"
-);
-
-
-/* FVG ZONE */
-
-if(
-analysisData.bullFVG
-){
-
-const top=
-y(
-candles[
-candles.length-3
-].high
-);
-
-
-const bottom=
-y(
-candles[
-candles.length-1
-].low
-);
-
-
-ctx.fillStyle=
-"rgba(192,132,252,0.16)";
-
-
-ctx.fillRect(
-W*.55,
-Math.min(
-top,
-bottom
-),
-W*.45,
-Math.abs(
-bottom-top
-)
-);
-
-
-ctx.fillStyle=
-"#c084fc";
-
-
-ctx.font=
-"10px Arial";
-
-
-ctx.fillText(
-"BULL FVG",
-W*.56,
-Math.min(
-top,
-bottom
-)+12
-);
-
-}
-
-
-if(
-analysisData.bearFVG
-){
-
-const top=
-y(
-candles[
-candles.length-1
-].high
-);
-
-
-const bottom=
-y(
-candles[
-candles.length-3
-].low
-);
-
-
-ctx.fillStyle=
-"rgba(192,132,252,0.16)";
-
-
-ctx.fillRect(
-W*.55,
-Math.min(
-top,
-bottom
-),
-W*.45,
-Math.abs(
-bottom-top
-)
-);
-
-
-ctx.fillStyle=
-"#c084fc";
-
-
-ctx.font=
-"10px Arial";
-
-
-ctx.fillText(
-"BEAR FVG",
-W*.56,
-Math.min(
-top,
-bottom
-)+12
-);
-
-}
-
-
-/* MSS MARKER */
-
-const last=
-candles[
-candles.length-1
-];
-
-
-const markerX=
-W-candleWidth/2;
-
-
-if(
-analysisData.bullMSS
-){
-
-const yy=
-y(last.low);
-
-
-ctx.fillStyle=
-"#62a8ff";
-
-
-ctx.beginPath();
-
-ctx.arc(
-markerX,
-yy,
-5,
-0,
-Math.PI*2
-);
-
-ctx.fill();
-
-
-ctx.font=
-"bold 10px Arial";
-
-ctx.fillText(
-"MSS",
-markerX-25,
-yy+18
-);
-
-}
-
-
-if(
-analysisData.bearMSS
-){
-
-const yy=
-y(last.high);
-
-
-ctx.fillStyle=
-"#62a8ff";
-
-
-ctx.beginPath();
-
-ctx.arc(
-markerX,
-yy,
-5,
-0,
-Math.PI*2
-);
-
-ctx.fill();
-
-
-ctx.font=
-"bold 10px Arial";
-
-ctx.fillText(
-"MSS",
-markerX-25,
-yy-10
-);
-
-}
-
-
-/* SWEEP MARKER */
-
-if(
-analysisData.bullSweep
-){
-
-const yy=
-y(last.low);
-
-
-ctx.fillStyle=
-"#35d07f";
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-markerX,
-yy+15
-);
-
-ctx.lineTo(
-markerX-7,
-yy+5
-);
-
-ctx.lineTo(
-markerX+7,
-yy+5
-);
-
-ctx.closePath();
-
-ctx.fill();
-
-
-ctx.font=
-"bold 10px Arial";
-
-ctx.fillText(
-"SWEEP",
-markerX-25,
-yy+30
-);
-
-}
-
-
-if(
-analysisData.bearSweep
-){
-
-const yy=
-y(last.high);
-
-
-ctx.fillStyle=
-"#ff6262";
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-markerX,
-yy-15
-);
-
-ctx.lineTo(
-markerX-7,
-yy-5
-);
-
-ctx.lineTo(
-markerX+7,
-yy-5
-);
-
-ctx.closePath();
-
-ctx.fill();
-
-
-ctx.font=
-"bold 10px Arial";
-
-ctx.fillText(
-"SWEEP",
-markerX-25,
-yy-20
-);
-
-}
-
-
-/* TRADE LEVELS */
-
-function tradeLine(
-price,
-label,
-stroke
-){
-
-if(
-!price||
-isNaN(price)
-){
-
-return;
-
-}
-
-
-const yy=
-y(price);
-
-
-if(
-yy<0||
-yy>H
-){
-
-return;
-
-}
-
-
-ctx.strokeStyle=
-stroke;
-
-ctx.lineWidth=2;
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-0,
-yy
-);
-
-ctx.lineTo(
-W,
-yy
-);
-
-ctx.stroke();
-
-
-ctx.lineWidth=1;
-
-
-ctx.font=
-"bold 10px Arial";
-
-ctx.fillStyle=
-stroke;
-
-
-ctx.fillText(
-label+" "+format(price),
-5,
-yy-5
-);
-
-}
-
-
-tradeLine(
-analysisData.entry,
-"ENTRY",
-"#62a8ff"
-);
-
-
-tradeLine(
-analysisData.sl,
-"SL",
-"#ff6262"
-);
-
-
-tradeLine(
-analysisData.tp1,
-"TP1",
-"#35d07f"
-);
-
-
-tradeLine(
-analysisData.tp2,
-"TP2",
-"#35d07f"
-);
-
-}
-
-
-window.addEventListener(
-"resize",
-drawChart
-);
-
-
-loadData();
-
-
-setInterval(
-loadData,
-30000
-);
-
-</script>
-
-</body>
-  </html>
+line(
+an
