@@ -125,10 +125,8 @@ margin-right:5px
 <h1>⚡ OP ROYAL TRADE</h1>
 
 <div class="sub">
-XAU/USD • Liquidity → Sweep → MSS Engine
+XAU/USD • Liquidity → Sweep → MSS → Displacement
 </div>
-
-<!-- LIVE MARKET -->
 
 <div class="card">
 
@@ -153,9 +151,7 @@ XAU/USD • Liquidity → Sweep → MSS Engine
 
 <div class="row">
 <span>Engine</span>
-<span id="engineStatus" class="value yellow">
-STARTING
-</span>
+<span id="engineStatus" class="value yellow">STARTING</span>
 </div>
 
 <div class="row">
@@ -164,8 +160,6 @@ STARTING
 </div>
 
 </div>
-
-<!-- SEQUENCE -->
 
 <div class="card">
 
@@ -203,8 +197,6 @@ STARTING
 
 </div>
 
-<!-- LIQUIDITY -->
-
 <div class="card">
 
 <div class="title">💧 Liquidity Levels</div>
@@ -236,8 +228,6 @@ STARTING
 
 </div>
 
-<!-- KEY LEVELS -->
-
 <div class="card">
 
 <div class="title">📌 Key Liquidity</div>
@@ -259,50 +249,36 @@ STARTING
 
 </div>
 
-<!-- SWEEP -->
-
 <div class="card">
 
 <div class="title">💧 Liquidity Sweep</div>
 
 <div class="row">
 <span>Status</span>
-<span id="sweepStatus" class="value yellow">
-WAITING
-</span>
+<span id="sweepStatus" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Timeframe</span>
-<span id="sweepTF" class="value yellow">
-WAITING
-</span>
+<span id="sweepTF" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="sweepDir" class="value yellow">
-WAITING
-</span>
+<span id="sweepDir" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Swept Level</span>
-<span id="sweepLevel" class="value yellow">
-WAITING
-</span>
+<span id="sweepLevel" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Sweep Candle</span>
-<span id="sweepTime" class="value gray">
-WAITING
-</span>
+<span id="sweepTime" class="value gray">WAITING</span>
 </div>
 
 </div>
-
-<!-- MSS -->
 
 <div class="card">
 
@@ -310,35 +286,25 @@ WAITING
 
 <div class="row">
 <span>MSS</span>
-<span id="mss" class="value yellow">
-WAITING
-</span>
+<span id="mss" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="mssDir" class="value yellow">
-WAITING
-</span>
+<span id="mssDir" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>MSS Candle</span>
-<span id="mssTime" class="value gray">
-WAITING
-</span>
+<span id="mssTime" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
 <span>Broken Structure</span>
-<span id="mssLevel" class="value blue">
-WAITING
-</span>
+<span id="mssLevel" class="value blue">WAITING</span>
 </div>
 
 </div>
-
-<!-- DISPLACEMENT -->
 
 <div class="card">
 
@@ -346,14 +312,20 @@ WAITING
 
 <div class="row">
 <span>Status</span>
-<span id="disp" class="value yellow">
-WAITING
-</span>
+<span id="disp" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Body Strength</span>
+<span id="bodyStrength" class="value gray">WAITING</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="dispDir" class="value yellow">WAITING</span>
 </div>
 
 </div>
-
-<!-- BIG PLAYER -->
 
 <div class="card">
 
@@ -361,16 +333,12 @@ WAITING
 
 <div class="row">
 <span>Confirmation</span>
-<span id="big" class="value yellow">
-WAITING
-</span>
+<span id="big" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="bigDir" class="value yellow">
-WAITING
-</span>
+<span id="bigDir" class="value yellow">WAITING</span>
 </div>
 
 <div class="small">
@@ -380,50 +348,36 @@ It does not identify actual institutional orders.
 
 </div>
 
-<!-- TRADE -->
-
 <div class="card">
 
 <div class="title">💰 Trade Setup</div>
 
 <div class="row">
 <span>Signal</span>
-<span id="signal" class="value yellow">
-NO ACTIVE SIGNAL
-</span>
+<span id="signal" class="value yellow">NO ACTIVE SIGNAL</span>
 </div>
 
 <div class="row">
 <span>Entry</span>
-<span id="entry" class="value yellow">
-WAITING
-</span>
+<span id="entry" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Stop Loss</span>
-<span id="sl" class="value red">
-WAITING
-</span>
+<span id="sl" class="value red">WAITING</span>
 </div>
 
 <div class="row">
 <span>Take Profit</span>
-<span id="tp" class="value green">
-WAITING
-</span>
+<span id="tp" class="value green">WAITING</span>
 </div>
 
 <div class="row">
 <span>Risk : Reward</span>
-<span class="value blue">
-1 : 2
-</span>
+<span class="value blue">1 : 2</span>
 </div>
 
 </div>
-
-<!-- NOTIFICATIONS -->
 
 <div class="card">
 
@@ -454,8 +408,6 @@ Notification permission not requested.
 </div>
 
 </div>
-
-<!-- LOG -->
 
 <div class="card">
 
@@ -558,11 +510,7 @@ if(
 !Array.isArray(data.values)||
 !data.values.length
 ){
-
-throw new Error(
-"No values received"
-);
-
+throw new Error("No values received");
 }
 
 marketData=data.values
@@ -590,9 +538,7 @@ new Date(b.time)
 );
 
 if(!marketData.length)
-throw new Error(
-"Invalid candle data"
-);
+throw new Error("Invalid candle data");
 
 const latest=
 marketData[marketData.length-1];
@@ -650,8 +596,7 @@ const groups={};
 
 marketData.forEach(c=>{
 
-const b=
-bucket(c.time,minutes);
+const b=bucket(c.time,minutes);
 
 if(!groups[b])
 groups[b]=[];
@@ -682,8 +627,7 @@ low:Math.min(
 ...arr.map(x=>x.low)
 ),
 
-close:
-arr[arr.length-1].close
+close:arr[arr.length-1].close
 
 };
 
@@ -697,8 +641,7 @@ PREVIOUS LIQUIDITY
 
 function getPreviousLiquidity(minutes){
 
-const cs=
-aggregate(minutes);
+const cs=aggregate(minutes);
 
 if(cs.length<2)
 return null;
@@ -708,7 +651,7 @@ return cs[cs.length-2];
 }
 
 /* =========================
-DISPLAY LIQUIDITY
+LIQUIDITY
 ========================= */
 
 function showLiquidity(){
@@ -728,9 +671,7 @@ getPreviousLiquidity(item[0]);
 
 if(!c){
 
-$(item[1]).textContent=
-"WAITING";
-
+$(item[1]).textContent="WAITING";
 return;
 
 }
@@ -757,16 +698,13 @@ fmt(daily.low);
 
 }
 
-$("s1").textContent=
-"READY";
-
-$("s1").className=
-"green";
+$("s1").textContent="READY";
+$("s1").className="green";
 
 }
 
 /* =========================
-SWEEP DETECTION
+SWEEP
 ========================= */
 
 function detectSweep(){
@@ -779,29 +717,15 @@ const timeframes=[
 
 timeframes.forEach(tf=>{
 
-const cs=
-aggregate(tf);
+const cs=aggregate(tf);
 
 if(cs.length<3)
 return;
 
-for(
-let i=1;
-i<cs.length;
-i++
-){
+for(let i=1;i<cs.length;i++){
 
-const previous=
-cs[i-1];
-
-const current=
-cs[i];
-
-/*
-BEARISH SWEEP:
-High takes previous high,
-then close returns below.
-*/
+const previous=cs[i-1];
+const current=cs[i];
 
 if(
 current.high>previous.high &&
@@ -821,18 +745,10 @@ if(
 new Date(current.time)>
 new Date(best.candle.time)
 ){
-
 best=sweep;
-
 }
 
 }
-
-/*
-BULLISH SWEEP:
-Low takes previous low,
-then close returns above.
-*/
 
 if(
 current.low<previous.low &&
@@ -852,9 +768,7 @@ if(
 new Date(current.time)>
 new Date(best.candle.time)
 ){
-
 best=sweep;
-
 }
 
 }
@@ -881,33 +795,20 @@ $("sweepStatus").textContent=
 $("sweepStatus").className=
 "value yellow";
 
-$("sweepTF").textContent=
-"WAITING";
+$("sweepTF").textContent="WAITING";
+$("sweepDir").textContent="WAITING";
+$("sweepLevel").textContent="WAITING";
+$("sweepTime").textContent="WAITING";
 
-$("sweepDir").textContent=
-"WAITING";
-
-$("sweepLevel").textContent=
-"WAITING";
-
-$("sweepTime").textContent=
-"WAITING";
-
-$("s2").textContent=
-"WAITING";
-
-$("s2").className=
-"yellow";
+$("s2").textContent="WAITING";
+$("s2").className="yellow";
 
 return;
 
 }
 
-$("sweepStatus").textContent=
-"CONFIRMED";
-
-$("sweepStatus").className=
-"value green";
+$("sweepStatus").textContent="CONFIRMED";
+$("sweepStatus").className="value green";
 
 $("sweepTF").textContent=
 tfText(sweep.tf);
@@ -919,8 +820,7 @@ $("sweepDir").className=
 "value "+
 (
 sweep.direction==="BULLISH"
-?"green"
-:"red"
+?"green":"red"
 );
 
 $("sweepLevel").textContent=
@@ -931,23 +831,17 @@ new Date(
 sweep.candle.time
 ).toLocaleString();
 
-$("s2").textContent=
-"CONFIRMED";
-
-$("s2").className=
-"green";
-
-/* Sweep notification */
+$("s2").textContent="CONFIRMED";
+$("s2").className="green";
 
 const key=
-sweep.tf+
-"_"+sweep.direction+
+sweep.tf+"_"+sweep.direction+
 "_"+sweep.candle.time;
 
 if(
-key!==lastSweepKey&&
-$("sweepAlert").checked&&
-"Notification" in window&&
+key!==lastSweepKey &&
+$("sweepAlert").checked &&
+"Notification" in window &&
 Notification.permission==="granted"
 ){
 
@@ -959,8 +853,7 @@ new Notification(
 body:
 sweep.direction+
 " • "+tfText(sweep.tf)+
-" • Level "+
-fmt(sweep.level)
+" • Level "+fmt(sweep.level)
 }
 );
 
@@ -973,7 +866,7 @@ lastSweepKey=key;
 }
 
 /* =========================
-MSS DETECTION
+MSS
 ========================= */
 
 function detectMSS(sweep){
@@ -981,8 +874,7 @@ function detectMSS(sweep){
 if(!sweep)
 return null;
 
-const cs=
-aggregate(sweep.tf);
+const cs=aggregate(sweep.tf);
 
 if(
 sweep.index===undefined||
@@ -990,24 +882,13 @@ sweep.index>=cs.length-1
 )
 return null;
 
-/*
-Only candles AFTER the sweep
-can create MSS.
-*/
-
 for(
 let i=sweep.index+1;
 i<cs.length;
 i++
 ){
 
-const current=
-cs[i];
-
-/*
-Use previous 3 completed
-candles as structure.
-*/
+const current=cs[i];
 
 const start=
 Math.max(0,i-3);
@@ -1028,56 +909,32 @@ Math.min(
 ...structure.map(x=>x.low)
 );
 
-/*
-BULLISH MSS:
-After bullish sweep,
-price closes above recent structure high.
-*/
-
 if(
-sweep.direction==="BULLISH"&&
+sweep.direction==="BULLISH" &&
 current.close>structureHigh
 ){
 
 return{
-
 direction:"BULLISH",
-
 time:current.time,
-
 level:structureHigh,
-
 candle:current,
-
 index:i
-
 };
 
 }
 
-/*
-BEARISH MSS:
-After bearish sweep,
-price closes below recent structure low.
-*/
-
 if(
-sweep.direction==="BEARISH"&&
+sweep.direction==="BEARISH" &&
 current.close<structureLow
 ){
 
 return{
-
 direction:"BEARISH",
-
 time:current.time,
-
 level:structureLow,
-
 candle:current,
-
 index:i
-
 };
 
 }
@@ -1096,36 +953,22 @@ function showMSS(mss){
 
 if(!mss){
 
-$("mss").textContent=
-"WAITING";
+$("mss").textContent="WAITING";
+$("mss").className="value yellow";
 
-$("mss").className=
-"value yellow";
+$("mssDir").textContent="WAITING";
+$("mssTime").textContent="WAITING";
+$("mssLevel").textContent="WAITING";
 
-$("mssDir").textContent=
-"WAITING";
-
-$("mssLevel").textContent=
-"WAITING";
-
-$("mssTime").textContent=
-"WAITING";
-
-$("s3").textContent=
-"WAITING";
-
-$("s3").className=
-"yellow";
+$("s3").textContent="WAITING";
+$("s3").className="yellow";
 
 return;
 
 }
 
-$("mss").textContent=
-"CONFIRMED";
-
-$("mss").className=
-"value green";
+$("mss").textContent="CONFIRMED";
+$("mss").className="value green";
 
 $("mssDir").textContent=
 mss.direction;
@@ -1134,28 +977,164 @@ $("mssDir").className=
 "value "+
 (
 mss.direction==="BULLISH"
-?"green"
-:"red"
+?"green":"red"
 );
+
+$("mssTime").textContent=
+new Date(mss.time).toLocaleString();
 
 $("mssLevel").textContent=
 fmt(mss.level);
 
-$("mssTime").textContent=
-new Date(
-mss.time
-).toLocaleString();
+$("s3").textContent="CONFIRMED";
+$("s3").className="green";
 
-$("s3").textContent=
-"CONFIRMED";
+}
 
-$("s3").className=
-"green";
+/* =========================
+DISPLACEMENT
+========================= */
+
+function detectDisplacement(mss,sweep){
+
+if(!mss||!sweep)
+return null;
+
+const cs=
+aggregate(sweep.tf);
+
+const i=mss.index;
+
+if(i===undefined||i<5)
+return null;
+
+const current=cs[i];
+
+const currentBody=
+Math.abs(
+current.close-current.open
+);
+
+const previous=
+cs.slice(i-5,i);
+
+const bodies=
+previous.map(c=>
+Math.abs(c.close-c.open)
+);
+
+const average=
+bodies.reduce(
+(a,b)=>a+b,0
+)/bodies.length;
+
+if(!average)
+return null;
+
+const ratio=
+currentBody/average;
+
+const bullish=
+current.close>current.open;
+
+const bearish=
+current.close<current.open;
+
+let directionMatch=false;
+
+if(
+mss.direction==="BULLISH" &&
+bullish
+){
+directionMatch=true;
+}
+
+if(
+mss.direction==="BEARISH" &&
+bearish
+){
+directionMatch=true;
+}
 
 /*
-MSS notification is intentionally
-not enabled separately.
+1.25x average body = displacement
+confirmation threshold.
 */
+
+if(
+ratio>=1.25 &&
+directionMatch
+){
+
+return{
+confirmed:true,
+ratio:ratio,
+direction:mss.direction,
+candle:current
+};
+
+}
+
+return{
+confirmed:false,
+ratio:ratio,
+direction:mss.direction,
+candle:current
+};
+
+}
+
+/* =========================
+SHOW DISPLACEMENT
+========================= */
+
+function showDisplacement(result){
+
+if(!result){
+
+$("disp").textContent="WAITING";
+$("disp").className="value yellow";
+
+$("bodyStrength").textContent="WAITING";
+$("dispDir").textContent="WAITING";
+
+$("s4").textContent="WAITING";
+$("s4").className="yellow";
+
+return;
+
+}
+
+$("bodyStrength").textContent=
+result.ratio.toFixed(2)+"x average";
+
+$("dispDir").textContent=
+result.direction;
+
+$("dispDir").className=
+"value "+
+(
+result.direction==="BULLISH"
+?"green":"red"
+);
+
+if(result.confirmed){
+
+$("disp").textContent="CONFIRMED";
+$("disp").className="value green";
+
+$("s4").textContent="CONFIRMED";
+$("s4").className="green";
+
+}else{
+
+$("disp").textContent="NOT CONFIRMED";
+$("disp").className="value yellow";
+
+$("s4").textContent="WAITING";
+$("s4").className="yellow";
+
+}
 
 }
 
@@ -1176,35 +1155,20 @@ if(!sweep){
 
 showMSS(null);
 
-$("disp").textContent=
-"WAITING";
+showDisplacement(null);
 
-$("big").textContent=
-"WAITING";
+$("big").textContent="WAITING";
+$("bigDir").textContent="WAITING";
 
-$("bigDir").textContent=
-"WAITING";
-
-$("s4").textContent=
-"WAITING";
-
-$("s5").textContent=
-"WAITING";
-
-$("s6").textContent=
-"WAITING";
+$("s5").textContent="WAITING";
+$("s6").textContent="WAITING";
 
 $("signal").textContent=
 "NO ACTIVE SIGNAL";
 
-$("entry").textContent=
-"WAITING";
-
-$("sl").textContent=
-"WAITING";
-
-$("tp").textContent=
-"WAITING";
+$("entry").textContent="WAITING";
+$("sl").textContent="WAITING";
+$("tp").textContent="WAITING";
 
 log(
 "Liquidity active • No confirmed sweep"
@@ -1221,23 +1185,13 @@ showMSS(mss);
 
 if(!mss){
 
-$("disp").textContent=
-"WAITING";
+showDisplacement(null);
 
-$("big").textContent=
-"WAITING";
+$("big").textContent="WAITING";
+$("bigDir").textContent="WAITING";
 
-$("bigDir").textContent=
-"WAITING";
-
-$("s4").textContent=
-"WAITING";
-
-$("s5").textContent=
-"WAITING";
-
-$("s6").textContent=
-"WAITING";
+$("s5").textContent="WAITING";
+$("s6").textContent="WAITING";
 
 log(
 "SWEEP CONFIRMED • Waiting for MSS"
@@ -1247,27 +1201,68 @@ return;
 
 }
 
-log(
-"SWEEP + MSS CONFIRMED • "+
-mss.direction
+const displacement=
+detectDisplacement(
+mss,
+sweep
 );
 
+showDisplacement(displacement);
+
+if(
+!displacement||
+!displacement.confirmed
+){
+
+$("big").textContent="WAITING";
+$("bigDir").textContent="WAITING";
+
+$("s5").textContent="WAITING";
+$("s6").textContent="WAITING";
+
+log(
+"SWEEP + MSS • Waiting for displacement"
+);
+
+return;
+
+}
+
 /*
-Displacement will be added
-in the next step.
+All 3 conditions now confirmed.
 */
 
-$("disp").textContent=
-"WAITING";
+$("big").textContent=
+"CONFIRMED";
 
-$("s4").textContent=
-"WAITING";
+$("big").className=
+"value green";
+
+$("bigDir").textContent=
+mss.direction;
+
+$("bigDir").className=
+"value "+
+(
+mss.direction==="BULLISH"
+?"green":"red"
+);
 
 $("s5").textContent=
-"WAITING";
+"CONFIRMED";
+
+$("s5").className=
+"green";
 
 $("s6").textContent=
-"WAITING";
+"READY";
+
+$("s6").className=
+"green";
+
+log(
+"SWEEP + MSS + DISPLACEMENT CONFIRMED"
+);
 
 }
 
