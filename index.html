@@ -4,30 +4,113 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>OP ROYAL TRADE</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:12px;background:#071018;color:#fff;font-family:Arial,sans-serif}
-h1{text-align:center;font-size:23px;margin:5px 0;color:#f5c542}
-.sub{text-align:center;font-size:12px;color:#9aa7b2;margin-bottom:14px}
-.card{background:#0d1822;border:1px solid #263746;border-radius:12px;padding:13px;margin-bottom:11px}
-.title{font-size:15px;font-weight:bold;color:#f5c542;margin-bottom:9px}
-.price{text-align:center;font-size:31px;font-weight:bold;margin:8px 0 12px}
-.row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #1d2b36;font-size:13px}
+body{
+margin:0;
+padding:12px;
+background:#071018;
+color:#fff;
+font-family:Arial,sans-serif
+}
+h1{
+text-align:center;
+font-size:23px;
+margin:5px 0;
+color:#f5c542
+}
+.sub{
+text-align:center;
+font-size:12px;
+color:#9aa7b2;
+margin-bottom:14px
+}
+.card{
+background:#0d1822;
+border:1px solid #263746;
+border-radius:12px;
+padding:13px;
+margin-bottom:11px
+}
+.title{
+font-size:15px;
+font-weight:bold;
+color:#f5c542;
+margin-bottom:9px
+}
+.price{
+text-align:center;
+font-size:31px;
+font-weight:bold;
+margin:8px 0 12px
+}
+.row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:8px 0;
+border-bottom:1px solid #1d2b36;
+font-size:13px
+}
 .row:last-child{border-bottom:0}
-.value{font-weight:bold;text-align:right}
-.green{color:#36d98b}.red{color:#ff5b5b}.yellow{color:#f5c542}.blue{color:#55b7ff}.gray{color:#9aa7b2}
-.tf{font-size:10px;background:#162633;padding:3px 6px;border-radius:5px;color:#55b7ff}
-.setup{background:#101e29;padding:9px;margin:5px 0;border-radius:8px;font-size:13px}
-button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;color:#071018;font-weight:bold;font-size:14px}
-.small{font-size:11px;line-height:1.5;color:#8d9aa5}
-.statusDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f5c542;margin-right:5px}
+.value{
+font-weight:bold;
+text-align:right
+}
+.green{color:#36d98b}
+.red{color:#ff5b5b}
+.yellow{color:#f5c542}
+.blue{color:#55b7ff}
+.gray{color:#9aa7b2}
+.tf{
+font-size:10px;
+background:#162633;
+padding:3px 6px;
+border-radius:5px;
+color:#55b7ff
+}
+.setup{
+background:#101e29;
+padding:9px;
+margin:5px 0;
+border-radius:8px;
+font-size:13px
+}
+button{
+width:100%;
+border:0;
+border-radius:9px;
+padding:12px;
+background:#f5c542;
+color:#071018;
+font-weight:bold;
+font-size:14px
+}
+.small{
+font-size:11px;
+line-height:1.5;
+color:#8d9aa5
+}
+.statusDot{
+display:inline-block;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#f5c542;
+margin-right:5px
+}
 </style>
 </head>
 
 <body>
 
 <h1>⚡ OP ROYAL TRADE</h1>
-<div class="sub">XAU/USD • Liquidity Sweep Trading Engine</div>
+<div class="sub">
+XAU/USD • Liquidity Sweep Trading Engine
+</div>
+
+<!-- LIVE MARKET -->
 
 <div class="card">
 
@@ -52,7 +135,9 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 <div class="row">
 <span>Engine</span>
-<span id="engineStatus" class="value yellow">STARTING</span>
+<span id="engineStatus" class="value yellow">
+STARTING
+</span>
 </div>
 
 <div class="row">
@@ -61,6 +146,8 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 </div>
 
 </div>
+
+<!-- SETUP -->
 
 <div class="card">
 
@@ -98,6 +185,8 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 </div>
 
+<!-- LIQUIDITY -->
+
 <div class="card">
 
 <div class="title">💧 Liquidity Levels</div>
@@ -129,9 +218,11 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 </div>
 
+<!-- PDH PDL -->
+
 <div class="card">
 
-<div class="title">📌 Liquidity Detail</div>
+<div class="title">📌 Key Liquidity</div>
 
 <div class="row">
 <span>PDH</span>
@@ -145,31 +236,57 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 <div class="row">
 <span>Current Price</span>
-<span id="currentPrice" class="value green">WAITING</span>
+<span id="currentPrice" class="value green">
+WAITING
+</span>
 </div>
 
 </div>
+
+<!-- SWEEP -->
 
 <div class="card">
 
 <div class="title">💧 Liquidity Sweep</div>
 
 <div class="row">
-<span>Detection</span>
-<span id="sweepStatus" class="value yellow">WAITING</span>
+<span>Status</span>
+<span id="sweepStatus" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Timeframe</span>
-<span id="sweepTF" class="value yellow">WAITING</span>
+<span id="sweepTF" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="sweepDir" class="value yellow">WAITING</span>
+<span id="sweepDir" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Swept Level</span>
+<span id="sweepLevel" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Sweep Candle</span>
+<span id="sweepTime" class="value gray">
+WAITING
+</span>
 </div>
 
 </div>
+
+<!-- MSS -->
 
 <div class="card">
 
@@ -177,20 +294,28 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 <div class="row">
 <span>MSS</span>
-<span id="mss" class="value yellow">WAITING</span>
+<span id="mss" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="mssDir" class="value yellow">WAITING</span>
+<span id="mssDir" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Displacement</span>
-<span id="disp" class="value yellow">WAITING</span>
+<span id="disp" class="value yellow">
+WAITING
+</span>
 </div>
 
 </div>
+
+<!-- BIG PLAYER -->
 
 <div class="card">
 
@@ -198,20 +323,27 @@ button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;col
 
 <div class="row">
 <span>Confirmation</span>
-<span id="big" class="value yellow">WAITING</span>
+<span id="big" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="bigDir" class="value yellow">WAITING</span>
+<span id="bigDir" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="small">
-Proxy = liquidity sweep + MSS + displacement.
-It does not identify actual institutional orders.
+Proxy confirmation = Liquidity Sweep + MSS +
+Displacement. It does not identify actual
+institutional orders.
 </div>
 
 </div>
+
+<!-- TRADE -->
 
 <div class="card">
 
@@ -219,30 +351,42 @@ It does not identify actual institutional orders.
 
 <div class="row">
 <span>Signal</span>
-<span id="signal" class="value yellow">NO ACTIVE SIGNAL</span>
+<span id="signal" class="value yellow">
+NO ACTIVE SIGNAL
+</span>
 </div>
 
 <div class="row">
 <span>Entry</span>
-<span id="entry" class="value yellow">WAITING</span>
+<span id="entry" class="value yellow">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Stop Loss</span>
-<span id="sl" class="value red">WAITING</span>
+<span id="sl" class="value red">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Take Profit</span>
-<span id="tp" class="value green">WAITING</span>
+<span id="tp" class="value green">
+WAITING
+</span>
 </div>
 
 <div class="row">
 <span>Risk : Reward</span>
-<span class="value blue">1 : 2</span>
+<span class="value blue">
+1 : 2
+</span>
 </div>
 
 </div>
+
+<!-- NOTIFICATIONS -->
 
 <div class="card">
 
@@ -251,14 +395,16 @@ It does not identify actual institutional orders.
 <div class="row">
 <span>Liquidity Sweep</span>
 <label>
-<input type="checkbox" id="sweepAlert"> ON
+<input type="checkbox" id="sweepAlert">
+ON
 </label>
 </div>
 
 <div class="row">
 <span>Big Player Entry</span>
 <label>
-<input type="checkbox" id="entryAlert"> ON
+<input type="checkbox" id="entryAlert">
+ON
 </label>
 </div>
 
@@ -272,10 +418,15 @@ Notification permission not requested.
 
 </div>
 
+<!-- LOG -->
+
 <div class="card">
 
 <div class="title">📝 System Log</div>
-<div id="log" class="small">Starting engine...</div>
+
+<div id="log" class="small">
+Starting engine...
+</div>
 
 </div>
 
@@ -289,6 +440,11 @@ WORKER_URL+
 "/api.twelvedata.com/time_series";
 
 let marketData=[];
+let lastSweepKey="";
+
+/* =========================
+   HELPERS
+========================= */
 
 function $(id){
 return document.getElementById(id);
@@ -315,10 +471,11 @@ $("dataStatus").className=
 
 function fmt(value){
 
-if(value===undefined||
+if(
+value===undefined||
 value===null||
-isNaN(value))
-return "WAITING";
+isNaN(value)
+)return "WAITING";
 
 return Number(value).toFixed(2);
 }
@@ -336,7 +493,9 @@ try{
 const response=await fetch(
 ENDPOINT+
 "?symbol=XAU/USD&interval=15min&outputsize=100",
-{cache:"no-store"}
+{
+cache:"no-store"
+}
 );
 
 if(!response.ok)
@@ -346,19 +505,18 @@ throw new Error(
 
 const data=await response.json();
 
-console.log("OP ROYAL DATA",data);
-
-if(!data.values||
+if(
+!data.values||
 !Array.isArray(data.values)||
-data.values.length===0){
-
+!data.values.length
+){
 throw new Error(
 "No values received"
 );
-
 }
 
-marketData=data.values.map(c=>({
+marketData=data.values
+.map(c=>({
 
 time:c.datetime,
 open:Number(c.open),
@@ -368,9 +526,7 @@ close:Number(c.close),
 volume:c.volume?
 Number(c.volume):null
 
-}));
-
-marketData=marketData
+}))
 .filter(c=>
 isFinite(c.open)&&
 isFinite(c.high)&&
@@ -383,7 +539,9 @@ new Date(b.time)
 );
 
 if(!marketData.length)
-throw new Error("Invalid candles");
+throw new Error(
+"Invalid candle data"
+);
 
 const latest=
 marketData[marketData.length-1];
@@ -400,13 +558,7 @@ new Date().toLocaleTimeString();
 setData("LIVE","green");
 setEngine("DATA LIVE","green");
 
-runLiquidityEngine();
-
-log(
-"LIVE • "+
-marketData.length+
-" candles • Liquidity engine active"
-);
+runEngine();
 
 }catch(error){
 
@@ -429,17 +581,16 @@ function bucket(time,minutes){
 
 const d=new Date(time);
 
-const size=
-minutes*60*1000;
-
 return Math.floor(
-d.getTime()/size
-)*size;
+d.getTime()/
+(minutes*60*1000)
+)*
+(minutes*60*1000);
 
 }
 
 /* =========================
-   AGGREGATE 15M DATA
+   AGGREGATION
 ========================= */
 
 function aggregate(minutes){
@@ -448,10 +599,8 @@ const groups={};
 
 marketData.forEach(c=>{
 
-const b=bucket(
-c.time,
-minutes
-);
+const b=
+bucket(c.time,minutes);
 
 if(!groups[b])
 groups[b]=[];
@@ -482,7 +631,8 @@ low:Math.min(
 ...arr.map(x=>x.low)
 ),
 
-close:arr[arr.length-1].close
+close:
+arr[arr.length-1].close
 
 };
 
@@ -496,25 +646,23 @@ close:arr[arr.length-1].close
 
 function getPreviousLiquidity(minutes){
 
-const candles=
+const cs=
 aggregate(minutes);
 
-if(candles.length<2)
+if(cs.length<2)
 return null;
 
-return candles[
-candles.length-2
-];
+return cs[cs.length-2];
 
 }
 
 /* =========================
-   DISPLAY LEVELS
+   SHOW LIQUIDITY
 ========================= */
 
 function showLiquidity(){
 
-const settings=[
+const map=[
 [15,"l15"],
 [30,"l30"],
 [60,"l60"],
@@ -522,31 +670,28 @@ const settings=[
 [1440,"l1440"]
 ];
 
-settings.forEach(item=>{
-
-const tf=item[0];
-const id=item[1];
+map.forEach(item=>{
 
 const c=
-getPreviousLiquidity(tf);
+getPreviousLiquidity(item[0]);
 
 if(!c){
 
-$(id).textContent="WAITING";
+$(item[1]).textContent=
+"WAITING";
+
 return;
 
 }
 
-$(id).innerHTML=
+$(item[1]).innerHTML=
 "H "+fmt(c.high)+
 " / L "+fmt(c.low);
 
-$(id).className=
+$(item[1]).className=
 "value blue";
 
 });
-
-/* Previous Daily High / Low */
 
 const daily=
 getPreviousLiquidity(1440);
@@ -559,12 +704,6 @@ fmt(daily.high);
 $("pdl").textContent=
 fmt(daily.low);
 
-$("pdh").className=
-"value blue";
-
-$("pdl").className=
-"value blue";
-
 }
 
 $("s1").textContent=
@@ -576,24 +715,249 @@ $("s1").className=
 }
 
 /* =========================
-   LIQUIDITY ENGINE
+   SWEEP DETECTION
 ========================= */
 
-function runLiquidityEngine(){
+function detectSweep(){
 
-if(!marketData.length)
+let best=null;
+
+const timeframes=[
+15,
+30,
+60,
+240,
+1440
+];
+
+timeframes.forEach(tf=>{
+
+const cs=
+aggregate(tf);
+
+if(cs.length<3)
 return;
 
-showLiquidity();
+/*
+Current completed candle
+is compared with previous
+liquidity candle.
+*/
+
+for(
+let i=1;
+i<cs.length;
+i++
+){
+
+const previous=cs[i-1];
+const current=cs[i];
 
 /*
-Next stage intentionally waits.
-Sweep detection will be added
-after liquidity levels are stable.
+BEARISH SWEEP
+
+Price takes previous HIGH
+but closes back below it.
 */
+
+if(
+current.high>previous.high &&
+current.close<previous.high
+){
+
+const sweep={
+tf:tf,
+direction:"BEARISH",
+level:previous.high,
+candle:current
+};
+
+if(
+!best||
+new Date(current.time)>
+new Date(best.candle.time)
+){
+
+best=sweep;
+
+}
+
+}
+
+/*
+BULLISH SWEEP
+
+Price takes previous LOW
+but closes back above it.
+*/
+
+if(
+current.low<previous.low &&
+current.close>previous.low
+){
+
+const sweep={
+tf:tf,
+direction:"BULLISH",
+level:previous.low,
+candle:current
+};
+
+if(
+!best||
+new Date(current.time)>
+new Date(best.candle.time)
+){
+
+best=sweep;
+
+}
+
+}
+
+}
+
+});
+
+return best;
+
+}
+
+/* =========================
+   DISPLAY SWEEP
+========================= */
+
+function showSweep(sweep){
+
+if(!sweep){
+
+$("sweepStatus").textContent=
+"NO CONFIRMED SWEEP";
+
+$("sweepStatus").className=
+"value yellow";
+
+$("sweepTF").textContent=
+"WAITING";
+
+$("sweepDir").textContent=
+"WAITING";
+
+$("sweepLevel").textContent=
+"WAITING";
+
+$("sweepTime").textContent=
+"WAITING";
 
 $("s2").textContent=
 "WAITING";
+
+$("s2").className=
+"yellow";
+
+return;
+
+}
+
+const tfText=
+sweep.tf===1440?
+"1D":
+sweep.tf===240?
+"4H":
+sweep.tf===60?
+"1H":
+sweep.tf===30?
+"30M":
+"15M";
+
+$("sweepStatus").textContent=
+"CONFIRMED";
+
+$("sweepStatus").className=
+"value green";
+
+$("sweepTF").textContent=
+tfText;
+
+$("sweepDir").textContent=
+sweep.direction;
+
+$("sweepDir").className=
+"value "+
+(
+sweep.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+$("sweepLevel").textContent=
+fmt(sweep.level);
+
+$("sweepTime").textContent=
+new Date(
+sweep.candle.time
+).toLocaleString();
+
+$("s2").textContent=
+"CONFIRMED";
+
+$("s2").className=
+"green";
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+const key=
+sweep.tf+
+"_"+sweep.direction+
+"_"+sweep.candle.time;
+
+if(
+key!==lastSweepKey&&
+$("sweepAlert").checked&&
+"Notification" in window&&
+Notification.permission==="granted"
+){
+
+try{
+
+new Notification(
+"OP ROYAL — Liquidity Sweep",
+{
+body:
+sweep.direction+
+" sweep detected on "+
+tfText+
+" @ "+
+fmt(sweep.level)
+}
+);
+
+}catch(e){}
+
+lastSweepKey=key;
+
+}
+
+}
+
+/* =========================
+   ENGINE
+========================= */
+
+function runEngine(){
+
+showLiquidity();
+
+const sweep=
+detectSweep();
+
+showSweep(sweep);
+
+/*
+MSS will be added in next step.
+*/
 
 $("s3").textContent=
 "WAITING";
@@ -607,7 +971,19 @@ $("s5").textContent=
 $("s6").textContent=
 "WAITING";
 
+log(
+sweep?
+"Liquidity sweep engine active • "+
+sweep.direction+" sweep detected"
+:
+"Liquidity engine active • No confirmed sweep"
+);
+
 }
+
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 async function enableNotifications(){
 
@@ -620,11 +996,20 @@ return;
 
 }
 
+try{
+
 const permission=
 await Notification.requestPermission();
 
 $("notificationStatus").textContent=
 "Permission: "+permission;
+
+}catch(error){
+
+$("notificationStatus").textContent=
+"Notification error.";
+
+}
 
 }
 
