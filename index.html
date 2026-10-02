@@ -1,464 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>OP ROYAL XAUUSD</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OP ROYAL TEST</title>
 <style>
-*{box-sizing:border-box}
 body{
-margin:0;
-padding:12px;
 background:#0b0f14;
-color:#fff;
-font-family:Arial,sans-serif;
-}
-.header,.card{
-background:#111821;
-border:1px solid #273342;
-border-radius:15px;
-padding:15px;
-margin-bottom:12px;
-}
-.title{
-font-size:22px;
-font-weight:800;
-}
-.sub{
-color:#8995a3;
-font-size:12px;
-margin-top:5px;
-}
-.price{
-font-size:32px;
-font-weight:800;
-margin-top:14px;
-}
-.status{
-font-size:13px;
-margin-top:6px;
-}
-.green{color:#35df8a}
-.red{color:#ff6262}
-.yellow{color:#f2c75c}
-.blue{color:#55aaff}
-.cardtitle{
-font-size:16px;
-font-weight:800;
-margin-bottom:12px;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-}
-.tf{
-background:#0b1118;
-border:1px solid #263241;
-border-radius:12px;
-padding:11px;
-}
-.tfname{
-font-weight:800;
-margin-bottom:8px;
-}
-.row{
-display:flex;
-justify-content:space-between;
-gap:8px;
-padding:7px 0;
-font-size:12px;
-border-bottom:1px solid #1d2732;
-}
-.row:last-child{
-border-bottom:0;
-}
-.signal{
-text-align:center;
-font-size:22px;
-font-weight:900;
-padding:12px;
-border-radius:10px;
-background:#0b1118;
+color:white;
+font-family:Arial;
+padding:20px;
 }
 button{
 width:100%;
-padding:13px;
-border:0;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+margin-top:15px;
+}
+pre{
+white-space:pre-wrap;
+word-break:break-word;
+background:#111821;
+padding:12px;
 border-radius:10px;
-background:#1d9bf0;
-color:white;
-font-size:15px;
-font-weight:800;
-}
-.small{
-font-size:11px;
-color:#8793a1;
-line-height:1.5;
-margin-top:8px;
-}
-@media(max-width:420px){
-.grid{grid-template-columns:1fr}
+margin-top:15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
+<h2>👑 OP ROYAL XAUUSD TEST</h2>
 
-<div class="title">👑 OP ROYAL XAUUSD</div>
+<div id="status">Testing Worker...</div>
 
-<div class="sub">
-Liquidity Sweep • MSS • Big Player
-</div>
-
-<div id="price" class="price">
-CONNECTING...
-</div>
-
-<div id="status" class="status yellow">
-● CONNECTING
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-🔔 Notifications
-</div>
-
-<button onclick="enableNotifications()">
-ENABLE NOTIFICATIONS
+<button onclick="testWorker()">
+TEST LIVE DATA
 </button>
 
-<div id="notificationStatus" class="small">
-Notifications OFF
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-💧 Multi-Timeframe Liquidity
-</div>
-
-<div class="grid">
-
-<div class="tf">
-
-<div class="tfname">15 MIN</div>
-
-<div class="row">
-<span>High</span>
-<span id="h15" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Low</span>
-<span id="l15" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s15" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m15" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">30 MIN</div>
-
-<div class="row">
-<span>High</span>
-<span id="h30" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Low</span>
-<span id="l30" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s30" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m30" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">1 HOUR</div>
-
-<div class="row">
-<span>High</span>
-<span id="h60" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Low</span>
-<span id="l60" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s60" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m60" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">4 HOUR</div>
-
-<div class="row">
-<span>High</span>
-<span id="h240" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Low</span>
-<span id="l240" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s240" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m240" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">1 DAY</div>
-
-<div class="row">
-<span>High</span>
-<span id="hD" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Low</span>
-<span id="lD" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="sD" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="mD" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-</div>
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-⚡ Big Player Proxy
-</div>
-
-<div class="row">
-<span>Status</span>
-<span id="bpStatus" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="bpDirection" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Entry Candle</span>
-<span id="bpCandle" class="yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Timeframe</span>
-<span id="bpTF" class="yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-🎯 Trade Setup
-</div>
-
-<div id="signal" class="signal yellow">
-NO ACTIVE SIGNAL
-</div>
-
-<div class="row">
-<span>Entry</span>
-<span id="entry">WAITING</span>
-</div>
-
-<div class="row">
-<span>SL</span>
-<span id="sl">WAITING</span>
-</div>
-
-<div class="row">
-<span>TP</span>
-<span id="tp">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-🧠 Engine Status
-</div>
-
-<div id="engine" class="small">
-Starting...
-</div>
-
-</div>
-
+<pre id="result">Waiting...</pre>
 
 <script>
 
-const WORKER_URL =
-"https://icy-snow-263a.optrader06.workers.dev";
+async function testWorker(){
 
-let notificationOn=false;
+const status=document.getElementById("status");
+const result=document.getElementById("result");
 
+status.innerText="Connecting...";
+result.innerText="";
 
-/* =========================
-   NOTIFICATION
-========================= */
-
-async function enableNotifications(){
-
-if(!("Notification" in window)){
-
-document.getElementById(
-"notificationStatus"
-).textContent=
-"Browser notification supported nahi hai.";
-
-return;
-}
-
-const permission=
-await Notification.requestPermission();
-
-if(permission==="granted"){
-
-notificationOn=true;
-
-document.getElementById(
-"notificationStatus"
-).textContent=
-"✅ Notifications ON";
-
-new Notification(
-"OP ROYAL",
-{
-body:"Notification system active."
-}
-);
-
-}else{
-
-document.getElementById(
-"notificationStatus"
-).textContent=
-"❌ Notification permission denied";
-}
-
-}
-
-
-/* =========================
-   NUMBER
-========================= */
-
-function number(x){
-
-const n=Number(x);
-
-if(!isFinite(n))return null;
-
-return n;
-}
-
-
-/* =========================
-   GET WORKER DATA
-========================= */
-
-async function getData(){
+const url=
+"https://icy-snow-263a.optrader06.workers.dev/api.twelvedata.com/time_series?symbol=XAU/USD&interval=15min&outputsize=5";
 
 try{
 
-document.getElementById(
-"status"
-).textContent=
-"● CONNECTING";
-
-document.getElementById(
-"status"
-).className=
-"status yellow";
-
-
-/*
-IMPORTANT:
-Worker URL directly call kiya ja raha hai.
-*/
-
-const url=
-WORKER_URL+
-"/?symbol=XAU/USD"+
-"&interval=15min"+
-"&outputsize=100";
-
-
-const response=
-await fetch(
+const response=await fetch(
 url,
 {
 method:"GET",
@@ -466,283 +63,40 @@ cache:"no-store"
 }
 );
 
+result.innerText=
+"HTTP STATUS: "+
+response.status+
+"\n\n";
 
-if(!response.ok){
+const text=await response.text();
 
-throw new Error(
-"HTTP "+response.status
-);
+result.innerText+=text;
 
-}
+if(response.ok){
 
-
-const data=
-await response.json();
-
-
-console.log(
-"WORKER RESPONSE:",
-data
-);
-
-
-/* Twelve Data format */
-
-let values=
-data.values;
-
-
-/* Some Worker responses may use data */
-
-if(!values &&
-data.data &&
-Array.isArray(data.data)){
-
-values=data.data;
-
-}
-
-
-if(!Array.isArray(values) ||
-values.length===0){
-
-throw new Error(
-"No candle data received"
-);
-
-}
-
-
-const candles=
-values.map(function(c){
-
-return{
-
-time:c.datetime ||
-c.time ||
-c.date,
-
-open:number(c.open),
-
-high:number(c.high),
-
-low:number(c.low),
-
-close:number(c.close),
-
-volume:number(c.volume)
-
-};
-
-}).filter(function(c){
-
-return c.time &&
-c.open!==null &&
-c.high!==null &&
-c.low!==null &&
-c.close!==null;
-
-});
-
-
-if(!candles.length){
-
-throw new Error(
-"Invalid candle data"
-);
-
-}
-
-
-const latest=
-candles[candles.length-1];
-
-
-/* =========================
-   LIVE PRICE
-========================= */
-
-document.getElementById(
-"price"
-).textContent=
-latest.close.toFixed(2);
-
-
-document.getElementById(
-"status"
-).textContent=
-"● LIVE • XAU/USD • 15M";
-
-
-document.getElementById(
-"status"
-).className=
-"status green";
-
-
-document.getElementById(
-"engine"
-).textContent=
-"Data LIVE • "+
-candles.length+
-" candles • Last candle: "+
-latest.time;
-
-
-/* =========================
-   BASIC LIQUIDITY
-========================= */
-
-const previous=
-candles.slice(
-Math.max(0,candles.length-21),
-candles.length-1
-);
-
-
-let high=-Infinity;
-let low=Infinity;
-
-
-previous.forEach(function(c){
-
-if(c.high>high)
-high=c.high;
-
-if(c.low<low)
-low=c.low;
-
-});
-
-
-document.getElementById(
-"h15"
-).textContent=
-high.toFixed(2);
-
-document.getElementById(
-"l15"
-).textContent=
-low.toFixed(2);
-
-
-/* =========================
-   SIMPLE SWEEP
-========================= */
-
-let sweep="WAITING";
-
-
-if(
-latest.high>high &&
-latest.close<high
-){
-
-sweep="HIGH SWEPT";
-
-document.getElementById(
-"s15"
-).textContent=
-sweep;
-
-document.getElementById(
-"s15"
-).className=
-"red";
-
-
-}else if(
-latest.low<low &&
-latest.close>low
-){
-
-sweep="LOW SWEPT";
-
-document.getElementById(
-"s15"
-).textContent=
-sweep;
-
-document.getElementById(
-"s15"
-).className=
-"green";
-
+status.innerText=
+"✅ WORKER CONNECTED";
 
 }else{
 
-document.getElementById(
-"s15"
-).textContent=
-"WAITING";
-
-document.getElementById(
-"s15"
-).className=
-"yellow";
+status.innerText=
+"❌ WORKER ERROR";
 
 }
-
-
-/* =========================
-   OTHER TF PLACEHOLDER
-========================= */
-
-document.getElementById("h30").textContent="READY";
-document.getElementById("l30").textContent="READY";
-
-document.getElementById("h60").textContent="READY";
-document.getElementById("l60").textContent="READY";
-
-document.getElementById("h240").textContent="READY";
-document.getElementById("l240").textContent="READY";
-
-document.getElementById("hD").textContent="READY";
-document.getElementById("lD").textContent="READY";
-
 
 }catch(error){
 
-console.log(
-"DATA ERROR:",
-error
-);
+status.innerText=
+"❌ CONNECTION FAILED";
 
-
-document.getElementById(
-"status"
-).textContent=
-"● DATA ERROR";
-
-
-document.getElementById(
-"status"
-).className=
-"status red";
-
-
-document.getElementById(
-"engine"
-).textContent=
-"Worker connection failed: "+
-error.message;
+result.innerText=
+error.toString();
 
 }
 
 }
 
-
-/* START */
-
-getData();
-
-
-/* REFRESH EVERY 60 SEC */
-
-setInterval(
-getData,
-60000
-);
+testWorker();
 
 </script>
 
