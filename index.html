@@ -4,119 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>OP ROYAL TRADE</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-padding:12px;
-background:#071018;
-color:#fff;
-font-family:Arial,sans-serif;
-}
-
-h1{
-text-align:center;
-font-size:23px;
-margin:5px 0;
-color:#f5c542;
-}
-
-.sub{
-text-align:center;
-font-size:12px;
-color:#9aa7b2;
-margin-bottom:14px;
-}
-
-.card{
-background:#0d1822;
-border:1px solid #263746;
-border-radius:12px;
-padding:13px;
-margin-bottom:11px;
-}
-
-.title{
-font-size:15px;
-font-weight:bold;
-color:#f5c542;
-margin-bottom:9px;
-}
-
-.price{
-text-align:center;
-font-size:31px;
-font-weight:bold;
-margin:8px 0 12px;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding:8px 0;
-border-bottom:1px solid #1d2b36;
-font-size:13px;
-}
-
-.row:last-child{
-border-bottom:0;
-}
-
-.value{
-font-weight:bold;
-text-align:right;
-}
-
-.green{color:#36d98b}
-.red{color:#ff5b5b}
-.yellow{color:#f5c542}
-.blue{color:#55b7ff}
-.gray{color:#9aa7b2}
-
-.tf{
-font-size:10px;
-background:#162633;
-padding:3px 6px;
-border-radius:5px;
-color:#55b7ff;
-}
-
-.setup{
-background:#101e29;
-padding:9px;
-margin:5px 0;
-border-radius:8px;
-font-size:13px;
-}
-
-button{
-width:100%;
-border:0;
-border-radius:9px;
-padding:12px;
-background:#f5c542;
-color:#071018;
-font-weight:bold;
-font-size:14px;
-}
-
-.small{
-font-size:11px;
-line-height:1.5;
-color:#8d9aa5;
-}
-
-.statusDot{
-display:inline-block;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#f5c542;
-margin-right:5px;
-}
+body{margin:0;padding:12px;background:#071018;color:#fff;font-family:Arial,sans-serif}
+h1{text-align:center;font-size:23px;margin:5px 0;color:#f5c542}
+.sub{text-align:center;font-size:12px;color:#9aa7b2;margin-bottom:14px}
+.card{background:#0d1822;border:1px solid #263746;border-radius:12px;padding:13px;margin-bottom:11px}
+.title{font-size:15px;font-weight:bold;color:#f5c542;margin-bottom:9px}
+.price{text-align:center;font-size:31px;font-weight:bold;margin:8px 0 12px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #1d2b36;font-size:13px}
+.row:last-child{border-bottom:0}
+.value{font-weight:bold;text-align:right}
+.green{color:#36d98b}.red{color:#ff5b5b}.yellow{color:#f5c542}.blue{color:#55b7ff}.gray{color:#9aa7b2}
+.tf{font-size:10px;background:#162633;padding:3px 6px;border-radius:5px;color:#55b7ff}
+.setup{background:#101e29;padding:9px;margin:5px 0;border-radius:8px;font-size:13px}
+button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;color:#071018;font-weight:bold;font-size:14px}
+.small{font-size:11px;line-height:1.5;color:#8d9aa5}
+.statusDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f5c542;margin-right:5px}
 </style>
 </head>
 
@@ -124,8 +28,6 @@ margin-right:5px;
 
 <h1>⚡ OP ROYAL TRADE</h1>
 <div class="sub">XAU/USD • Liquidity Sweep Trading Engine</div>
-
-<!-- LIVE MARKET -->
 
 <div class="card">
 
@@ -159,8 +61,6 @@ margin-right:5px;
 </div>
 
 </div>
-
-<!-- SETUP -->
 
 <div class="card">
 
@@ -198,44 +98,66 @@ margin-right:5px;
 
 </div>
 
-<!-- LIQUIDITY -->
-
 <div class="card">
 
 <div class="title">💧 Liquidity Levels</div>
 
 <div class="row">
-<span>15M <span class="tf">Liquidity</span></span>
+<span>15M <span class="tf">Previous</span></span>
 <span id="l15" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>30M <span class="tf">Liquidity</span></span>
+<span>30M <span class="tf">Previous</span></span>
 <span id="l30" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>1H <span class="tf">Liquidity</span></span>
+<span>1H <span class="tf">Previous</span></span>
 <span id="l60" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>4H <span class="tf">Liquidity</span></span>
+<span>4H <span class="tf">Previous</span></span>
 <span id="l240" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>1D <span class="tf">Liquidity</span></span>
+<span>1D <span class="tf">Previous</span></span>
 <span id="l1440" class="value gray">WAITING</span>
 </div>
 
 </div>
 
-<!-- SWEEP -->
+<div class="card">
+
+<div class="title">📌 Liquidity Detail</div>
+
+<div class="row">
+<span>PDH</span>
+<span id="pdh" class="value blue">WAITING</span>
+</div>
+
+<div class="row">
+<span>PDL</span>
+<span id="pdl" class="value blue">WAITING</span>
+</div>
+
+<div class="row">
+<span>Current Price</span>
+<span id="currentPrice" class="value green">WAITING</span>
+</div>
+
+</div>
 
 <div class="card">
 
 <div class="title">💧 Liquidity Sweep</div>
+
+<div class="row">
+<span>Detection</span>
+<span id="sweepStatus" class="value yellow">WAITING</span>
+</div>
 
 <div class="row">
 <span>Timeframe</span>
@@ -247,14 +169,7 @@ margin-right:5px;
 <span id="sweepDir" class="value yellow">WAITING</span>
 </div>
 
-<div class="row">
-<span>Level</span>
-<span id="sweepLevel" class="value yellow">WAITING</span>
 </div>
-
-</div>
-
-<!-- MSS -->
 
 <div class="card">
 
@@ -277,8 +192,6 @@ margin-right:5px;
 
 </div>
 
-<!-- BIG PLAYER -->
-
 <div class="card">
 
 <div class="title">🐋 Big Player Proxy</div>
@@ -294,13 +207,11 @@ margin-right:5px;
 </div>
 
 <div class="small">
-Proxy confirmation = Liquidity Sweep + MSS + Displacement.
-Actual institutional orders cannot be directly identified from this data.
+Proxy = liquidity sweep + MSS + displacement.
+It does not identify actual institutional orders.
 </div>
 
 </div>
-
-<!-- TRADE -->
 
 <div class="card">
 
@@ -333,25 +244,21 @@ Actual institutional orders cannot be directly identified from this data.
 
 </div>
 
-<!-- NOTIFICATION -->
-
 <div class="card">
 
-<div class="title">🔔 Trade Notifications</div>
+<div class="title">🔔 Notifications</div>
 
 <div class="row">
 <span>Liquidity Sweep</span>
 <label>
-<input type="checkbox" id="sweepAlert">
-ON
+<input type="checkbox" id="sweepAlert"> ON
 </label>
 </div>
 
 <div class="row">
 <span>Big Player Entry</span>
 <label>
-<input type="checkbox" id="entryAlert">
-ON
+<input type="checkbox" id="entryAlert"> ON
 </label>
 </div>
 
@@ -365,15 +272,10 @@ Notification permission not requested.
 
 </div>
 
-<!-- LOG -->
-
 <div class="card">
 
 <div class="title">📝 System Log</div>
-
-<div id="log" class="small">
-Starting engine...
-</div>
+<div id="log" class="small">Starting engine...</div>
 
 </div>
 
@@ -387,7 +289,6 @@ WORKER_URL+
 "/api.twelvedata.com/time_series";
 
 let marketData=[];
-let firstLoad=true;
 
 function $(id){
 return document.getElementById(id);
@@ -408,20 +309,23 @@ $("engineStatus").className=
 function setData(text,color){
 $("dataStatus").innerHTML=
 '<span class="statusDot"></span>'+text;
-
 $("dataStatus").className=
 "value "+color;
 }
 
-function formatPrice(value){
+function fmt(value){
 
-if(value===undefined ||
-value===null ||
+if(value===undefined||
+value===null||
 isNaN(value))
 return "WAITING";
 
 return Number(value).toFixed(2);
 }
+
+/* =========================
+   LIVE DATA
+========================= */
 
 async function loadData(){
 
@@ -431,26 +335,21 @@ try{
 
 const response=await fetch(
 ENDPOINT+
-"?symbol=XAU/USD&interval=15min&outputsize=5",
-{
-cache:"no-store"
-}
+"?symbol=XAU/USD&interval=15min&outputsize=100",
+{cache:"no-store"}
 );
 
-if(!response.ok){
-
+if(!response.ok)
 throw new Error(
 "HTTP "+response.status
 );
 
-}
-
 const data=await response.json();
 
-console.log("OP ROYAL DATA:",data);
+console.log("OP ROYAL DATA",data);
 
-if(!data.values ||
-!Array.isArray(data.values) ||
+if(!data.values||
+!Array.isArray(data.values)||
 data.values.length===0){
 
 throw new Error(
@@ -459,66 +358,254 @@ throw new Error(
 
 }
 
-marketData=data.values;
+marketData=data.values.map(c=>({
 
-const latest=data.values[0];
+time:c.datetime,
+open:Number(c.open),
+high:Number(c.high),
+low:Number(c.low),
+close:Number(c.close),
+volume:c.volume?
+Number(c.volume):null
+
+}));
+
+marketData=marketData
+.filter(c=>
+isFinite(c.open)&&
+isFinite(c.high)&&
+isFinite(c.low)&&
+isFinite(c.close)
+)
+.sort((a,b)=>
+new Date(a.time)-
+new Date(b.time)
+);
+
+if(!marketData.length)
+throw new Error("Invalid candles");
+
+const latest=
+marketData[marketData.length-1];
 
 $("price").textContent=
-formatPrice(latest.close);
+fmt(latest.close);
+
+$("currentPrice").textContent=
+fmt(latest.close);
 
 $("lastUpdate").textContent=
 new Date().toLocaleTimeString();
 
 setData("LIVE","green");
-
 setEngine("DATA LIVE","green");
 
-$("s1").textContent="READY";
-$("s1").className="green";
+runLiquidityEngine();
 
 log(
-"LIVE • XAU/USD • "+
-data.values.length+
-" candles received"
+"LIVE • "+
+marketData.length+
+" candles • Liquidity engine active"
 );
-
-if(firstLoad){
-
-firstLoad=false;
-
-setTimeout(
-runBasicEngine,
-500
-);
-
-}
 
 }catch(error){
 
 setData("ERROR","red");
-
 setEngine("DATA ERROR","red");
 
 log(
-"Connection error: "+
-error.message
+"Data error: "+error.message
 );
 
 }
 
 }
 
-function runBasicEngine(){
+/* =========================
+   TIME BUCKET
+========================= */
+
+function bucket(time,minutes){
+
+const d=new Date(time);
+
+const size=
+minutes*60*1000;
+
+return Math.floor(
+d.getTime()/size
+)*size;
+
+}
+
+/* =========================
+   AGGREGATE 15M DATA
+========================= */
+
+function aggregate(minutes){
+
+const groups={};
+
+marketData.forEach(c=>{
+
+const b=bucket(
+c.time,
+minutes
+);
+
+if(!groups[b])
+groups[b]=[];
+
+groups[b].push(c);
+
+});
+
+return Object.keys(groups)
+.sort((a,b)=>Number(a)-Number(b))
+.map(k=>{
+
+const arr=groups[k];
+
+return{
+
+time:new Date(
+Number(k)
+).toISOString(),
+
+open:arr[0].open,
+
+high:Math.max(
+...arr.map(x=>x.high)
+),
+
+low:Math.min(
+...arr.map(x=>x.low)
+),
+
+close:arr[arr.length-1].close
+
+};
+
+});
+
+}
+
+/* =========================
+   PREVIOUS LIQUIDITY
+========================= */
+
+function getPreviousLiquidity(minutes){
+
+const candles=
+aggregate(minutes);
+
+if(candles.length<2)
+return null;
+
+return candles[
+candles.length-2
+];
+
+}
+
+/* =========================
+   DISPLAY LEVELS
+========================= */
+
+function showLiquidity(){
+
+const settings=[
+[15,"l15"],
+[30,"l30"],
+[60,"l60"],
+[240,"l240"],
+[1440,"l1440"]
+];
+
+settings.forEach(item=>{
+
+const tf=item[0];
+const id=item[1];
+
+const c=
+getPreviousLiquidity(tf);
+
+if(!c){
+
+$(id).textContent="WAITING";
+return;
+
+}
+
+$(id).innerHTML=
+"H "+fmt(c.high)+
+" / L "+fmt(c.low);
+
+$(id).className=
+"value blue";
+
+});
+
+/* Previous Daily High / Low */
+
+const daily=
+getPreviousLiquidity(1440);
+
+if(daily){
+
+$("pdh").textContent=
+fmt(daily.high);
+
+$("pdl").textContent=
+fmt(daily.low);
+
+$("pdh").className=
+"value blue";
+
+$("pdl").className=
+"value blue";
+
+}
+
+$("s1").textContent=
+"READY";
+
+$("s1").className=
+"green";
+
+}
+
+/* =========================
+   LIQUIDITY ENGINE
+========================= */
+
+function runLiquidityEngine(){
 
 if(!marketData.length)
 return;
 
-$("s1").textContent="READY";
-$("s1").className="green";
+showLiquidity();
 
-log(
-"Engine LIVE • Waiting for liquidity sweep confirmation."
-);
+/*
+Next stage intentionally waits.
+Sweep detection will be added
+after liquidity levels are stable.
+*/
+
+$("s2").textContent=
+"WAITING";
+
+$("s3").textContent=
+"WAITING";
+
+$("s4").textContent=
+"WAITING";
+
+$("s5").textContent=
+"WAITING";
+
+$("s6").textContent=
+"WAITING";
 
 }
 
@@ -527,13 +614,11 @@ async function enableNotifications(){
 if(!("Notification" in window)){
 
 $("notificationStatus").textContent=
-"Browser notifications are not supported.";
+"Notifications not supported.";
 
 return;
 
 }
-
-try{
 
 const permission=
 await Notification.requestPermission();
@@ -541,14 +626,11 @@ await Notification.requestPermission();
 $("notificationStatus").textContent=
 "Permission: "+permission;
 
-}catch(error){
-
-$("notificationStatus").textContent=
-"Notification error.";
-
 }
 
-}
+/* =========================
+   START
+========================= */
 
 loadData();
 
