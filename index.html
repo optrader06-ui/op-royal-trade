@@ -1,61 +1,601 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OP ROYAL TEST</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OP ROYAL XAUUSD</title>
+
 <style>
+*{box-sizing:border-box}
+
 body{
-background:#0b0f14;
-color:white;
-font-family:Arial;
-padding:20px;
+margin:0;
+padding:12px;
+background:#080c11;
+color:#fff;
+font-family:Arial,sans-serif;
 }
-button{
-width:100%;
-padding:15px;
-font-size:18px;
-font-weight:bold;
-margin-top:15px;
-}
-pre{
-white-space:pre-wrap;
-word-break:break-word;
+
+.header,.card{
 background:#111821;
+border:1px solid #283544;
+border-radius:16px;
+padding:15px;
+margin-bottom:12px;
+}
+
+.title{
+font-size:22px;
+font-weight:800;
+}
+
+.sub{
+font-size:12px;
+color:#8c98a6;
+margin-top:5px;
+}
+
+.price{
+font-size:32px;
+font-weight:900;
+margin-top:13px;
+}
+
+.status{
+font-size:13px;
+margin-top:5px;
+}
+
+.green{color:#35df8a}
+.red{color:#ff6262}
+.yellow{color:#f1c75b}
+.blue{color:#55aaff}
+
+.cardtitle{
+font-size:16px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+.tf{
+background:#0b1118;
+border:1px solid #263241;
+border-radius:12px;
+padding:11px;
+}
+
+.tfname{
+font-weight:800;
+margin-bottom:8px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+gap:8px;
+padding:7px 0;
+font-size:12px;
+border-bottom:1px solid #1d2732;
+}
+
+.row:last-child{
+border-bottom:0;
+}
+
+.value{
+font-weight:700;
+text-align:right;
+}
+
+.signal{
+text-align:center;
+font-size:23px;
+font-weight:900;
 padding:12px;
 border-radius:10px;
-margin-top:15px;
+background:#0b1118;
+}
+
+.big{
+font-size:18px;
+font-weight:900;
+}
+
+button{
+width:100%;
+border:0;
+border-radius:10px;
+padding:13px;
+background:#1597ed;
+color:#fff;
+font-size:15px;
+font-weight:800;
+}
+
+.small{
+font-size:11px;
+color:#8793a1;
+line-height:1.5;
+margin-top:8px;
+}
+
+@media(max-width:420px){
+.grid{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
 
 <body>
 
-<h2>👑 OP ROYAL XAUUSD TEST</h2>
+<div class="header">
 
-<div id="status">Testing Worker...</div>
+<div class="title">
+👑 OP ROYAL XAUUSD
+</div>
 
-<button onclick="testWorker()">
-TEST LIVE DATA
+<div class="sub">
+Liquidity Sweep • MSS • Big Player Proxy
+</div>
+
+<div id="price" class="price">
+WAITING
+</div>
+
+<div id="status" class="status yellow">
+● CONNECTING
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardtitle">
+🔔 Notifications
+</div>
+
+<button onclick="enableNotifications()">
+ENABLE NOTIFICATIONS
 </button>
 
-<pre id="result">Waiting...</pre>
+<div id="notificationStatus" class="small">
+Notifications OFF
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardtitle">
+💧 MULTI-TIMEFRAME LIQUIDITY
+</div>
+
+<div class="grid">
+
+
+<div class="tf">
+
+<div class="tfname">
+15 MIN
+</div>
+
+<div class="row">
+<span>Liquidity High</span>
+<span id="h15" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Liquidity Low</span>
+<span id="l15" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep</span>
+<span id="s15" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="m15" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="tf">
+
+<div class="tfname">
+30 MIN
+</div>
+
+<div class="row">
+<span>Liquidity High</span>
+<span id="h30" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Liquidity Low</span>
+<span id="l30" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep</span>
+<span id="s30" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="m30" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="tf">
+
+<div class="tfname">
+1 HOUR
+</div>
+
+<div class="row">
+<span>Liquidity High</span>
+<span id="h60" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Liquidity Low</span>
+<span id="l60" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep</span>
+<span id="s60" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="m60" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="tf">
+
+<div class="tfname">
+4 HOUR
+</div>
+
+<div class="row">
+<span>Liquidity High</span>
+<span id="h240" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Liquidity Low</span>
+<span id="l240" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep</span>
+<span id="s240" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="m240" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="tf">
+
+<div class="tfname">
+1 DAY
+</div>
+
+<div class="row">
+<span>Liquidity High</span>
+<span id="hD" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Liquidity Low</span>
+<span id="lD" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep</span>
+<span id="sD" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="mD" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="small">
+Liquidity is calculated from available XAU/USD 15-minute candle history.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardtitle">
+⚡ BIG PLAYER PROXY
+</div>
+
+<div class="row">
+<span>Status</span>
+<span id="bpStatus" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="bpDirection" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Entry Candle</span>
+<span id="bpCandle" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Timeframe</span>
+<span id="bpTF" class="value yellow">
+WAITING
+</span>
+</div>
+
+<div class="small">
+Big-player confirmation is a price-action proxy based on liquidity sweep, MSS and displacement. It does not identify a specific institution.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardtitle">
+🎯 TRADE SETUP
+</div>
+
+<div id="signal" class="signal yellow">
+NO ACTIVE SIGNAL
+</div>
+
+<div class="row">
+<span>Entry</span>
+<span id="entry" class="value">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Stop Loss</span>
+<span id="sl" class="value">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Take Profit</span>
+<span id="tp" class="value">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Risk : Reward</span>
+<span id="rr" class="value yellow">
+WAITING
+</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="cardtitle">
+🧠 ENGINE STATUS
+</div>
+
+<div id="engine" class="small">
+Starting...
+</div>
+
+</div>
+
 
 <script>
 
-async function testWorker(){
+/* =====================================
+   WORKING CLOUDFLARE WORKER
+===================================== */
 
-const status=document.getElementById("status");
-const result=document.getElementById("result");
+const WORKER_URL =
+"https://icy-snow-263a.optrader06.workers.dev";
 
-status.innerText="Connecting...";
-result.innerText="";
 
-const url=
-"https://icy-snow-263a.optrader06.workers.dev/api.twelvedata.com/time_series?symbol=XAU/USD&interval=15min&outputsize=5";
+/* =====================================
+   STATE
+===================================== */
+
+let candles=[];
+
+let notificationEnabled=false;
+
+let lastSweepAlert="";
+
+let lastBigPlayerAlert="";
+
+
+/* =====================================
+   ELEMENT
+===================================== */
+
+function el(id){
+return document.getElementById(id);
+}
+
+
+/* =====================================
+   NUMBER
+===================================== */
+
+function num(x){
+
+const n=Number(x);
+
+return Number.isFinite(n)?n:null;
+
+}
+
+
+/* =====================================
+   FORMAT PRICE
+===================================== */
+
+function price(x){
+
+if(x===null || x===undefined)
+return "WAITING";
+
+return Number(x).toFixed(2);
+
+}
+
+
+/* =====================================
+   NOTIFICATION
+===================================== */
+
+async function enableNotifications(){
+
+if(!("Notification" in window)){
+
+el("notificationStatus").textContent=
+"Browser notifications supported nahi hain.";
+
+return;
+
+}
 
 try{
 
-const response=await fetch(
+const permission=
+await Notification.requestPermission();
+
+if(permission==="granted"){
+
+notificationEnabled=true;
+
+el("notificationStatus").textContent=
+"✅ Notifications ON";
+
+new Notification(
+"OP ROYAL",
+{
+body:"Liquidity alert system is active."
+}
+);
+
+}else{
+
+el("notificationStatus").textContent=
+"❌ Notifications permission denied";
+
+}
+
+}catch(error){
+
+el("notificationStatus").textContent=
+"Notification error";
+
+}
+
+}
+
+
+function sendNotification(title,body){
+
+if(!notificationEnabled)
+return;
+
+if(Notification.permission!=="granted")
+return;
+
+try{
+
+new Notification(
+title,
+{
+body:body
+}
+);
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =====================================
+   GET DATA
+===================================== */
+
+async function loadData(){
+
+try{
+
+el("status").textContent=
+"● CONNECTING";
+
+el("status").className=
+"status yellow";
+
+
+/*
+THIS IS THE SAME ROUTE
+THAT WAS CONFIRMED LIVE
+*/
+
+const url=
+WORKER_URL+
+"/api.twelvedata.com/time_series"+
+"?symbol=XAU/USD"+
+"&interval=15min"+
+"&outputsize=100";
+
+
+const response=
+await fetch(
 url,
 {
 method:"GET",
@@ -63,40 +603,723 @@ cache:"no-store"
 }
 );
 
-result.innerText=
-"HTTP STATUS: "+
-response.status+
-"\n\n";
 
-const text=await response.text();
+if(!response.ok){
 
-result.innerText+=text;
-
-if(response.ok){
-
-status.innerText=
-"✅ WORKER CONNECTED";
-
-}else{
-
-status.innerText=
-"❌ WORKER ERROR";
+throw new Error(
+"HTTP "+response.status
+);
 
 }
+
+
+const data=
+await response.json();
+
+
+console.log(
+"WORKER DATA",
+data
+);
+
+
+if(
+!data.values ||
+!Array.isArray(data.values)
+){
+
+throw new Error(
+"No values received"
+);
+
+}
+
+
+candles=
+data.values.map(function(c){
+
+return{
+
+time:
+c.datetime,
+
+open:
+num(c.open),
+
+high:
+num(c.high),
+
+low:
+num(c.low),
+
+close:
+num(c.close),
+
+volume:
+num(c.volume)
+
+};
+
+}).filter(function(c){
+
+return(
+c.time &&
+c.open!==null &&
+c.high!==null &&
+c.low!==null &&
+c.close!==null
+);
+
+});
+
+
+if(candles.length<5){
+
+throw new Error(
+"Not enough candle data"
+);
+
+}
+
+
+candles.sort(function(a,b){
+
+return new Date(a.time)-
+new Date(b.time);
+
+});
+
+
+const latest=
+candles[candles.length-1];
+
+
+/* =====================================
+   LIVE STATUS
+===================================== */
+
+el("price").textContent=
+price(latest.close);
+
+el("status").textContent=
+"● LIVE • XAU/USD • 15M";
+
+el("status").className=
+"status green";
+
+el("engine").textContent=
+"Data LIVE • "+
+candles.length+
+" candles • Last candle: "+
+latest.time;
+
+
+/* =====================================
+   BUILD TIMEFRAMES
+===================================== */
+
+buildTimeframe(
+15,
+"h15",
+"l15",
+"s15",
+"m15",
+"15M"
+);
+
+buildTimeframe(
+30,
+"h30",
+"l30",
+"s30",
+"m30",
+"30M"
+);
+
+buildTimeframe(
+60,
+"h60",
+"l60",
+"s60",
+"m60",
+"1H"
+);
+
+buildTimeframe(
+240,
+"h240",
+"l240",
+"s240",
+"m240",
+"4H"
+);
+
+buildTimeframe(
+1440,
+"hD",
+"lD",
+"sD",
+"mD",
+"1D"
+);
+
 
 }catch(error){
 
-status.innerText=
-"❌ CONNECTION FAILED";
+console.log(
+"LOAD ERROR",
+error
+);
 
-result.innerText=
-error.toString();
+el("status").textContent=
+"● DATA ERROR";
+
+el("status").className=
+"status red";
+
+el("engine").textContent=
+"Worker error: "+
+error.message;
 
 }
 
 }
 
-testWorker();
+
+/* =====================================
+   AGGREGATE 15M DATA
+===================================== */
+
+function aggregate(minutes){
+
+const groups={};
+
+const size=
+minutes*60*1000;
+
+
+for(const c of candles){
+
+const t=
+new Date(c.time).getTime();
+
+const bucket=
+Math.floor(t/size)*size;
+
+
+if(!groups[bucket]){
+
+groups[bucket]={
+
+time:
+new Date(bucket).toISOString(),
+
+open:c.open,
+
+high:c.high,
+
+low:c.low,
+
+close:c.close,
+
+volume:c.volume||0
+
+};
+
+}else{
+
+groups[bucket].high=
+Math.max(
+groups[bucket].high,
+c.high
+);
+
+groups[bucket].low=
+Math.min(
+groups[bucket].low,
+c.low
+);
+
+groups[bucket].close=
+c.close;
+
+groups[bucket].volume+=
+c.volume||0;
+
+}
+
+}
+
+
+return Object.values(groups).sort(
+function(a,b){
+
+return new Date(a.time)-
+new Date(b.time);
+
+});
+
+}
+
+
+/* =====================================
+   TIMEFRAME ANALYSIS
+===================================== */
+
+function buildTimeframe(
+minutes,
+highId,
+lowId,
+sweepId,
+mssId,
+label
+){
+
+const data=
+aggregate(minutes);
+
+
+/*
+Need enough candles
+*/
+
+if(data.length<6){
+
+el(highId).textContent=
+"INSUFFICIENT";
+
+el(lowId).textContent=
+"INSUFFICIENT";
+
+el(sweepId).textContent=
+"WAITING";
+
+el(mssId).textContent=
+"WAITING";
+
+return;
+
+}
+
+
+/*
+Previous liquidity
+*/
+
+const current=
+data[data.length-1];
+
+const previous=
+data.slice(
+Math.max(0,data.length-21),
+data.length-1
+);
+
+
+let liquidityHigh=
+-Infinity;
+
+let liquidityLow=
+Infinity;
+
+
+for(const c of previous){
+
+liquidityHigh=
+Math.max(
+liquidityHigh,
+c.high
+);
+
+liquidityLow=
+Math.min(
+liquidityLow,
+c.low
+);
+
+}
+
+
+el(highId).textContent=
+price(liquidityHigh);
+
+el(lowId).textContent=
+price(liquidityLow);
+
+
+/*
+Liquidity sweep
+*/
+
+let sweep=null;
+
+
+if(
+current.high>liquidityHigh &&
+current.close<liquidityHigh
+){
+
+sweep={
+direction:"SELL",
+type:"HIGH SWEPT",
+level:liquidityHigh,
+candle:current
+};
+
+}
+
+
+if(
+current.low<liquidityLow &&
+current.close>liquidityLow
+){
+
+sweep={
+direction:"BUY",
+type:"LOW SWEPT",
+level:liquidityLow,
+candle:current
+};
+
+}
+
+
+if(!sweep){
+
+el(sweepId).textContent=
+"WAITING";
+
+el(sweepId).className=
+"value yellow";
+
+el(mssId).textContent=
+"WAITING";
+
+el(mssId).className=
+"value yellow";
+
+return;
+
+}
+
+
+/*
+SWEEP FOUND
+*/
+
+el(sweepId).textContent=
+sweep.type;
+
+el(sweepId).className=
+"value green";
+
+
+/*
+Separate sweep notification
+*/
+
+const sweepKey=
+label+
+sweep.type+
+sweep.candle.time;
+
+
+if(sweepKey!==lastSweepAlert){
+
+lastSweepAlert=
+sweepKey;
+
+sendNotification(
+"💧 OP ROYAL LIQUIDITY SWEEP",
+"XAUUSD "+label+
+" • "+sweep.type+
+" • Price "+
+price(sweep.candle.close)
+);
+
+}
+
+
+/*
+MSS
+*/
+
+const before=
+data.slice(
+Math.max(0,data.length-8),
+data.length-1
+);
+
+
+const structureHigh=
+Math.max(
+...before.map(
+x=>x.high
+)
+);
+
+
+const structureLow=
+Math.min(
+...before.map(
+x=>x.low
+)
+);
+
+
+let mss=null;
+
+
+if(
+sweep.direction==="BUY" &&
+current.close>structureHigh
+){
+
+mss={
+direction:"BUY",
+candle:current
+};
+
+}
+
+
+if(
+sweep.direction==="SELL" &&
+current.close<structureLow
+){
+
+mss={
+direction:"SELL",
+candle:current
+};
+
+}
+
+
+if(!mss){
+
+el(mssId).textContent=
+"MSS WAITING";
+
+el(mssId).className=
+"value yellow";
+
+return;
+
+}
+
+
+/*
+MSS CONFIRMED
+*/
+
+el(mssId).textContent=
+mss.direction==="BUY"?
+"BULLISH MSS":
+"BEARISH MSS";
+
+el(mssId).className=
+"value green";
+
+
+/*
+BIG PLAYER PROXY
+*/
+
+const recent=
+data.slice(
+Math.max(0,data.length-6),
+data.length-1
+);
+
+
+const avgRange=
+recent.reduce(
+function(sum,c){
+
+return sum+
+(c.high-c.low);
+
+},
+0
+)/recent.length;
+
+
+const currentRange=
+current.high-current.low;
+
+
+const displacement=
+currentRange>
+avgRange*1.20;
+
+
+if(!displacement)
+return;
+
+
+/*
+BIG PLAYER ENTRY
+*/
+
+el("bpStatus").textContent=
+"CONFIRMED";
+
+el("bpStatus").className=
+"value green";
+
+
+el("bpDirection").textContent=
+mss.direction;
+
+el("bpDirection").className=
+mss.direction==="BUY"?
+"value green":
+"value red";
+
+
+el("bpCandle").textContent=
+current.time;
+
+el("bpCandle").className=
+"value blue";
+
+
+el("bpTF").textContent=
+label;
+
+el("bpTF").className=
+"value blue";
+
+
+/*
+ENTRY
+*/
+
+const entry=
+current.close;
+
+
+/*
+SL:
+BUY = sweep candle low
+SELL = sweep candle high
+*/
+
+let stop;
+
+
+if(mss.direction==="BUY"){
+
+stop=
+sweep.candle.low;
+
+}else{
+
+stop=
+sweep.candle.high;
+
+}
+
+
+/*
+2R TARGET
+*/
+
+let target;
+
+
+if(mss.direction==="BUY"){
+
+target=
+entry+
+(entry-stop)*2;
+
+}else{
+
+target=
+entry-
+(stop-entry)*2;
+
+}
+
+
+el("signal").textContent=
+mss.direction==="BUY"?
+"🟢 BUY":
+"🔴 SELL";
+
+el("signal").className=
+mss.direction==="BUY"?
+"signal green":
+"signal red";
+
+
+el("entry").textContent=
+price(entry);
+
+el("sl").textContent=
+price(stop);
+
+el("tp").textContent=
+price(target);
+
+el("rr").textContent=
+"1 : 2";
+
+el("rr").className=
+"value green";
+
+
+/*
+BIG PLAYER NOTIFICATION
+*/
+
+const bigKey=
+label+
+mss.direction+
+current.time;
+
+
+if(bigKey!==lastBigPlayerAlert){
+
+lastBigPlayerAlert=
+bigKey;
+
+sendNotification(
+"⚡ OP ROYAL BIG PLAYER ENTRY",
+"XAUUSD "+label+
+" • "+mss.direction+
+" • Entry "+
+price(entry)+
+" • SL "+
+price(stop)+
+" • TP "+
+price(target)+
+" • Candle "+
+current.time
+);
+
+}
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+loadData();
+
+
+/*
+REFRESH EVERY 60 SECONDS
+*/
+
+setInterval(
+loadData,
+60000
+);
 
 </script>
 
