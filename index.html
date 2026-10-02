@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>OP ROYAL XAUUSD Liquidity Dashboard</title>
+<title>OP ROYAL XAUUSD</title>
 
 <style>
 *{box-sizing:border-box}
 body{
 margin:0;
-font-family:Arial,sans-serif;
+padding:12px;
 background:#0b0f14;
 color:#fff;
-padding:12px;
+font-family:Arial,sans-serif;
 }
-.header{
-background:#121923;
-border:1px solid #263241;
-border-radius:16px;
-padding:16px;
+.header,.card{
+background:#111821;
+border:1px solid #273342;
+border-radius:15px;
+padding:15px;
 margin-bottom:12px;
 }
 .title{
@@ -26,27 +26,24 @@ font-size:22px;
 font-weight:800;
 }
 .sub{
+color:#8995a3;
 font-size:12px;
-color:#8f9baa;
 margin-top:5px;
 }
 .price{
-font-size:30px;
+font-size:32px;
 font-weight:800;
-margin-top:12px;
+margin-top:14px;
 }
 .status{
 font-size:13px;
-margin-top:5px;
+margin-top:6px;
 }
-.card{
-background:#111821;
-border:1px solid #263241;
-border-radius:15px;
-padding:14px;
-margin-bottom:12px;
-}
-.card-title{
+.green{color:#35df8a}
+.red{color:#ff6262}
+.yellow{color:#f2c75c}
+.blue{color:#55aaff}
+.cardtitle{
 font-size:16px;
 font-weight:800;
 margin-bottom:12px;
@@ -60,58 +57,46 @@ gap:8px;
 background:#0b1118;
 border:1px solid #263241;
 border-radius:12px;
-padding:12px;
+padding:11px;
 }
-.tf-name{
+.tfname{
 font-weight:800;
-font-size:15px;
-margin-bottom:9px;
+margin-bottom:8px;
 }
 .row{
 display:flex;
 justify-content:space-between;
 gap:8px;
+padding:7px 0;
 font-size:12px;
-padding:6px 0;
 border-bottom:1px solid #1d2732;
 }
-.row:last-child{border-bottom:0}
-.wait{color:#f1c75b}
-.good{color:#36d98b}
-.bad{color:#ff6262}
-.blue{color:#55aaff}
-.big{
-font-size:17px;
-font-weight:800;
+.row:last-child{
+border-bottom:0;
 }
 .signal{
-font-size:23px;
-font-weight:900;
 text-align:center;
-padding:10px;
+font-size:22px;
+font-weight:900;
+padding:12px;
 border-radius:10px;
-background:#0a1016;
+background:#0b1118;
 }
-.level{
-font-size:20px;
-font-weight:800;
-}
-.btn{
+button{
 width:100%;
-border:0;
-border-radius:11px;
 padding:13px;
+border:0;
+border-radius:10px;
+background:#1d9bf0;
+color:white;
 font-size:15px;
 font-weight:800;
-background:#1c9cff;
-color:#fff;
-margin-top:8px;
 }
-.btn:active{transform:scale(.98)}
-.note{
+.small{
 font-size:11px;
 color:#8793a1;
 line-height:1.5;
+margin-top:8px;
 }
 @media(max-width:420px){
 .grid{grid-template-columns:1fr}
@@ -122,789 +107,642 @@ line-height:1.5;
 <body>
 
 <div class="header">
-<div class="title">👑 OP ROYAL XAUUSD</div>
-<div class="sub">Liquidity Sweep • MSS • Big Player Proxy</div>
 
-<div id="price" class="price">WAITING</div>
-<div id="connection" class="status wait">CONNECTING...</div>
+<div class="title">👑 OP ROYAL XAUUSD</div>
+
+<div class="sub">
+Liquidity Sweep • MSS • Big Player
 </div>
 
+<div id="price" class="price">
+CONNECTING...
+</div>
+
+<div id="status" class="status yellow">
+● CONNECTING
+</div>
+
+</div>
+
+
 <div class="card">
-<div class="card-title">🔔 Notifications</div>
-<button class="btn" onclick="enableNotifications()">
+
+<div class="cardtitle">
+🔔 Notifications
+</div>
+
+<button onclick="enableNotifications()">
 ENABLE NOTIFICATIONS
 </button>
-<div id="notifyStatus" class="note">
-Notifications are OFF
-</div>
+
+<div id="notificationStatus" class="small">
+Notifications OFF
 </div>
 
+</div>
+
+
 <div class="card">
-<div class="card-title">💧 Multi-Timeframe Liquidity</div>
+
+<div class="cardtitle">
+💧 Multi-Timeframe Liquidity
+</div>
 
 <div class="grid">
 
 <div class="tf">
-<div class="tf-name">15 MIN</div>
+
+<div class="tfname">15 MIN</div>
+
 <div class="row">
-<span>Liquidity High</span>
-<span id="h15" class="wait">WAITING</span>
+<span>High</span>
+<span id="h15" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
-<span>Liquidity Low</span>
-<span id="l15" class="wait">WAITING</span>
+<span>Low</span>
+<span id="l15" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>Sweep</span>
-<span id="s15" class="wait">WAITING</span>
+<span id="s15" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>MSS</span>
-<span id="m15" class="wait">WAITING</span>
+<span id="m15" class="yellow">WAITING</span>
 </div>
+
 </div>
+
 
 <div class="tf">
-<div class="tf-name">30 MIN</div>
+
+<div class="tfname">30 MIN</div>
+
 <div class="row">
-<span>Liquidity High</span>
-<span id="h30" class="wait">WAITING</span>
+<span>High</span>
+<span id="h30" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
-<span>Liquidity Low</span>
-<span id="l30" class="wait">WAITING</span>
+<span>Low</span>
+<span id="l30" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>Sweep</span>
-<span id="s30" class="wait">WAITING</span>
+<span id="s30" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>MSS</span>
-<span id="m30" class="wait">WAITING</span>
+<span id="m30" class="yellow">WAITING</span>
 </div>
+
 </div>
+
 
 <div class="tf">
-<div class="tf-name">1 HOUR</div>
+
+<div class="tfname">1 HOUR</div>
+
 <div class="row">
-<span>Liquidity High</span>
-<span id="h60" class="wait">WAITING</span>
+<span>High</span>
+<span id="h60" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
-<span>Liquidity Low</span>
-<span id="l60" class="wait">WAITING</span>
+<span>Low</span>
+<span id="l60" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>Sweep</span>
-<span id="s60" class="wait">WAITING</span>
+<span id="s60" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>MSS</span>
-<span id="m60" class="wait">WAITING</span>
+<span id="m60" class="yellow">WAITING</span>
 </div>
+
 </div>
+
 
 <div class="tf">
-<div class="tf-name">4 HOUR</div>
+
+<div class="tfname">4 HOUR</div>
+
 <div class="row">
-<span>Liquidity High</span>
-<span id="h240" class="wait">WAITING</span>
+<span>High</span>
+<span id="h240" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
-<span>Liquidity Low</span>
-<span id="l240" class="wait">WAITING</span>
+<span>Low</span>
+<span id="l240" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>Sweep</span>
-<span id="s240" class="wait">WAITING</span>
+<span id="s240" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>MSS</span>
-<span id="m240" class="wait">WAITING</span>
+<span id="m240" class="yellow">WAITING</span>
 </div>
+
 </div>
+
 
 <div class="tf">
-<div class="tf-name">1 DAY</div>
+
+<div class="tfname">1 DAY</div>
+
 <div class="row">
-<span>Liquidity High</span>
-<span id="hD" class="wait">WAITING</span>
+<span>High</span>
+<span id="hD" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
-<span>Liquidity Low</span>
-<span id="lD" class="wait">WAITING</span>
+<span>Low</span>
+<span id="lD" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>Sweep</span>
-<span id="sD" class="wait">WAITING</span>
+<span id="sD" class="yellow">WAITING</span>
 </div>
+
 <div class="row">
 <span>MSS</span>
-<span id="mD" class="wait">WAITING</span>
+<span id="mD" class="yellow">WAITING</span>
 </div>
+
 </div>
 
 </div>
 </div>
+
 
 <div class="card">
-<div class="card-title">⚡ Big Player Proxy</div>
+
+<div class="cardtitle">
+⚡ Big Player Proxy
+</div>
 
 <div class="row">
 <span>Status</span>
-<span id="bpStatus" class="wait">WAITING</span>
+<span id="bpStatus" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="bpDirection" class="wait">WAITING</span>
+<span id="bpDirection" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Entry Candle</span>
-<span id="bpCandle" class="wait">WAITING</span>
+<span id="bpCandle" class="yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Timeframe</span>
-<span id="bpTF" class="wait">WAITING</span>
+<span id="bpTF" class="yellow">WAITING</span>
 </div>
 
-<div class="note">
-Big-player entry is estimated from liquidity sweep + MSS + strong displacement candle. It does not identify a specific institution.
 </div>
-</div>
+
 
 <div class="card">
-<div class="card-title">🎯 Trade Setup</div>
 
-<div id="signal" class="signal wait">
+<div class="cardtitle">
+🎯 Trade Setup
+</div>
+
+<div id="signal" class="signal yellow">
 NO ACTIVE SIGNAL
 </div>
 
 <div class="row">
 <span>Entry</span>
-<span id="entry" class="level">WAITING</span>
+<span id="entry">WAITING</span>
 </div>
 
 <div class="row">
-<span>Stop Loss</span>
-<span id="sl" class="level">WAITING</span>
+<span>SL</span>
+<span id="sl">WAITING</span>
 </div>
 
 <div class="row">
-<span>Take Profit</span>
-<span id="tp" class="level">WAITING</span>
+<span>TP</span>
+<span id="tp">WAITING</span>
 </div>
 
-<div class="row">
-<span>Risk : Reward</span>
-<span id="rr" class="wait">WAITING</span>
 </div>
-</div>
+
 
 <div class="card">
-<div class="card-title">🧠 Engine Status</div>
-<div id="engine" class="note">
+
+<div class="cardtitle">
+🧠 Engine Status
+</div>
+
+<div id="engine" class="small">
 Starting...
 </div>
+
 </div>
+
 
 <script>
 
-const WORKER =
+const WORKER_URL =
 "https://icy-snow-263a.optrader06.workers.dev";
 
-let candles=[];
-let lastSweepKey="";
-let lastBigPlayerKey="";
-let notificationPermission=false;
+let notificationOn=false;
 
-function $(id){
-return document.getElementById(id);
-}
 
-function fmt(n){
-if(n===null || n===undefined || isNaN(n)) return "WAITING";
-return Number(n).toFixed(2);
-}
-
-function set(id,text,cls="wait"){
-const el=$(id);
-if(!el)return;
-el.textContent=text;
-el.className=cls;
-}
-
-function notify(title,body){
-
-if(!notificationPermission)return;
-
-if("Notification" in window &&
-Notification.permission==="granted"){
-
-try{
-new Notification(title,{
-body:body,
-icon:""
-});
-}catch(e){}
-}
-
-}
+/* =========================
+   NOTIFICATION
+========================= */
 
 async function enableNotifications(){
 
 if(!("Notification" in window)){
-$("notifyStatus").textContent=
+
+document.getElementById(
+"notificationStatus"
+).textContent=
 "Browser notification supported nahi hai.";
+
 return;
 }
 
-try{
+const permission=
+await Notification.requestPermission();
 
-const p=await Notification.requestPermission();
+if(permission==="granted"){
 
-if(p==="granted"){
+notificationOn=true;
 
-notificationPermission=true;
-
-$("notifyStatus").textContent=
+document.getElementById(
+"notificationStatus"
+).textContent=
 "✅ Notifications ON";
 
-notify(
-"OP ROYAL TEST",
-"Notifications successfully enabled."
+new Notification(
+"OP ROYAL",
+{
+body:"Notification system active."
+}
 );
 
 }else{
 
-$("notifyStatus").textContent=
-"Notifications permission denied";
-}
-
-}catch(e){
-
-$("notifyStatus").textContent=
-"Notification permission error";
+document.getElementById(
+"notificationStatus"
+).textContent=
+"❌ Notification permission denied";
 }
 
 }
 
-function parseData(data){
 
-let arr=[];
+/* =========================
+   NUMBER
+========================= */
 
-if(data && Array.isArray(data.values)){
-arr=data.values;
+function number(x){
+
+const n=Number(x);
+
+if(!isFinite(n))return null;
+
+return n;
 }
 
-else if(data && Array.isArray(data.data)){
-arr=data.data;
-}
 
-return arr.map(x=>({
+/* =========================
+   GET WORKER DATA
+========================= */
 
-time:x.datetime || x.time || x.date,
-open:Number(x.open),
-high:Number(x.high),
-low:Number(x.low),
-close:Number(x.close),
-volume:x.volume!==undefined?
-Number(x.volume):null
-
-})).filter(x=>
-x.time &&
-isFinite(x.open) &&
-isFinite(x.high) &&
-isFinite(x.low) &&
-isFinite(x.close)
-).sort((a,b)=>
-new Date(a.time)-new Date(b.time)
-);
-
-}
-
-async function loadData(){
+async function getData(){
 
 try{
 
-set("connection","CONNECTING...","wait");
+document.getElementById(
+"status"
+).textContent=
+"● CONNECTING";
+
+document.getElementById(
+"status"
+).className=
+"status yellow";
+
+
+/*
+IMPORTANT:
+Worker URL directly call kiya ja raha hai.
+*/
 
 const url=
-WORKER+
-"/api.twelvedata.com/time_series"+
-"?symbol=XAU/USD"+
+WORKER_URL+
+"/?symbol=XAU/USD"+
 "&interval=15min"+
-"&outputsize=500";
+"&outputsize=100";
 
-const response=await fetch(url,{
+
+const response=
+await fetch(
+url,
+{
+method:"GET",
 cache:"no-store"
-});
-
-if(!response.ok)
-throw new Error("HTTP "+response.status);
-
-const data=await response.json();
-
-const parsed=parseData(data);
-
-if(!parsed.length)
-throw new Error("No candle data");
-
-candles=parsed;
-
-const latest=candles[candles.length-1];
-
-$("price").textContent=
-fmt(latest.close);
-
-set(
-"connection",
-"● LIVE • XAU/USD • 15M",
-"good"
+}
 );
 
-$("engine").textContent=
-"Data LIVE • "+candles.length+
-" candles • Last candle: "+latest.time;
 
-buildAll();
+if(!response.ok){
 
-}catch(err){
-
-console.log(err);
-
-set(
-"connection",
-"● DATA ERROR",
-"bad"
+throw new Error(
+"HTTP "+response.status
 );
 
-$("engine").textContent=
-"Unable to read market data: "+err.message;
+}
+
+
+const data=
+await response.json();
+
+
+console.log(
+"WORKER RESPONSE:",
+data
+);
+
+
+/* Twelve Data format */
+
+let values=
+data.values;
+
+
+/* Some Worker responses may use data */
+
+if(!values &&
+data.data &&
+Array.isArray(data.data)){
+
+values=data.data;
 
 }
 
-}
 
-function bucketCandle(c,minutes){
+if(!Array.isArray(values) ||
+values.length===0){
 
-const d=new Date(c.time);
-
-const ms=minutes*60*1000;
-
-const bucket=
-Math.floor(d.getTime()/ms)*ms;
-
-return bucket;
+throw new Error(
+"No candle data received"
+);
 
 }
 
-function aggregate(minutes){
 
-const map={};
+const candles=
+values.map(function(c){
 
-for(const c of candles){
+return{
 
-const b=bucketCandle(c,minutes);
+time:c.datetime ||
+c.time ||
+c.date,
 
-if(!map[b]){
+open:number(c.open),
 
-map[b]={
-time:new Date(b).toISOString(),
-open:c.open,
-high:c.high,
-low:c.low,
-close:c.close,
-volume:c.volume||0
+high:number(c.high),
+
+low:number(c.low),
+
+close:number(c.close),
+
+volume:number(c.volume)
+
 };
 
-}else{
+}).filter(function(c){
 
-map[b].high=
-Math.max(map[b].high,c.high);
+return c.time &&
+c.open!==null &&
+c.high!==null &&
+c.low!==null &&
+c.close!==null;
 
-map[b].low=
-Math.min(map[b].low,c.low);
+});
 
-map[b].close=c.close;
 
-map[b].volume+=c.volume||0;
+if(!candles.length){
 
-}
-
-}
-
-return Object.values(map)
-.sort((a,b)=>
-new Date(a.time)-new Date(b.time)
+throw new Error(
+"Invalid candle data"
 );
 
 }
 
-function getLiquidity(arr){
 
-if(arr.length<5){
+const latest=
+candles[candles.length-1];
 
-return null;
-}
 
-const last=arr[arr.length-1];
+/* =========================
+   LIVE PRICE
+========================= */
+
+document.getElementById(
+"price"
+).textContent=
+latest.close.toFixed(2);
+
+
+document.getElementById(
+"status"
+).textContent=
+"● LIVE • XAU/USD • 15M";
+
+
+document.getElementById(
+"status"
+).className=
+"status green";
+
+
+document.getElementById(
+"engine"
+).textContent=
+"Data LIVE • "+
+candles.length+
+" candles • Last candle: "+
+latest.time;
+
+
+/* =========================
+   BASIC LIQUIDITY
+========================= */
 
 const previous=
-arr.slice(
-Math.max(0,arr.length-21),
-arr.length-1
+candles.slice(
+Math.max(0,candles.length-21),
+candles.length-1
 );
+
 
 let high=-Infinity;
 let low=Infinity;
 
-for(const c of previous){
 
-if(c.high>high)high=c.high;
-if(c.low<low)low=c.low;
+previous.forEach(function(c){
 
-}
+if(c.high>high)
+high=c.high;
 
-return{
-high,
-low,
-last
-};
+if(c.low<low)
+low=c.low;
 
-}
+});
 
-function detectSweep(arr){
 
-if(arr.length<6)return null;
+document.getElementById(
+"h15"
+).textContent=
+high.toFixed(2);
 
-const x=getLiquidity(arr);
+document.getElementById(
+"l15"
+).textContent=
+low.toFixed(2);
 
-if(!x)return null;
 
-const c=x.last;
+/* =========================
+   SIMPLE SWEEP
+========================= */
 
-let highSweep=
-c.high>x.high &&
-c.close<x.high;
+let sweep="WAITING";
 
-let lowSweep=
-c.low<x.low &&
-c.close>x.low;
-
-if(highSweep){
-
-return{
-type:"SELL",
-level:x.high,
-candle:c
-};
-
-}
-
-if(lowSweep){
-
-return{
-type:"BUY",
-level:x.low,
-candle:c
-};
-
-}
-
-return null;
-
-}
-
-function detectMSS(arr,sweep){
-
-if(!sweep || arr.length<8)
-return null;
-
-const index=arr.length-1;
-
-const before=arr.slice(
-Math.max(0,index-7),
-index
-);
-
-if(!before.length)return null;
-
-const recentHigh=
-Math.max(...before.map(x=>x.high));
-
-const recentLow=
-Math.min(...before.map(x=>x.low));
-
-const c=arr[index];
 
 if(
-sweep.type==="BUY" &&
-c.close>recentHigh
+latest.high>high &&
+latest.close<high
 ){
 
-return{
-direction:"BUY",
-candle:c
-};
+sweep="HIGH SWEPT";
 
-}
+document.getElementById(
+"s15"
+).textContent=
+sweep;
 
-if(
-sweep.type==="SELL" &&
-c.close<recentLow
+document.getElementById(
+"s15"
+).className=
+"red";
+
+
+}else if(
+latest.low<low &&
+latest.close>low
 ){
 
-return{
-direction:"SELL",
-candle:c
-};
+sweep="LOW SWEPT";
 
-}
+document.getElementById(
+"s15"
+).textContent=
+sweep;
 
-return null;
+document.getElementById(
+"s15"
+).className=
+"green";
 
-}
-
-function strongCandle(arr){
-
-if(arr.length<6)return false;
-
-const c=arr[arr.length-1];
-
-const recent=
-arr.slice(-6,-1);
-
-const ranges=
-recent.map(x=>x.high-x.low);
-
-const avg=
-ranges.reduce((a,b)=>a+b,0)/
-ranges.length;
-
-const current=
-c.high-c.low;
-
-return current>avg*1.25;
-
-}
-
-function updateTF(minutes,label){
-
-const arr=aggregate(minutes);
-
-const liq=getLiquidity(arr);
-
-if(!liq){
-
-return null;
-}
-
-const high=liq.high;
-const low=liq.low;
-
-const highId=
-minutes===1440?"hD":
-"h"+minutes;
-
-const lowId=
-minutes===1440?"lD":
-"l"+minutes;
-
-set(highId,fmt(high),"blue");
-set(lowId,fmt(low),"blue");
-
-const sweep=detectSweep(arr);
-
-const sweepId=
-minutes===1440?"sD":
-"s"+minutes;
-
-const mssId=
-minutes===1440?"mD":
-"m"+minutes;
-
-if(sweep){
-
-set(
-sweepId,
-sweep.type==="BUY"?
-"LOW SWEPT":"HIGH SWEPT",
-"good"
-);
-
-const key=
-minutes+"-"+sweep.type+"-"+sweep.candle.time;
-
-if(key!==lastSweepKey){
-
-lastSweepKey=key;
-
-notify(
-"💧 OP ROYAL LIQUIDITY SWEEP",
-"XAUUSD "+label+
-" • "+
-(sweep.type==="BUY"?
-"LOW SWEPT":"HIGH SWEPT")+
-" • Price "+fmt(sweep.candle.close)
-);
-
-}
-
-const mss=detectMSS(arr,sweep);
-
-if(mss){
-
-set(
-mssId,
-mss.direction==="BUY"?
-"BULLISH MSS":
-"BEARISH MSS",
-"good"
-);
-
-if(strongCandle(arr)){
-
-const bigKey=
-minutes+"-"+mss.direction+
-"-"+mss.candle.time;
-
-if(bigKey!==lastBigPlayerKey){
-
-lastBigPlayerKey=bigKey;
-
-const price=mss.candle.close;
-
-const range=
-mss.direction==="BUY"?
-mss.candle.low:
-mss.candle.high;
-
-let stop;
-let target;
-
-if(mss.direction==="BUY"){
-
-stop=range;
-
-target=price+
-(price-stop)*2;
 
 }else{
 
-stop=range;
+document.getElementById(
+"s15"
+).textContent=
+"WAITING";
 
-target=price-
-(stop-price)*2;
-
-}
-
-set(
-"bpStatus",
-"CONFIRMED",
-"good"
-);
-
-set(
-"bpDirection",
-mss.direction,
-mss.direction==="BUY"?
-"good":"bad"
-);
-
-set(
-"bpCandle",
-mss.candle.time,
-"blue"
-);
-
-set(
-"bpTF",
-label,
-"blue"
-);
-
-set(
-"signal",
-mss.direction==="BUY"?
-"🟢 BUY":"🔴 SELL",
-mss.direction==="BUY"?
-"good":"bad"
-);
-
-set(
-"entry",
-fmt(price),
-"level"
-);
-
-set(
-"sl",
-fmt(stop),
-"level"
-);
-
-set(
-"tp",
-fmt(target),
-"level"
-);
-
-set(
-"rr",
-"1 : 2",
-"good"
-);
-
-notify(
-"⚡ BIG PLAYER ENTRY",
-"XAUUSD "+label+
-" • "+mss.direction+
-" • Entry "+fmt(price)+
-" • SL "+fmt(stop)+
-" • TP "+fmt(target)+
-" • Candle "+mss.candle.time
-);
+document.getElementById(
+"s15"
+).className=
+"yellow";
 
 }
 
-}else{
 
-set(mssId,"WAITING","wait");
+/* =========================
+   OTHER TF PLACEHOLDER
+========================= */
+
+document.getElementById("h30").textContent="READY";
+document.getElementById("l30").textContent="READY";
+
+document.getElementById("h60").textContent="READY";
+document.getElementById("l60").textContent="READY";
+
+document.getElementById("h240").textContent="READY";
+document.getElementById("l240").textContent="READY";
+
+document.getElementById("hD").textContent="READY";
+document.getElementById("lD").textContent="READY";
+
+
+}catch(error){
+
+console.log(
+"DATA ERROR:",
+error
+);
+
+
+document.getElementById(
+"status"
+).textContent=
+"● DATA ERROR";
+
+
+document.getElementById(
+"status"
+).className=
+"status red";
+
+
+document.getElementById(
+"engine"
+).textContent=
+"Worker connection failed: "+
+error.message;
 
 }
 
-}else{
-
-set(sweepId,"WAITING","wait");
-set(mssId,"WAITING","wait");
-
 }
 
-return{
-sweep:sweep,
-liq:liq
-};
 
-}
+/* START */
 
-function buildAll(){
+getData();
 
-if(!candles.length)return;
 
-updateTF(15,"15M");
-updateTF(30,"30M");
-updateTF(60,"1H");
-updateTF(240,"4H");
-updateTF(1440,"1D");
+/* REFRESH EVERY 60 SEC */
 
-}
-
-loadData();
-
-setInterval(loadData,60000);
+setInterval(
+getData,
+60000
+);
 
 </script>
 
