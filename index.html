@@ -4,1872 +4,840 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>OP ROYAL TRADE</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-background:#07090d;
-color:#fff;
-font-family:Arial,sans-serif;
-}
-
-.header{
-text-align:center;
-padding:16px;
-background:#0d1118;
-border-bottom:1px solid #252b34;
-}
-
-.header h1{
-margin:0;
-font-size:23px;
-letter-spacing:1px;
-}
-
-.header p{
-margin:6px 0 0;
-font-size:12px;
-color:#8d96a3;
-}
-
-.container{
-max-width:700px;
-margin:auto;
-padding:12px;
-}
-
-.card{
-background:#0d1118;
-border:1px solid #252b34;
-border-radius:12px;
-padding:14px;
-margin-bottom:12px;
-}
-
-.title{
-font-size:14px;
-font-weight:bold;
-margin-bottom:11px;
-color:#ddd;
-}
-
-.price{
-text-align:center;
-font-size:31px;
-font-weight:bold;
-padding:10px;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding:9px 0;
-border-bottom:1px solid #1b2028;
-font-size:13px;
-}
-
-.row:last-child{
-border-bottom:0;
-}
-
-.value{
-font-weight:bold;
-text-align:right;
-word-break:break-word;
-}
-
-.green{color:#36e58b}
-.red{color:#ff5965}
-.yellow{color:#ffd45b}
-.blue{color:#52b7ff}
-
-.signal{
-text-align:center;
-padding:12px;
-border-radius:9px;
-background:#151b23;
-font-weight:bold;
-}
-
-.trade{
-text-align:center;
-padding:13px;
-border-radius:9px;
-background:#151b23;
-font-size:19px;
-font-weight:bold;
-}
-
-button{
-width:100%;
-border:0;
-border-radius:9px;
-padding:13px;
-margin-top:7px;
-background:#1c2735;
-color:#fff;
-font-weight:bold;
-}
-
-.log{
-font-size:11px;
-color:#9da5b0;
-line-height:1.5;
-white-space:pre-wrap;
-word-break:break-word;
-}
-
-.badge{
-display:inline-block;
-padding:5px 8px;
-border-radius:6px;
-background:#151b23;
-font-size:11px;
-}
+body{margin:0;background:#071018;color:#fff;font-family:Arial,sans-serif;padding:12px}
+h1{font-size:22px;text-align:center;margin:5px 0;color:#f5c542}
+.sub{text-align:center;color:#9da8b3;font-size:12px;margin-bottom:12px}
+.card{background:#0d1822;border:1px solid #263746;border-radius:12px;padding:12px;margin-bottom:10px}
+.title{font-size:15px;font-weight:bold;color:#f5c542;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #1c2a35;font-size:13px}
+.row:last-child{border-bottom:0}
+.value{font-weight:bold;text-align:right}
+.green{color:#32d583}.red{color:#ff5c5c}.yellow{color:#f5c542}.blue{color:#55b7ff}.gray{color:#9da8b3}
+.price{font-size:30px;text-align:center;font-weight:bold;margin:4px 0 12px}
+.tf{font-size:12px;background:#152431;border-radius:8px;padding:3px 7px;color:#55b7ff}
+button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;color:#071018;font-weight:bold;font-size:14px;margin-top:5px}
+.small{font-size:11px;color:#8d9aa5;line-height:1.5}
+.setup{padding:9px;border-radius:8px;margin:5px 0;background:#101e29;border-left:3px solid #647482}
+.notify{font-size:12px;padding:8px;border-radius:7px;background:#101e29;margin:5px 0}
+input{accent-color:#f5c542}
 </style>
 </head>
 
 <body>
 
-<div class="header">
 <h1>⚡ OP ROYAL TRADE</h1>
-<p>XAU/USD • Liquidity Sweep • MSS • Big Player Proxy</p>
-</div>
-
-<div class="container">
+<div class="sub">XAU/USD • Liquidity Sweep Trading Engine</div>
 
 <div class="card">
-
-<div class="title">LIVE MARKET</div>
-
-<div id="price" class="price yellow">
-CONNECTING...
+<div class="price" id="price">WAITING</div>
+<div class="row"><span>Data</span><span id="dataStatus" class="value yellow">WAITING</span></div>
+<div class="row"><span>Engine</span><span id="engineStatus" class="value yellow">STARTING</span></div>
+<div class="row"><span>Last Update</span><span id="lastUpdate" class="value gray">--</span></div>
 </div>
-
-<div class="row">
-<span>Symbol</span>
-<span class="value">XAU/USD</span>
-</div>
-
-<div class="row">
-<span>Source</span>
-<span class="value blue">TWELVE DATA</span>
-</div>
-
-<div class="row">
-<span>Last Candle</span>
-<span id="lastCandle" class="value">WAITING</span>
-</div>
-
-</div>
-
 
 <div class="card">
-
-<div class="title">MULTI-TIMEFRAME LIQUIDITY</div>
-
-<div class="row">
-<span>15M Liquidity High</span>
-<span id="m15h" class="value yellow">WAITING</span>
-</div>
+<div class="title">🔔 Notifications</div>
 
 <div class="row">
-<span>15M Liquidity Low</span>
-<span id="m15l" class="value yellow">WAITING</span>
+<span>Liquidity Sweep</span>
+<label><input type="checkbox" id="sweepNotify"> ON</label>
 </div>
 
 <div class="row">
-<span>30M Liquidity High</span>
-<span id="m30h" class="value yellow">WAITING</span>
+<span>Big Player Entry</span>
+<label><input type="checkbox" id="entryNotify"> ON</label>
 </div>
 
-<div class="row">
-<span>30M Liquidity Low</span>
-<span id="m30l" class="value yellow">WAITING</span>
+<button onclick="enableNotifications()">ENABLE BROWSER NOTIFICATION</button>
+<div class="small" id="notifyStatus">Notification permission not requested.</div>
 </div>
-
-<div class="row">
-<span>1H Liquidity High</span>
-<span id="h1h" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>1H Liquidity Low</span>
-<span id="h1l" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>4H Liquidity High</span>
-<span id="h4h" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>4H Liquidity Low</span>
-<span id="h4l" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>1D Liquidity High</span>
-<span id="d1h" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>1D Liquidity Low</span>
-<span id="d1l" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
 
 <div class="card">
+<div class="title">📊 Setup Sequence</div>
 
-<div class="title">SETUP SEQUENCE</div>
-
-<div class="row">
-<span>1. Liquidity</span>
-<span id="stepLiquidity" class="value yellow">WAITING</span>
+<div class="setup">1️⃣ Liquidity Levels → <span id="step1" class="yellow">WAITING</span></div>
+<div class="setup">2️⃣ Liquidity Sweep → <span id="step2" class="yellow">WAITING</span></div>
+<div class="setup">3️⃣ MSS → <span id="step3" class="yellow">WAITING</span></div>
+<div class="setup">4️⃣ Displacement → <span id="step4" class="yellow">WAITING</span></div>
+<div class="setup">5️⃣ Big Player Proxy → <span id="step5" class="yellow">WAITING</span></div>
+<div class="setup">6️⃣ Trade Setup → <span id="step6" class="yellow">WAITING</span></div>
 </div>
-
-<div class="row">
-<span>2. Sweep</span>
-<span id="stepSweep" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>3. MSS</span>
-<span id="stepMss" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>4. Displacement</span>
-<span id="stepDisp" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>5. Big Player</span>
-<span id="stepBig" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
 
 <div class="card">
+<div class="title">💧 Multi-Timeframe Liquidity</div>
 
-<div class="title">LIQUIDITY SWEEP</div>
-
-<div id="sweepSignal" class="signal yellow">
-WAITING
+<div class="row">
+<span>15M <span class="tf">Liquidity</span></span>
+<span id="liq15" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>Direction</span>
-<span id="sweepDirection" class="value yellow">WAITING</span>
+<span>30M <span class="tf">Liquidity</span></span>
+<span id="liq30" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>Sweep Level</span>
-<span id="sweepLevel" class="value yellow">WAITING</span>
+<span>1H <span class="tf">Liquidity</span></span>
+<span id="liq60" class="value gray">WAITING</span>
 </div>
 
 <div class="row">
-<span>Sweep Candle</span>
-<span id="sweepCandle" class="value">WAITING</span>
+<span>4H <span class="tf">Liquidity</span></span>
+<span id="liq240" class="value gray">WAITING</span>
 </div>
 
+<div class="row">
+<span>1D <span class="tf">Liquidity</span></span>
+<span id="liq1440" class="value gray">WAITING</span>
 </div>
-
+</div>
 
 <div class="card">
+<div class="title">🎯 Latest Liquidity Sweep</div>
 
-<div class="title">MARKET STRUCTURE</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="mss" class="value yellow">WAITING</span>
+<div class="row"><span>Timeframe</span><span id="sweepTF" class="value yellow">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="sweepDirection" class="value yellow">WAITING</span></div>
+<div class="row"><span>Level</span><span id="sweepLevel" class="value yellow">WAITING</span></div>
+<div class="row"><span>Time</span><span id="sweepTime" class="value gray">WAITING</span></div>
 </div>
-
-<div class="row">
-<span>MSS Candle</span>
-<span id="mssCandle" class="value">WAITING</span>
-</div>
-
-<div class="row">
-<span>Displacement</span>
-<span id="displacement" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
 
 <div class="card">
+<div class="title">📈 Market Structure Shift</div>
 
-<div class="title">BIG PLAYER PROXY</div>
-
-<div id="bigPlayer" class="signal yellow">
-WAITING
+<div class="row"><span>MSS</span><span id="mss" class="value yellow">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="mssDirection" class="value yellow">WAITING</span></div>
+<div class="row"><span>Displacement</span><span id="displacement" class="value yellow">WAITING</span></div>
 </div>
-
-<div class="row">
-<span>Direction</span>
-<span id="bigDirection" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Confirmation Candle</span>
-<span id="bigCandle" class="value">WAITING</span>
-</div>
-
-<div class="row">
-<span>Confirmation Time</span>
-<span id="bigTime" class="value">WAITING</span>
-</div>
-
-</div>
-
 
 <div class="card">
+<div class="title">🐋 Big Player Proxy</div>
 
-<div class="title">TRADE SETUP</div>
+<div class="row"><span>Confirmation</span><span id="bigPlayer" class="value yellow">WAITING</span></div>
+<div class="row"><span>Timeframe</span><span id="bigPlayerTF" class="value gray">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="bigPlayerDirection" class="value yellow">WAITING</span></div>
 
-<div id="tradeSignal" class="trade yellow">
-NO ACTIVE SIGNAL
+<div class="small">
+Proxy logic: Liquidity Sweep + MSS + Displacement.
+This does not identify actual institutional orders.
 </div>
-
-<div class="row">
-<span>Direction</span>
-<span id="tradeDirection" class="value yellow">WAITING</span>
 </div>
-
-<div class="row">
-<span>Entry</span>
-<span id="entry" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Stop Loss</span>
-<span id="sl" class="value red">WAITING</span>
-</div>
-
-<div class="row">
-<span>Take Profit</span>
-<span id="tp" class="value green">WAITING</span>
-</div>
-
-<div class="row">
-<span>Risk : Reward</span>
-<span id="rr" class="value blue">1 : 2</span>
-</div>
-
-</div>
-
 
 <div class="card">
+<div class="title">💰 Trade Setup</div>
 
-<div class="title">NOTIFICATIONS</div>
-
-<button id="notifyButton" onclick="enableNotifications()">
-🔔 ENABLE TRADE NOTIFICATIONS
-</button>
-
-<div class="log">
-💧 Sweep notification = liquidity sweep detected
-⚡ Entry notification = MSS + displacement confirmation
+<div class="row"><span>Signal</span><span id="signal" class="value yellow">NO ACTIVE SIGNAL</span></div>
+<div class="row"><span>Entry</span><span id="entry" class="value yellow">WAITING</span></div>
+<div class="row"><span>Stop Loss</span><span id="sl" class="value red">WAITING</span></div>
+<div class="row"><span>Take Profit</span><span id="tp" class="value green">WAITING</span></div>
+<div class="row"><span>Risk : Reward</span><span id="rr" class="value blue">1 : 2</span></div>
 </div>
-
-</div>
-
 
 <div class="card">
-
-<div class="title">ENGINE STATUS</div>
-
-<div class="row">
-<span>Engine</span>
-<span id="engine" class="value yellow">STARTING...</span>
+<div class="title">📝 System Log</div>
+<div id="log" class="small">Engine starting...</div>
 </div>
-
-<div class="row">
-<span>Data</span>
-<span id="dataStatus" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Last Update</span>
-<span id="updateTime" class="value">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="title">SYSTEM LOG</div>
-
-<div id="systemLog" class="log">
-Starting OP ROYAL engine...
-</div>
-
-</div>
-
-</div>
-
 
 <script>
 
-/* =====================================================
-   OP ROYAL TRADE
-   WORKER - DO NOT CHANGE
-===================================================== */
-
-const WORKER_URL=
-"https://icy-snow-263a.optrader06.workers.dev";
-
-const ENDPOINT=
-WORKER_URL+
-"/api.twelvedata.com/time_series";
-
-
-/* =====================================================
-   GLOBAL STATE
-===================================================== */
+const WORKER_URL="https://icy-snow-263a.optrader06.workers.dev";
+const ENDPOINT=WORKER_URL+"/api.twelvedata.com/time_series";
 
 let candles=[];
+let lastSweepKey="";
+let lastEntryKey="";
 
-let activeSetup=null;
+const $=id=>document.getElementById(id);
 
-let notifiedSweepKeys={};
-
-let notifiedBigKeys={};
-
-let notificationEnabled=false;
-
-
-/* =====================================================
-   BASIC HELPERS
-===================================================== */
-
-function setValue(
-id,
-text,
-color
-){
-
-const el=
-document.getElementById(id);
-
-if(!el)return;
-
-el.innerText=text;
-
-if(color){
-
-el.className=
-"value "+color;
-
+function log(msg){
+    $("log").innerHTML=
+        new Date().toLocaleTimeString()+" — "+msg;
 }
 
+function setEngine(text,cls){
+    $("engineStatus").textContent=text;
+    $("engineStatus").className="value "+cls;
 }
 
-
-function price(value){
-
-if(
-value===undefined||
-value===null||
-isNaN(Number(value))
-){
-
-return "WAITING";
-
+function setData(text,cls){
+    $("dataStatus").textContent=text;
+    $("dataStatus").className="value "+cls;
 }
 
-return Number(value).toFixed(2);
+function notify(message){
+    if(!("Notification" in window)) return;
 
+    if(Notification.permission==="granted"){
+        try{
+            new Notification("OP ROYAL TRADE",{body:message});
+        }catch(e){}
+    }
 }
-
-
-function candleTime(value){
-
-if(!value){
-
-return "WAITING";
-
-}
-
-const d=
-new Date(value);
-
-if(isNaN(d.getTime())){
-
-return String(value);
-
-}
-
-return d.toLocaleString(
-"en-IN",
-{
-day:"2-digit",
-month:"2-digit",
-hour:"2-digit",
-minute:"2-digit"
-}
-);
-
-}
-
-
-function log(message){
-
-const el=
-document.getElementById(
-"systemLog"
-);
-
-el.innerText=
-message;
-
-console.log(message);
-
-}
-
-
-/* =====================================================
-   NOTIFICATIONS
-===================================================== */
 
 async function enableNotifications(){
 
-if(!("Notification" in window)){
+    if(!("Notification" in window)){
+        $("notifyStatus").textContent="Browser notifications are not supported.";
+        return;
+    }
 
-alert(
-"Is browser me notification support available nahi hai."
-);
-
-return;
-
+    try{
+        const permission=await Notification.requestPermission();
+        $("notifyStatus").textContent=
+            "Notification permission: "+permission;
+    }catch(e){
+        $("notifyStatus").textContent="Notification permission error.";
+    }
 }
 
-try{
-
-const permission=
-await Notification.requestPermission();
-
-if(permission==="granted"){
-
-notificationEnabled=true;
-
-document.getElementById(
-"notifyButton"
-).innerText=
-"🔔 NOTIFICATIONS ON";
-
-new Notification(
-"OP ROYAL TRADE",
-{
-body:
-"Trade notifications enabled."
-}
-);
-
-}else{
-
-document.getElementById(
-"notifyButton"
-).innerText=
-"🔕 NOTIFICATIONS BLOCKED";
-
+function fmt(n){
+    if(n===undefined || n===null || isNaN(n)) return "WAITING";
+    return Number(n).toFixed(2);
 }
 
-}catch(error){
+function parseValues(data){
 
-console.log(error);
+    if(Array.isArray(data)) return data;
 
+    if(data && Array.isArray(data.values))
+        return data.values;
+
+    if(data && Array.isArray(data.data))
+        return data.data;
+
+    if(data && data.data && Array.isArray(data.data.values))
+        return data.data.values;
+
+    return [];
 }
-
-}
-
-
-function sendNotification(
-title,
-body
-){
-
-if(!notificationEnabled)return;
-
-if(
-!("Notification" in window)
-)return;
-
-if(
-Notification.permission!=="granted"
-)return;
-
-try{
-
-new Notification(
-title,
-{
-body:body
-}
-);
-
-}catch(error){
-
-console.log(error);
-
-}
-
-}
-
-
-/* =====================================================
-   FETCH MARKET DATA
-===================================================== */
 
 async function fetchMarketData(){
 
-try{
+    setEngine("FETCHING...","yellow");
+    setData("WAITING","yellow");
 
-setValue(
-"engine",
-"CONNECTING...",
-"yellow"
-);
+    const url=
+        ENDPOINT+
+        "?symbol=XAU/USD&interval=15min&outputsize=100";
 
-const url=
-ENDPOINT+
-"?symbol=XAU/USD"+
-"&interval=15min"+
-"&outputsize=100";
+    let controller=new AbortController();
 
-const response=
-await fetch(
-url,
-{
-method:"GET",
-cache:"no-store"
-}
-);
+    let timeout=setTimeout(()=>{
+        controller.abort();
+    },10000);
 
-const raw=
-await response.text();
+    try{
 
-let data;
+        log("Connecting to market data...");
 
-try{
+        const response=await fetch(url,{
+            method:"GET",
+            cache:"no-store",
+            signal:controller.signal
+        });
 
-data=
-JSON.parse(raw);
+        clearTimeout(timeout);
 
-}catch(error){
+        if(!response.ok){
+            throw new Error("HTTP "+response.status);
+        }
 
-throw new Error(
-"Worker JSON response invalid"
-);
+        const data=await response.json();
 
-}
+        const values=parseValues(data);
 
+        if(!values.length){
 
-let values=null;
+            if(data && data.message){
+                throw new Error(data.message);
+            }
 
-if(
-data &&
-Array.isArray(data.values)
-){
+            throw new Error("No candle data received");
+        }
 
-values=data.values;
+        candles=values.map(x=>({
+            time:x.datetime || x.time || x.date,
+            open:Number(x.open),
+            high:Number(x.high),
+            low:Number(x.low),
+            close:Number(x.close),
+            volume:x.volume!==undefined?Number(x.volume):null
+        }))
+        .filter(x=>
+            isFinite(x.open)&&
+            isFinite(x.high)&&
+            isFinite(x.low)&&
+            isFinite(x.close)
+        )
+        .sort((a,b)=>
+            new Date(a.time)-new Date(b.time)
+        );
 
-}
+        if(!candles.length)
+            throw new Error("Invalid candle values");
 
-else if(
-data &&
-Array.isArray(data.data)
-){
+        const latest=candles[candles.length-1];
 
-values=data.data;
+        $("price").textContent=fmt(latest.close);
+        $("lastUpdate").textContent=
+            new Date().toLocaleTimeString();
 
-}
+        setData("LIVE","green");
+        setEngine("DATA LIVE","green");
 
-else if(
-Array.isArray(data)
-){
+        log(
+            "LIVE • "+candles.length+
+            " candles • XAU/USD 15M"
+        );
 
-values=data;
+        runEngine();
 
-}
+    }catch(error){
 
+        clearTimeout(timeout);
 
-if(!values){
+        if(error.name==="AbortError"){
+            setData("TIMEOUT","red");
+            setEngine("TIMEOUT","red");
+            log("Data request timed out after 10 seconds.");
+        }else{
+            setData("ERROR","red");
+            setEngine("DATA ERROR","red");
+            log("Data error: "+error.message);
+        }
 
-if(
-data &&
-data.status==="error"
-){
-
-throw new Error(
-data.message||
-"API ERROR"
-);
-
-}
-
-throw new Error(
-"Candle values not found"
-);
-
-}
-
-
-candles=
-values.map(
-function(item){
-
-return{
-
-time:
-item.datetime||
-item.time||
-item.date,
-
-open:Number(
-item.open||
-item.o||
-0
-),
-
-high:Number(
-item.high||
-item.h||
-0
-),
-
-low:Number(
-item.low||
-item.l||
-0
-),
-
-close:Number(
-item.close||
-item.c||
-0
-),
-
-volume:Number(
-item.volume||
-item.v||
-0
-)
-
-};
-
-}
-).filter(
-function(c){
-
-return(
-c.time &&
-c.high>0 &&
-c.low>0 &&
-c.close>0
-);
-
-}
-);
-
-
-/*
-   Oldest -> newest
-*/
-
-candles.sort(
-function(a,b){
-
-return(
-new Date(a.time)-
-new Date(b.time)
-);
-
-}
-);
-
-
-if(candles.length<10){
-
-throw new Error(
-"Insufficient candle data"
-);
-
+    }
 }
 
+function bucketTime(time,minutes){
 
-setValue(
-"engine",
-"DATA LIVE",
-"green"
-);
+    const d=new Date(time);
+    const ms=minutes*60*1000;
 
-setValue(
-"dataStatus",
-candles.length+
-" CANDLES LIVE",
-"green"
-);
-
-document.getElementById(
-"updateTime"
-).innerText=
-new Date().toLocaleTimeString();
-
-
-const latest=
-candles[
-candles.length-1
-];
-
-document.getElementById(
-"price"
-).innerText=
-price(latest.close);
-
-document.getElementById(
-"price"
-).className=
-"price green";
-
-document.getElementById(
-"lastCandle"
-).innerText=
-candleTime(latest.time);
-
-
-log(
-"LIVE\n"+
-"XAU/USD\n"+
-"Price: "+
-price(latest.close)+
-"\nCandles: "+
-candles.length+
-"\nEngine running..."
-);
-
-
-runEngine();
-
-
-}catch(error){
-
-setValue(
-"engine",
-"DATA ERROR",
-"red"
-);
-
-setValue(
-"dataStatus",
-error.message,
-"red"
-);
-
-log(
-"ERROR\n"+
-error.message
-);
-
+    return Math.floor(d.getTime()/ms)*ms;
 }
 
+function aggregate(minutes){
+
+    const groups={};
+
+    candles.forEach(c=>{
+
+        const b=bucketTime(c.time,minutes);
+
+        if(!groups[b])
+            groups[b]=[];
+
+        groups[b].push(c);
+
+    });
+
+    return Object.keys(groups)
+        .sort((a,b)=>Number(a)-Number(b))
+        .map(k=>{
+
+            const arr=groups[k];
+
+            return {
+                time:new Date(Number(k)).toISOString(),
+                open:arr[0].open,
+                high:Math.max(...arr.map(x=>x.high)),
+                low:Math.min(...arr.map(x=>x.low)),
+                close:arr[arr.length-1].close
+            };
+
+        });
 }
 
+function getLiquidity(minutes){
 
-/* =====================================================
-   AGGREGATE TIMEFRAME
-===================================================== */
+    const cs=aggregate(minutes);
 
-function aggregate(
-minutes
-){
+    if(cs.length<2) return null;
 
-const groups={};
+    const previous=cs[cs.length-2];
 
-candles.forEach(
-function(c){
-
-const time=
-new Date(c.time).getTime();
-
-const bucket=
-Math.floor(
-time/
-(minutes*60000)
-)*
-(minutes*60000);
-
-if(!groups[bucket]){
-
-groups[bucket]={
-time:
-new Date(bucket).toISOString(),
-open:c.open,
-high:c.high,
-low:c.low,
-close:c.close
-};
-
-}else{
-
-groups[bucket].high=
-Math.max(
-groups[bucket].high,
-c.high
-);
-
-groups[bucket].low=
-Math.min(
-groups[bucket].low,
-c.low
-);
-
-groups[bucket].close=
-c.close;
-
+    return {
+        high:previous.high,
+        low:previous.low,
+        time:previous.time
+    };
 }
 
-}
-);
+function displayLiquidity(){
 
+    const map=[
+        [15,"liq15"],
+        [30,"liq30"],
+        [60,"liq60"],
+        [240,"liq240"],
+        [1440,"liq1440"]
+    ];
 
-return Object.values(groups)
-.sort(
-function(a,b){
+    map.forEach(([tf,id])=>{
 
-return(
-new Date(a.time)-
-new Date(b.time)
-);
+        const l=getLiquidity(tf);
 
-}
-);
+        if(!l){
+            $(id).textContent="WAITING";
+            return;
+        }
 
-}
+        $(id).innerHTML=
+            "H "+fmt(l.high)+" / L "+fmt(l.low);
 
-
-/* =====================================================
-   LIQUIDITY LEVEL
-===================================================== */
-
-function getLiquidity(
-minutes
-){
-
-const arr=
-aggregate(minutes);
-
-if(arr.length<2){
-
-return{
-high:null,
-low:null
-};
-
+        $(id).className="value blue";
+    });
 }
 
+function findLatestSweep(minutes){
 
-/*
-   Current unfinished HTF candle
-   liquidity calculation me use nahi.
-*/
+    const cs=aggregate(minutes);
 
-const previous=
-arr.slice(
-0,
-arr.length-1
-);
+    if(cs.length<4) return null;
 
+    let found=null;
 
-/*
-   Recent liquidity pool
-*/
+    for(let i=1;i<cs.length;i++){
 
-const lookback=
-previous.slice(
-Math.max(
-0,
-previous.length-20
-)
-);
+        const current=cs[i];
+        const previous=cs[i-1];
 
-let high=-Infinity;
-let low=Infinity;
+        if(
+            current.high>previous.high &&
+            current.close<previous.high
+        ){
+            found={
+                tf:minutes,
+                direction:"BEARISH",
+                level:previous.high,
+                candle:current,
+                index:i
+            };
+        }
 
-lookback.forEach(
-function(c){
+        if(
+            current.low<previous.low &&
+            current.close>previous.low
+        ){
+            found={
+                tf:minutes,
+                direction:"BULLISH",
+                level:previous.low,
+                candle:current,
+                index:i
+            };
+        }
+    }
 
-if(c.high>high)
-high=c.high;
-
-if(c.low<low)
-low=c.low;
-
-}
-);
-
-
-return{
-high:high,
-low:low
-};
-
+    return found;
 }
 
+function findBestSweep(){
 
-/* =====================================================
-   UPDATE LIQUIDITY
-===================================================== */
+    const tfs=[15,30,60,240,1440];
 
-function updateLiquidity(){
+    let latest=null;
 
-const m15=
-getLiquidity(15);
+    tfs.forEach(tf=>{
 
-const m30=
-getLiquidity(30);
+        const s=findLatestSweep(tf);
 
-const h1=
-getLiquidity(60);
+        if(!s) return;
 
-const h4=
-getLiquidity(240);
+        if(
+            !latest ||
+            new Date(s.candle.time)>
+            new Date(latest.candle.time)
+        ){
+            latest=s;
+        }
 
-const d1=
-getLiquidity(1440);
+    });
 
-
-setValue(
-"m15h",
-price(m15.high),
-"yellow"
-);
-
-setValue(
-"m15l",
-price(m15.low),
-"yellow"
-);
-
-setValue(
-"m30h",
-price(m30.high),
-"yellow"
-);
-
-setValue(
-"m30l",
-price(m30.low),
-"yellow"
-);
-
-setValue(
-"h1h",
-price(h1.high),
-"yellow"
-);
-
-setValue(
-"h1l",
-price(h1.low),
-"yellow"
-);
-
-setValue(
-"h4h",
-price(h4.high),
-"yellow"
-);
-
-setValue(
-"h4l",
-price(h4.low),
-"yellow"
-);
-
-setValue(
-"d1h",
-price(d1.high),
-"yellow"
-);
-
-setValue(
-"d1l",
-price(d1.low),
-"yellow"
-);
-
+    return latest;
 }
 
+function findMSS(sweep){
 
-/* =====================================================
-   FIND LIQUIDITY SWEEP
-===================================================== */
+    if(!sweep) return null;
 
-function findSweep(
-arr,
-startIndex
-){
+    const cs=aggregate(sweep.tf);
 
-if(
-!arr ||
-arr.length<10
-){
+    const idx=sweep.index;
 
-return null;
+    if(idx<0 || idx>=cs.length-1)
+        return null;
 
+    for(
+        let i=idx+1;
+        i<cs.length;
+        i++
+    ){
+
+        const current=cs[i];
+
+        const start=Math.max(0,i-3);
+
+        const previous=cs.slice(start,i);
+
+        if(previous.length<2)
+            continue;
+
+        const structureHigh=
+            Math.max(...previous.map(x=>x.high));
+
+        const structureLow=
+            Math.min(...previous.map(x=>x.low));
+
+        if(
+            sweep.direction==="BULLISH" &&
+            current.close>structureHigh
+        ){
+            return {
+                direction:"BULLISH",
+                candle:current,
+                index:i
+            };
+        }
+
+        if(
+            sweep.direction==="BEARISH" &&
+            current.close<structureLow
+        ){
+            return {
+                direction:"BEARISH",
+                candle:current,
+                index:i
+            };
+        }
+    }
+
+    return null;
 }
 
+function displacement(candlesArray,mss){
 
-const lastIndex=
-arr.length-1;
+    if(!mss) return false;
 
+    const i=mss.index;
 
-/*
-   Latest closed candle
-*/
+    if(i<5) return false;
 
-const current=
-arr[lastIndex];
+    const current=candlesArray[i];
 
+    const body=
+        Math.abs(current.close-current.open);
 
-/*
-   Liquidity is taken from
-   candles BEFORE current candle.
-*/
+    const previous=
+        candlesArray.slice(i-5,i);
 
-const previous=
-arr.slice(
-Math.max(
-0,
-lastIndex-20
-),
-lastIndex
-);
+    const avg=
+        previous.reduce(
+            (sum,c)=>
+            sum+Math.abs(c.close-c.open),0
+        )/previous.length;
 
-if(previous.length<5){
+    if(avg<=0) return false;
 
-return null;
+    const strong=body>=avg*1.25;
 
+    const bullish=
+        current.close>current.open;
+
+    const bearish=
+        current.close<current.open;
+
+    if(
+        mss.direction==="BULLISH" &&
+        strong &&
+        bullish
+    ) return true;
+
+    if(
+        mss.direction==="BEARISH" &&
+        strong &&
+        bearish
+    ) return true;
+
+    return false;
 }
 
+function createTrade(sweep,mss){
 
-let liquidityHigh=-Infinity;
-let liquidityLow=Infinity;
+    if(!sweep || !mss)
+        return null;
 
-previous.forEach(
-function(c){
+    const entry=mss.candle.close;
 
-liquidityHigh=
-Math.max(
-liquidityHigh,
-c.high
-);
+    let sl;
+    let tp;
 
-liquidityLow=
-Math.min(
-liquidityLow,
-c.low
-);
+    if(sweep.direction==="BULLISH"){
 
-}
-);
+        sl=sweep.candle.low;
 
+        const risk=entry-sl;
 
-/*
-   BEARISH SWEEP
+        if(risk<=0) return null;
 
-   High taken
-   Close back below liquidity
-*/
+        tp=entry+risk*2;
 
-if(
-current.high>liquidityHigh &&
-current.close<liquidityHigh
-){
+    }else{
 
-return{
+        sl=sweep.candle.high;
 
-direction:"BEARISH",
+        const risk=sl-entry;
 
-level:liquidityHigh,
+        if(risk<=0) return null;
 
-index:lastIndex,
+        tp=entry-risk*2;
+    }
 
-candle:current
-
-};
-
+    return {
+        direction:sweep.direction,
+        entry,
+        sl,
+        tp
+    };
 }
 
+function updateSweep(sweep){
 
-/*
-   BULLISH SWEEP
+    if(!sweep){
 
-   Low taken
-   Close back above liquidity
-*/
+        $("sweepTF").textContent="WAITING";
+        $("sweepDirection").textContent="WAITING";
+        $("sweepLevel").textContent="WAITING";
+        $("sweepTime").textContent="WAITING";
+        return;
+    }
 
-if(
-current.low<liquidityLow &&
-current.close>liquidityLow
-){
+    $("sweepTF").textContent=
+        sweep.tf===1440?"1D":
+        sweep.tf===240?"4H":
+        sweep.tf===60?"1H":
+        sweep.tf===30?"30M":"15M";
 
-return{
+    $("sweepDirection").textContent=
+        sweep.direction;
 
-direction:"BULLISH",
+    $("sweepDirection").className=
+        "value "+
+        (sweep.direction==="BULLISH"?"green":"red");
 
-level:liquidityLow,
+    $("sweepLevel").textContent=
+        fmt(sweep.level);
 
-index:lastIndex,
-
-candle:current
-
-};
-
+    $("sweepTime").textContent=
+        new Date(sweep.candle.time)
+        .toLocaleString();
 }
 
+function updateMSS(mss){
 
-return null;
+    if(!mss){
 
+        $("mss").textContent="WAITING";
+        $("mssDirection").textContent="WAITING";
+        $("displacement").textContent="WAITING";
+        return;
+    }
+
+    $("mss").textContent="CONFIRMED";
+    $("mss").className="value green";
+
+    $("mssDirection").textContent=
+        mss.direction;
+
+    $("mssDirection").className=
+        "value "+
+        (mss.direction==="BULLISH"?"green":"red");
 }
 
+function updateTrade(trade){
 
-/* =====================================================
-   FIND LATEST SWEEP IN HISTORY
-===================================================== */
+    if(!trade){
 
-function findLatestHistoricalSweep(
-arr
-){
+        $("signal").textContent="NO ACTIVE SIGNAL";
+        $("entry").textContent="WAITING";
+        $("sl").textContent="WAITING";
+        $("tp").textContent="WAITING";
+        return;
+    }
 
-if(
-arr.length<10
-)return null;
+    $("signal").textContent=
+        trade.direction==="BULLISH"
+        ?"BUY SETUP"
+        :"SELL SETUP";
 
+    $("signal").className=
+        "value "+
+        (trade.direction==="BULLISH"?"green":"red");
 
-const start=
-Math.max(
-1,
-arr.length-20
-);
-
-let latest=null;
-
-
-for(
-let i=start;
-i<arr.length;
-i++
-){
-
-const current=
-arr[i];
-
-const previous=
-arr.slice(
-Math.max(0,i-20),
-i
-);
-
-if(previous.length<5)
-continue;
-
-
-let high=-Infinity;
-let low=Infinity;
-
-previous.forEach(
-function(c){
-
-high=
-Math.max(high,c.high);
-
-low=
-Math.min(low,c.low);
-
+    $("entry").textContent=fmt(trade.entry);
+    $("sl").textContent=fmt(trade.sl);
+    $("tp").textContent=fmt(trade.tp);
 }
-);
-
-
-if(
-current.high>high &&
-current.close<high
-){
-
-latest={
-direction:"BEARISH",
-level:high,
-index:i,
-candle:current
-};
-
-}
-
-
-if(
-current.low<low &&
-current.close>low
-){
-
-latest={
-direction:"BULLISH",
-level:low,
-index:i,
-candle:current
-};
-
-}
-
-}
-
-
-return latest;
-
-}
-
-
-/* =====================================================
-   MSS AFTER SWEEP
-===================================================== */
-
-function findMSS(
-arr,
-sweep
-){
-
-if(
-!sweep
-)return null;
-
-
-const start=
-sweep.index+1;
-
-if(
-start>=arr.length
-)return null;
-
-
-for(
-let i=start;
-i<arr.length;
-i++
-){
-
-const current=
-arr[i];
-
-
-/*
-   Need at least 3 candles
-   after sweep for structure.
-*/
-
-const structureStart=
-Math.max(
-start,
-i-4
-);
-
-const structure=
-arr.slice(
-structureStart,
-i
-);
-
-if(structure.length<2)
-continue;
-
-
-let high=-Infinity;
-let low=Infinity;
-
-structure.forEach(
-function(c){
-
-high=
-Math.max(high,c.high);
-
-low=
-Math.min(low,c.low);
-
-}
-);
-
-
-/*
-   Bullish MSS
-*/
-
-if(
-sweep.direction==="BULLISH" &&
-current.close>high
-){
-
-return{
-
-direction:"BULLISH",
-
-index:i,
-
-candle:current,
-
-structureLevel:high
-
-};
-
-}
-
-
-/*
-   Bearish MSS
-*/
-
-if(
-sweep.direction==="BEARISH" &&
-current.close<low
-){
-
-return{
-
-direction:"BEARISH",
-
-index:i,
-
-candle:current,
-
-structureLevel:low
-
-};
-
-}
-
-}
-
-
-return null;
-
-}
-
-
-/* =====================================================
-   DISPLACEMENT
-===================================================== */
-
-function isDisplacement(
-arr,
-mss
-){
-
-if(
-!mss
-)return false;
-
-
-const i=
-mss.index;
-
-if(i<5)
-return false;
-
-
-const current=
-arr[i];
-
-let totalRange=0;
-
-for(
-let x=i-5;
-x<i;
-x++
-){
-
-totalRange+=
-Math.abs(
-arr[x].close-
-arr[x].open
-);
-
-}
-
-const average=
-totalRange/5;
-
-const body=
-Math.abs(
-current.close-
-current.open
-);
-
-
-if(
-body<
-average*1.25
-){
-
-return false;
-
-}
-
-
-if(
-mss.direction==="BULLISH" &&
-current.close>current.open
-){
-
-return true;
-
-}
-
-
-if(
-mss.direction==="BEARISH" &&
-current.close<current.open
-){
-
-return true;
-
-}
-
-
-return false;
-
-}
-
-
-/* =====================================================
-   CREATE TRADE
-===================================================== */
-
-function createTrade(
-sweep,
-mss
-){
-
-if(
-!sweep||
-!mss
-)
-return null;
-
-
-const entry=
-mss.candle.close;
-
-let sl;
-
-
-if(
-sweep.direction==="BULLISH"
-){
-
-sl=sweep.candle.low;
-
-}else{
-
-sl=sweep.candle.high;
-
-}
-
-
-const risk=
-Math.abs(
-entry-sl
-);
-
-if(
-risk<=0
-)
-return null;
-
-
-let tp;
-
-
-if(
-sweep.direction==="BULLISH"
-){
-
-tp=
-entry+
-risk*2;
-
-}else{
-
-tp=
-entry-
-risk*2;
-
-}
-
-
-return{
-
-direction:
-sweep.direction,
-
-entry:entry,
-
-sl:sl,
-
-tp:tp,
-
-risk:risk
-
-};
-
-}
-
-
-/* =====================================================
-   SHOW WAITING STATE
-===================================================== */
-
-function resetSetupUI(){
-
-setValue(
-"stepLiquidity",
-"READY",
-"green"
-);
-
-setValue(
-"stepSweep",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"stepMss",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"stepDisp",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"stepBig",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"sweepDirection",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"sweepLevel",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"sweepCandle",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"mss",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"mssCandle",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"displacement",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"bigPlayer",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"bigDirection",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"bigCandle",
-"WAITING",
-"yellow"
-);
-
-setValue(
-"bigTime",
-"WAITING",
-"yellow"
-);
-
-}
-
-
-/* =====================================================
-   MAIN ENGINE
-===================================================== */
 
 function runEngine(){
 
-if(
-candles.length<10
-)
-return;
+    if(!candles.length) return;
 
+    displayLiquidity();
 
-updateLiquidity();
+    $("step1").textContent="READY";
+    $("step1").className="green";
 
+    const sweep=findBestSweep();
 
-/*
-   STEP 1
-   Liquidity
-*/
+    updateSweep(sweep);
 
-setValue(
-"stepLiquidity",
-"READY",
-"green"
-);
+    if(!sweep){
 
+        $("step2").textContent="WAITING";
+        $("step2").className="yellow";
 
-/*
-   Find latest sweep
-*/
+        $("step3").textContent="WAITING";
+        $("step3").className="yellow";
 
-const sweep=
-findLatestHistoricalSweep(
-candles
-);
+        $("step4").textContent="WAITING";
+        $("step4").className="yellow";
 
+        $("step5").textContent="WAITING";
+        $("step5").className="yellow";
 
-if(!sweep){
+        updateMSS(null);
+        updateTrade(null);
 
-setValue(
-"stepSweep",
-"WAITING",
-"yellow"
-);
+        return;
+    }
 
-setValue(
-"sweepSignal",
-"NO ACTIVE SWEEP",
-"yellow"
-);
+    $("step2").textContent="CONFIRMED";
+    $("step2").className="green";
 
-setValue(
-"stepMss",
-"WAITING",
-"yellow"
-);
+    const sweepKey=
+        sweep.tf+"_"+sweep.direction+"_"+sweep.candle.time;
 
-setValue(
-"stepDisp",
-"WAITING",
-"yellow"
-);
+    if(
+        sweepKey!==lastSweepKey &&
+        $("sweepNotify").checked
+    ){
 
-setValue(
-"stepBig",
-"WAITING",
-"yellow"
-);
+        notify(
+            "Liquidity Sweep: "+
+            sweep.direction+
+            " • "+
+            (sweep.tf===1440?"1D":
+             sweep.tf===240?"4H":
+             sweep.tf===60?"1H":
+             sweep.tf===30?"30M":"15M")
+        );
 
-return;
+        lastSweepKey=sweepKey;
+    }
 
+    const mss=findMSS(sweep);
+
+    updateMSS(mss);
+
+    if(!mss){
+
+        $("step3").textContent="WAITING";
+        $("step3").className="yellow";
+        $("step4").textContent="WAITING";
+        $("step4").className="yellow";
+        $("step5").textContent="WAITING";
+        $("step5").className="yellow";
+
+        updateTrade(null);
+        return;
+    }
+
+    $("step3").textContent="CONFIRMED";
+    $("step3").className="green";
+
+    const cs=aggregate(sweep.tf);
+
+    const disp=displacement(cs,mss);
+
+    $("displacement").textContent=
+        disp?"CONFIRMED":"WAITING";
+
+    $("displacement").className=
+        "value "+(disp?"green":"yellow");
+
+    if(!disp){
+
+        $("step4").textContent="WAITING";
+        $("step4").className="yellow";
+        $("step5").textContent="WAITING";
+        $("step5").className="yellow";
+
+        updateTrade(null);
+        return;
+    }
+
+    $("step4").textContent="CONFIRMED";
+    $("step4").className="green";
+
+    $("bigPlayer").textContent="CONFIRMED";
+    $("bigPlayer").className="value green";
+
+    $("bigPlayerTF").textContent=
+        sweep.tf===1440?"1D":
+        sweep.tf===240?"4H":
+        sweep.tf===60?"1H":
+        sweep.tf===30?"30M":"15M";
+
+    $("bigPlayerDirection").textContent=
+        sweep.direction;
+
+    $("bigPlayerDirection").className=
+        "value "+
+        (sweep.direction==="BULLISH"?"green":"red");
+
+    $("step5").textContent="CONFIRMED";
+    $("step5").className="green";
+
+    const trade=createTrade(sweep,mss);
+
+    updateTrade(trade);
+
+    if(!trade){
+
+        $("step6").textContent="WAITING";
+        $("step6").className="yellow";
+        return;
+    }
+
+    $("step6").textContent="READY";
+    $("step6").className="green";
+
+    const entryKey=
+        sweepKey+"_"+mss.candle.time;
+
+    if(
+        entryKey!==lastEntryKey &&
+        $("entryNotify").checked
+    ){
+
+        notify(
+            "🐋 BIG PLAYER PROXY ENTRY\n"+
+            trade.direction+
+            " | Entry "+fmt(trade.entry)+
+            " | SL "+fmt(trade.sl)+
+            " | TP "+fmt(trade.tp)
+        );
+
+        lastEntryKey=entryKey;
+    }
+
+    log(
+        "SETUP READY • "+
+        trade.direction+
+        " • Entry "+fmt(trade.entry)
+    );
 }
-
-
-/*
-   STEP 2
-   Sweep
-*/
-
-setValue(
-"stepSweep",
-sweep.direction+
-" SWEEP",
-sweep.direction==="BULLISH"
-?"green"
-:"red"
-);
-
-setValue(
-"sweepDirection",
-sweep.direction,
-sweep.direction==="BULLISH"
-?"green"
-:"red"
-);
-
-setValue(
-"sweepLevel",
-price(sweep.level),
-"yellow"
-);
-
-setValue(
-"sweepCandle",
-candleTime(
-sweep.candle.time
-),
-"white"
-);
-
-document.getElementById(
-"sweepSignal"
-).innerText=
-"💧 "+
-sweep.direction+
-" LIQUIDITY SWEEP";
-
-document.getElementById(
-"sweepSignal"
-).className=
-"signal "+
-(
-sweep.direction==="BULLISH"
-?"green"
-:"red"
-);
-
-
-/*
-   Sweep notification
-*/
-
-const sweepKey=
-"SWEEP_"+
-sweep.direction+
-"_"+
-sweep.candle.time;
-
-
-if(
-!notifiedSweepKeys[sweepKey]
-){
-
-notifiedSweepK
+   
