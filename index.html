@@ -1,80 +1,561 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OP ROYAL DATA TEST</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OP ROYAL TRADE</title>
+
 <style>
-body{background:#071018;color:white;font-family:Arial;padding:20px}
-h2{color:#f5c542}
-#status{font-size:22px;margin:20px 0}
-#price{font-size:32px;color:#55e0a3}
-#log{font-size:13px;color:#aaa;line-height:1.6}
+*{box-sizing:border-box}
+
+body{
+margin:0;
+padding:12px;
+background:#071018;
+color:#fff;
+font-family:Arial,sans-serif;
+}
+
+h1{
+text-align:center;
+font-size:23px;
+margin:5px 0;
+color:#f5c542;
+}
+
+.sub{
+text-align:center;
+font-size:12px;
+color:#9aa7b2;
+margin-bottom:14px;
+}
+
+.card{
+background:#0d1822;
+border:1px solid #263746;
+border-radius:12px;
+padding:13px;
+margin-bottom:11px;
+}
+
+.title{
+font-size:15px;
+font-weight:bold;
+color:#f5c542;
+margin-bottom:9px;
+}
+
+.price{
+text-align:center;
+font-size:31px;
+font-weight:bold;
+margin:8px 0 12px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:8px 0;
+border-bottom:1px solid #1d2b36;
+font-size:13px;
+}
+
+.row:last-child{
+border-bottom:0;
+}
+
+.value{
+font-weight:bold;
+text-align:right;
+}
+
+.green{color:#36d98b}
+.red{color:#ff5b5b}
+.yellow{color:#f5c542}
+.blue{color:#55b7ff}
+.gray{color:#9aa7b2}
+
+.tf{
+font-size:10px;
+background:#162633;
+padding:3px 6px;
+border-radius:5px;
+color:#55b7ff;
+}
+
+.setup{
+background:#101e29;
+padding:9px;
+margin:5px 0;
+border-radius:8px;
+font-size:13px;
+}
+
+button{
+width:100%;
+border:0;
+border-radius:9px;
+padding:12px;
+background:#f5c542;
+color:#071018;
+font-weight:bold;
+font-size:14px;
+}
+
+.small{
+font-size:11px;
+line-height:1.5;
+color:#8d9aa5;
+}
+
+.statusDot{
+display:inline-block;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#f5c542;
+margin-right:5px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>OP ROYAL TRADE — DATA TEST</h2>
+<h1>⚡ OP ROYAL TRADE</h1>
+<div class="sub">XAU/USD • Liquidity Sweep Trading Engine</div>
 
-<div id="status">STARTING...</div>
-<div id="price">WAITING</div>
-<div id="log">Connecting...</div>
+<!-- LIVE MARKET -->
+
+<div class="card">
+
+<div class="price" id="price">WAITING</div>
+
+<div class="row">
+<span>Market</span>
+<span class="value blue">XAU/USD</span>
+</div>
+
+<div class="row">
+<span>Timeframe</span>
+<span class="value blue">15 MIN</span>
+</div>
+
+<div class="row">
+<span>Data</span>
+<span id="dataStatus" class="value yellow">
+<span class="statusDot"></span>WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Engine</span>
+<span id="engineStatus" class="value yellow">STARTING</span>
+</div>
+
+<div class="row">
+<span>Last Update</span>
+<span id="lastUpdate" class="value gray">--</span>
+</div>
+
+</div>
+
+<!-- SETUP -->
+
+<div class="card">
+
+<div class="title">🎯 OP ROYAL Setup</div>
+
+<div class="setup">
+1️⃣ Liquidity Levels →
+<span id="s1" class="yellow">WAITING</span>
+</div>
+
+<div class="setup">
+2️⃣ Liquidity Sweep →
+<span id="s2" class="yellow">WAITING</span>
+</div>
+
+<div class="setup">
+3️⃣ MSS →
+<span id="s3" class="yellow">WAITING</span>
+</div>
+
+<div class="setup">
+4️⃣ Displacement →
+<span id="s4" class="yellow">WAITING</span>
+</div>
+
+<div class="setup">
+5️⃣ Big Player Proxy →
+<span id="s5" class="yellow">WAITING</span>
+</div>
+
+<div class="setup">
+6️⃣ Trade Setup →
+<span id="s6" class="yellow">WAITING</span>
+</div>
+
+</div>
+
+<!-- LIQUIDITY -->
+
+<div class="card">
+
+<div class="title">💧 Liquidity Levels</div>
+
+<div class="row">
+<span>15M <span class="tf">Liquidity</span></span>
+<span id="l15" class="value gray">WAITING</span>
+</div>
+
+<div class="row">
+<span>30M <span class="tf">Liquidity</span></span>
+<span id="l30" class="value gray">WAITING</span>
+</div>
+
+<div class="row">
+<span>1H <span class="tf">Liquidity</span></span>
+<span id="l60" class="value gray">WAITING</span>
+</div>
+
+<div class="row">
+<span>4H <span class="tf">Liquidity</span></span>
+<span id="l240" class="value gray">WAITING</span>
+</div>
+
+<div class="row">
+<span>1D <span class="tf">Liquidity</span></span>
+<span id="l1440" class="value gray">WAITING</span>
+</div>
+
+</div>
+
+<!-- SWEEP -->
+
+<div class="card">
+
+<div class="title">💧 Liquidity Sweep</div>
+
+<div class="row">
+<span>Timeframe</span>
+<span id="sweepTF" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="sweepDir" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Level</span>
+<span id="sweepLevel" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+<!-- MSS -->
+
+<div class="card">
+
+<div class="title">📈 MSS + Displacement</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="mss" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="mssDir" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Displacement</span>
+<span id="disp" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+<!-- BIG PLAYER -->
+
+<div class="card">
+
+<div class="title">🐋 Big Player Proxy</div>
+
+<div class="row">
+<span>Confirmation</span>
+<span id="big" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="bigDir" class="value yellow">WAITING</span>
+</div>
+
+<div class="small">
+Proxy confirmation = Liquidity Sweep + MSS + Displacement.
+Actual institutional orders cannot be directly identified from this data.
+</div>
+
+</div>
+
+<!-- TRADE -->
+
+<div class="card">
+
+<div class="title">💰 Trade Setup</div>
+
+<div class="row">
+<span>Signal</span>
+<span id="signal" class="value yellow">NO ACTIVE SIGNAL</span>
+</div>
+
+<div class="row">
+<span>Entry</span>
+<span id="entry" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Stop Loss</span>
+<span id="sl" class="value red">WAITING</span>
+</div>
+
+<div class="row">
+<span>Take Profit</span>
+<span id="tp" class="value green">WAITING</span>
+</div>
+
+<div class="row">
+<span>Risk : Reward</span>
+<span class="value blue">1 : 2</span>
+</div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="card">
+
+<div class="title">🔔 Trade Notifications</div>
+
+<div class="row">
+<span>Liquidity Sweep</span>
+<label>
+<input type="checkbox" id="sweepAlert">
+ON
+</label>
+</div>
+
+<div class="row">
+<span>Big Player Entry</span>
+<label>
+<input type="checkbox" id="entryAlert">
+ON
+</label>
+</div>
+
+<button onclick="enableNotifications()">
+ENABLE NOTIFICATIONS
+</button>
+
+<div id="notificationStatus" class="small">
+Notification permission not requested.
+</div>
+
+</div>
+
+<!-- LOG -->
+
+<div class="card">
+
+<div class="title">📝 System Log</div>
+
+<div id="log" class="small">
+Starting engine...
+</div>
+
+</div>
 
 <script>
 
-const url =
-"https://icy-snow-263a.optrader06.workers.dev/api.twelvedata.com/time_series?symbol=XAU/USD&interval=15min&outputsize=5";
+const WORKER_URL=
+"https://icy-snow-263a.optrader06.workers.dev";
 
-async function test(){
+const ENDPOINT=
+WORKER_URL+
+"/api.twelvedata.com/time_series";
 
-document.getElementById("status").innerText="FETCHING...";
+let marketData=[];
+let firstLoad=true;
+
+function $(id){
+return document.getElementById(id);
+}
+
+function log(text){
+$("log").innerHTML=
+new Date().toLocaleTimeString()+
+" — "+text;
+}
+
+function setEngine(text,color){
+$("engineStatus").textContent=text;
+$("engineStatus").className=
+"value "+color;
+}
+
+function setData(text,color){
+$("dataStatus").innerHTML=
+'<span class="statusDot"></span>'+text;
+
+$("dataStatus").className=
+"value "+color;
+}
+
+function formatPrice(value){
+
+if(value===undefined ||
+value===null ||
+isNaN(value))
+return "WAITING";
+
+return Number(value).toFixed(2);
+}
+
+async function loadData(){
+
+setEngine("FETCHING...","yellow");
 
 try{
 
-const response=await fetch(url,{cache:"no-store"});
+const response=await fetch(
+ENDPOINT+
+"?symbol=XAU/USD&interval=15min&outputsize=5",
+{
+cache:"no-store"
+}
+);
 
-document.getElementById("log").innerText=
-"HTTP STATUS: "+response.status;
+if(!response.ok){
+
+throw new Error(
+"HTTP "+response.status
+);
+
+}
 
 const data=await response.json();
 
-console.log(data);
+console.log("OP ROYAL DATA:",data);
 
-if(data.values && data.values.length){
+if(!data.values ||
+!Array.isArray(data.values) ||
+data.values.length===0){
+
+throw new Error(
+"No values received"
+);
+
+}
+
+marketData=data.values;
 
 const latest=data.values[0];
 
-document.getElementById("status").innerText="DATA LIVE";
-document.getElementById("status").style.color="#55e0a3";
+$("price").textContent=
+formatPrice(latest.close);
 
-document.getElementById("price").innerText=
-"XAU/USD  "+latest.close;
+$("lastUpdate").textContent=
+new Date().toLocaleTimeString();
 
-document.getElementById("log").innerText=
-"SUCCESS • Candles: "+data.values.length+
-" • Time: "+latest.datetime;
+setData("LIVE","green");
 
-}else{
+setEngine("DATA LIVE","green");
 
-document.getElementById("status").innerText="DATA ERROR";
+$("s1").textContent="READY";
+$("s1").className="green";
 
-document.getElementById("log").innerText=
-JSON.stringify(data);
+log(
+"LIVE • XAU/USD • "+
+data.values.length+
+" candles received"
+);
+
+if(firstLoad){
+
+firstLoad=false;
+
+setTimeout(
+runBasicEngine,
+500
+);
 
 }
 
 }catch(error){
 
-document.getElementById("status").innerText="FETCH ERROR";
+setData("ERROR","red");
 
-document.getElementById("log").innerText=
-error.name+" : "+error.message;
+setEngine("DATA ERROR","red");
+
+log(
+"Connection error: "+
+error.message
+);
 
 }
 
 }
 
-test();
+function runBasicEngine(){
+
+if(!marketData.length)
+return;
+
+$("s1").textContent="READY";
+$("s1").className="green";
+
+log(
+"Engine LIVE • Waiting for liquidity sweep confirmation."
+);
+
+}
+
+async function enableNotifications(){
+
+if(!("Notification" in window)){
+
+$("notificationStatus").textContent=
+"Browser notifications are not supported.";
+
+return;
+
+}
+
+try{
+
+const permission=
+await Notification.requestPermission();
+
+$("notificationStatus").textContent=
+"Permission: "+permission;
+
+}catch(error){
+
+$("notificationStatus").textContent=
+"Notification error.";
+
+}
+
+}
+
+loadData();
+
+setInterval(
+loadData,
+30000
+);
 
 </script>
 
