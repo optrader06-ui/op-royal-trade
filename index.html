@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 padding:12px;
@@ -14,18 +15,21 @@ background:#071018;
 color:#fff;
 font-family:Arial,sans-serif
 }
+
 h1{
 text-align:center;
 font-size:23px;
 margin:5px 0;
 color:#f5c542
 }
+
 .sub{
 text-align:center;
 font-size:12px;
 color:#9aa7b2;
 margin-bottom:14px
 }
+
 .card{
 background:#0d1822;
 border:1px solid #263746;
@@ -33,18 +37,21 @@ border-radius:12px;
 padding:13px;
 margin-bottom:11px
 }
+
 .title{
 font-size:15px;
 font-weight:bold;
 color:#f5c542;
 margin-bottom:9px
 }
+
 .price{
 text-align:center;
 font-size:31px;
 font-weight:bold;
 margin:8px 0 12px
 }
+
 .row{
 display:flex;
 justify-content:space-between;
@@ -53,16 +60,22 @@ padding:8px 0;
 border-bottom:1px solid #1d2b36;
 font-size:13px
 }
-.row:last-child{border-bottom:0}
+
+.row:last-child{
+border-bottom:0
+}
+
 .value{
 font-weight:bold;
 text-align:right
 }
+
 .green{color:#36d98b}
 .red{color:#ff5b5b}
 .yellow{color:#f5c542}
 .blue{color:#55b7ff}
 .gray{color:#9aa7b2}
+
 .tf{
 font-size:10px;
 background:#162633;
@@ -70,6 +83,7 @@ padding:3px 6px;
 border-radius:5px;
 color:#55b7ff
 }
+
 .setup{
 background:#101e29;
 padding:9px;
@@ -77,6 +91,7 @@ margin:5px 0;
 border-radius:8px;
 font-size:13px
 }
+
 button{
 width:100%;
 border:0;
@@ -87,11 +102,13 @@ color:#071018;
 font-weight:bold;
 font-size:14px
 }
+
 .small{
 font-size:11px;
 line-height:1.5;
 color:#8d9aa5
 }
+
 .statusDot{
 display:inline-block;
 width:8px;
@@ -106,8 +123,9 @@ margin-right:5px
 <body>
 
 <h1>⚡ OP ROYAL TRADE</h1>
+
 <div class="sub">
-XAU/USD • Liquidity Sweep Trading Engine
+XAU/USD • Liquidity → Sweep → MSS Engine
 </div>
 
 <!-- LIVE MARKET -->
@@ -147,7 +165,7 @@ STARTING
 
 </div>
 
-<!-- SETUP -->
+<!-- SEQUENCE -->
 
 <div class="card">
 
@@ -218,7 +236,7 @@ STARTING
 
 </div>
 
-<!-- PDH PDL -->
+<!-- KEY LEVELS -->
 
 <div class="card">
 
@@ -236,9 +254,7 @@ STARTING
 
 <div class="row">
 <span>Current Price</span>
-<span id="currentPrice" class="value green">
-WAITING
-</span>
+<span id="currentPrice" class="value green">WAITING</span>
 </div>
 
 </div>
@@ -290,7 +306,7 @@ WAITING
 
 <div class="card">
 
-<div class="title">📈 MSS + Displacement</div>
+<div class="title">📈 Market Structure Shift</div>
 
 <div class="row">
 <span>MSS</span>
@@ -307,7 +323,29 @@ WAITING
 </div>
 
 <div class="row">
-<span>Displacement</span>
+<span>MSS Candle</span>
+<span id="mssTime" class="value gray">
+WAITING
+</span>
+</div>
+
+<div class="row">
+<span>Broken Structure</span>
+<span id="mssLevel" class="value blue">
+WAITING
+</span>
+</div>
+
+</div>
+
+<!-- DISPLACEMENT -->
+
+<div class="card">
+
+<div class="title">⚡ Displacement</div>
+
+<div class="row">
+<span>Status</span>
 <span id="disp" class="value yellow">
 WAITING
 </span>
@@ -336,9 +374,8 @@ WAITING
 </div>
 
 <div class="small">
-Proxy confirmation = Liquidity Sweep + MSS +
-Displacement. It does not identify actual
-institutional orders.
+Proxy = Liquidity Sweep + MSS + Displacement.
+It does not identify actual institutional orders.
 </div>
 
 </div>
@@ -441,9 +478,10 @@ WORKER_URL+
 
 let marketData=[];
 let lastSweepKey="";
+let lastMSSKey="";
 
 /* =========================
-   HELPERS
+HELPERS
 ========================= */
 
 function $(id){
@@ -480,8 +518,18 @@ isNaN(value)
 return Number(value).toFixed(2);
 }
 
+function tfText(tf){
+
+if(tf===1440)return "1D";
+if(tf===240)return "4H";
+if(tf===60)return "1H";
+if(tf===30)return "30M";
+return "15M";
+
+}
+
 /* =========================
-   LIVE DATA
+LIVE DATA
 ========================= */
 
 async function loadData(){
@@ -510,9 +558,11 @@ if(
 !Array.isArray(data.values)||
 !data.values.length
 ){
+
 throw new Error(
 "No values received"
 );
+
 }
 
 marketData=data.values
@@ -523,7 +573,8 @@ open:Number(c.open),
 high:Number(c.high),
 low:Number(c.low),
 close:Number(c.close),
-volume:c.volume?
+volume:
+c.volume?
 Number(c.volume):null
 
 }))
@@ -574,7 +625,7 @@ log(
 }
 
 /* =========================
-   TIME BUCKET
+BUCKET
 ========================= */
 
 function bucket(time,minutes){
@@ -590,7 +641,7 @@ d.getTime()/
 }
 
 /* =========================
-   AGGREGATION
+AGGREGATE
 ========================= */
 
 function aggregate(minutes){
@@ -641,7 +692,7 @@ arr[arr.length-1].close
 }
 
 /* =========================
-   PREVIOUS LIQUIDITY
+PREVIOUS LIQUIDITY
 ========================= */
 
 function getPreviousLiquidity(minutes){
@@ -657,7 +708,7 @@ return cs[cs.length-2];
 }
 
 /* =========================
-   SHOW LIQUIDITY
+DISPLAY LIQUIDITY
 ========================= */
 
 function showLiquidity(){
@@ -715,7 +766,7 @@ $("s1").className=
 }
 
 /* =========================
-   SWEEP DETECTION
+SWEEP DETECTION
 ========================= */
 
 function detectSweep(){
@@ -723,11 +774,7 @@ function detectSweep(){
 let best=null;
 
 const timeframes=[
-15,
-30,
-60,
-240,
-1440
+15,30,60,240,1440
 ];
 
 timeframes.forEach(tf=>{
@@ -738,26 +785,22 @@ aggregate(tf);
 if(cs.length<3)
 return;
 
-/*
-Current completed candle
-is compared with previous
-liquidity candle.
-*/
-
 for(
 let i=1;
 i<cs.length;
 i++
 ){
 
-const previous=cs[i-1];
-const current=cs[i];
+const previous=
+cs[i-1];
+
+const current=
+cs[i];
 
 /*
-BEARISH SWEEP
-
-Price takes previous HIGH
-but closes back below it.
+BEARISH SWEEP:
+High takes previous high,
+then close returns below.
 */
 
 if(
@@ -769,7 +812,8 @@ const sweep={
 tf:tf,
 direction:"BEARISH",
 level:previous.high,
-candle:current
+candle:current,
+index:i
 };
 
 if(
@@ -785,10 +829,9 @@ best=sweep;
 }
 
 /*
-BULLISH SWEEP
-
-Price takes previous LOW
-but closes back above it.
+BULLISH SWEEP:
+Low takes previous low,
+then close returns above.
 */
 
 if(
@@ -800,7 +843,8 @@ const sweep={
 tf:tf,
 direction:"BULLISH",
 level:previous.low,
-candle:current
+candle:current,
+index:i
 };
 
 if(
@@ -824,7 +868,7 @@ return best;
 }
 
 /* =========================
-   DISPLAY SWEEP
+SHOW SWEEP
 ========================= */
 
 function showSweep(sweep){
@@ -859,17 +903,6 @@ return;
 
 }
 
-const tfText=
-sweep.tf===1440?
-"1D":
-sweep.tf===240?
-"4H":
-sweep.tf===60?
-"1H":
-sweep.tf===30?
-"30M":
-"15M";
-
 $("sweepStatus").textContent=
 "CONFIRMED";
 
@@ -877,7 +910,7 @@ $("sweepStatus").className=
 "value green";
 
 $("sweepTF").textContent=
-tfText;
+tfText(sweep.tf);
 
 $("sweepDir").textContent=
 sweep.direction;
@@ -904,9 +937,7 @@ $("s2").textContent=
 $("s2").className=
 "green";
 
-/* =========================
-   NOTIFICATION
-========================= */
+/* Sweep notification */
 
 const key=
 sweep.tf+
@@ -927,23 +958,209 @@ new Notification(
 {
 body:
 sweep.direction+
-" sweep detected on "+
-tfText+
-" @ "+
+" • "+tfText(sweep.tf)+
+" • Level "+
 fmt(sweep.level)
 }
 );
 
 }catch(e){}
 
+}
+
 lastSweepKey=key;
 
 }
 
+/* =========================
+MSS DETECTION
+========================= */
+
+function detectMSS(sweep){
+
+if(!sweep)
+return null;
+
+const cs=
+aggregate(sweep.tf);
+
+if(
+sweep.index===undefined||
+sweep.index>=cs.length-1
+)
+return null;
+
+/*
+Only candles AFTER the sweep
+can create MSS.
+*/
+
+for(
+let i=sweep.index+1;
+i<cs.length;
+i++
+){
+
+const current=
+cs[i];
+
+/*
+Use previous 3 completed
+candles as structure.
+*/
+
+const start=
+Math.max(0,i-3);
+
+const structure=
+cs.slice(start,i);
+
+if(structure.length<2)
+continue;
+
+const structureHigh=
+Math.max(
+...structure.map(x=>x.high)
+);
+
+const structureLow=
+Math.min(
+...structure.map(x=>x.low)
+);
+
+/*
+BULLISH MSS:
+After bullish sweep,
+price closes above recent structure high.
+*/
+
+if(
+sweep.direction==="BULLISH"&&
+current.close>structureHigh
+){
+
+return{
+
+direction:"BULLISH",
+
+time:current.time,
+
+level:structureHigh,
+
+candle:current,
+
+index:i
+
+};
+
+}
+
+/*
+BEARISH MSS:
+After bearish sweep,
+price closes below recent structure low.
+*/
+
+if(
+sweep.direction==="BEARISH"&&
+current.close<structureLow
+){
+
+return{
+
+direction:"BEARISH",
+
+time:current.time,
+
+level:structureLow,
+
+candle:current,
+
+index:i
+
+};
+
+}
+
+}
+
+return null;
+
 }
 
 /* =========================
-   ENGINE
+SHOW MSS
+========================= */
+
+function showMSS(mss){
+
+if(!mss){
+
+$("mss").textContent=
+"WAITING";
+
+$("mss").className=
+"value yellow";
+
+$("mssDir").textContent=
+"WAITING";
+
+$("mssLevel").textContent=
+"WAITING";
+
+$("mssTime").textContent=
+"WAITING";
+
+$("s3").textContent=
+"WAITING";
+
+$("s3").className=
+"yellow";
+
+return;
+
+}
+
+$("mss").textContent=
+"CONFIRMED";
+
+$("mss").className=
+"value green";
+
+$("mssDir").textContent=
+mss.direction;
+
+$("mssDir").className=
+"value "+
+(
+mss.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+$("mssLevel").textContent=
+fmt(mss.level);
+
+$("mssTime").textContent=
+new Date(
+mss.time
+).toLocaleString();
+
+$("s3").textContent=
+"CONFIRMED";
+
+$("s3").className=
+"green";
+
+/*
+MSS notification is intentionally
+not enabled separately.
+*/
+
+}
+
+/* =========================
+ENGINE
 ========================= */
 
 function runEngine(){
@@ -955,11 +1172,62 @@ detectSweep();
 
 showSweep(sweep);
 
-/*
-MSS will be added in next step.
-*/
+if(!sweep){
 
-$("s3").textContent=
+showMSS(null);
+
+$("disp").textContent=
+"WAITING";
+
+$("big").textContent=
+"WAITING";
+
+$("bigDir").textContent=
+"WAITING";
+
+$("s4").textContent=
+"WAITING";
+
+$("s5").textContent=
+"WAITING";
+
+$("s6").textContent=
+"WAITING";
+
+$("signal").textContent=
+"NO ACTIVE SIGNAL";
+
+$("entry").textContent=
+"WAITING";
+
+$("sl").textContent=
+"WAITING";
+
+$("tp").textContent=
+"WAITING";
+
+log(
+"Liquidity active • No confirmed sweep"
+);
+
+return;
+
+}
+
+const mss=
+detectMSS(sweep);
+
+showMSS(mss);
+
+if(!mss){
+
+$("disp").textContent=
+"WAITING";
+
+$("big").textContent=
+"WAITING";
+
+$("bigDir").textContent=
 "WAITING";
 
 $("s4").textContent=
@@ -972,17 +1240,39 @@ $("s6").textContent=
 "WAITING";
 
 log(
-sweep?
-"Liquidity sweep engine active • "+
-sweep.direction+" sweep detected"
-:
-"Liquidity engine active • No confirmed sweep"
+"SWEEP CONFIRMED • Waiting for MSS"
 );
+
+return;
+
+}
+
+log(
+"SWEEP + MSS CONFIRMED • "+
+mss.direction
+);
+
+/*
+Displacement will be added
+in the next step.
+*/
+
+$("disp").textContent=
+"WAITING";
+
+$("s4").textContent=
+"WAITING";
+
+$("s5").textContent=
+"WAITING";
+
+$("s6").textContent=
+"WAITING";
 
 }
 
 /* =========================
-   NOTIFICATIONS
+NOTIFICATIONS
 ========================= */
 
 async function enableNotifications(){
@@ -1014,7 +1304,7 @@ $("notificationStatus").textContent=
 }
 
 /* =========================
-   START
+START
 ========================= */
 
 loadData();
