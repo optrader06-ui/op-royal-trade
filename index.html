@@ -4,128 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>OP ROYAL TRADE</title>
-
 <style>
-*{
-box-sizing:border-box;
-}
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#07090d;
-color:#fff;
-}
-.header{
-padding:16px;
-text-align:center;
-background:#0d1118;
-border-bottom:1px solid #222;
-}
-.header h1{
-margin:0;
-font-size:23px;
-letter-spacing:1px;
-}
-.header p{
-margin:5px 0 0;
-font-size:12px;
-color:#aaa;
-}
-.container{
-padding:12px;
-max-width:700px;
-margin:auto;
-}
-.card{
-background:#0d1118;
-border:1px solid #242a33;
-border-radius:12px;
-padding:14px;
-margin-bottom:12px;
-}
-.title{
-font-size:15px;
-font-weight:bold;
-margin-bottom:12px;
-color:#ddd;
-}
-.row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:9px 0;
-border-bottom:1px solid #1c2129;
-font-size:13px;
-}
-.row:last-child{
-border-bottom:0;
-}
-.value{
-font-weight:bold;
-text-align:right;
-}
-.green{
-color:#35e58a;
-}
-.red{
-color:#ff5c67;
-}
-.yellow{
-color:#ffd45a;
-}
-.blue{
-color:#55b7ff;
-}
-.white{
-color:#fff;
-}
-button{
-width:100%;
-border:0;
-border-radius:9px;
-padding:13px;
-font-size:14px;
-font-weight:bold;
-margin-top:8px;
-background:#1d2633;
-color:#fff;
-}
-button:active{
-transform:scale(.98);
-}
-.price{
-font-size:30px;
-font-weight:bold;
-text-align:center;
-margin:5px 0 15px;
-}
-.signal{
-text-align:center;
-font-size:21px;
-font-weight:bold;
-padding:12px;
-border-radius:10px;
-background:#151b23;
-}
-.trade{
-font-size:18px;
-font-weight:bold;
-text-align:center;
-padding:10px;
-border-radius:8px;
-background:#111720;
-}
-.small{
-font-size:11px;
-color:#888;
-line-height:1.5;
-}
-.status{
-word-break:break-word;
-}
-.notifyOn{
-background:#143b2a;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#07090d;color:#fff;font-family:Arial,sans-serif}
+.header{text-align:center;padding:16px;background:#0d1118;border-bottom:1px solid #252b34}
+.header h1{margin:0;font-size:23px}
+.header p{margin:6px 0 0;color:#8d96a3;font-size:12px}
+.container{max-width:700px;margin:auto;padding:12px}
+.card{background:#0d1118;border:1px solid #252b34;border-radius:12px;padding:14px;margin-bottom:12px}
+.title{font-size:14px;font-weight:bold;margin-bottom:10px;color:#ddd}
+.price{text-align:center;font-size:31px;font-weight:bold;padding:10px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #1b2028;font-size:13px}
+.row:last-child{border-bottom:0}
+.value{font-weight:bold;text-align:right;word-break:break-word}
+.green{color:#36e58b}
+.red{color:#ff5965}
+.yellow{color:#ffd45b}
+.blue{color:#52b7ff}
+.signal{text-align:center;padding:12px;border-radius:9px;background:#151b23;font-weight:bold}
+.trade{text-align:center;padding:12px;border-radius:9px;background:#151b23;font-size:18px;font-weight:bold}
+button{width:100%;border:0;border-radius:9px;padding:13px;margin-top:7px;background:#1c2735;color:#fff;font-weight:bold}
+.log{font-size:11px;color:#9da5b0;line-height:1.5;white-space:pre-wrap;word-break:break-word}
 </style>
 </head>
 
@@ -133,116 +32,98 @@ background:#143b2a;
 
 <div class="header">
 <h1>⚡ OP ROYAL TRADE</h1>
-<p>XAUUSD • Liquidity Sweep • MSS • Big Player Proxy</p>
+<p>XAU/USD • Liquidity • MSS • Big Player Proxy</p>
 </div>
 
 <div class="container">
 
 <div class="card">
-
-<div class="title">LIVE MARKET</div>
-
-<div id="price" class="price yellow">WAITING</div>
+<div class="title">LIVE PRICE</div>
+<div id="price" class="price yellow">CONNECTING...</div>
 
 <div class="row">
 <span>Symbol</span>
-<span id="symbol" class="value">XAU/USD</span>
-</div>
-
-<div class="row">
-<span>Timeframe</span>
-<span class="value blue">15M</span>
+<span class="value">XAU/USD</span>
 </div>
 
 <div class="row">
 <span>Last Candle</span>
-<span id="candleTime" class="value">WAITING</span>
+<span id="lastCandle" class="value">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
-<div class="title">LIQUIDITY LEVELS</div>
+<div class="title">LIQUIDITY</div>
 
 <div class="row">
 <span>15M High</span>
-<span id="m15High" class="value yellow">WAITING</span>
+<span id="m15h" class="value yellow">WAITING</span>
 </div>
-
 <div class="row">
 <span>15M Low</span>
-<span id="m15Low" class="value yellow">WAITING</span>
+<span id="m15l" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>30M High</span>
-<span id="m30High" class="value yellow">WAITING</span>
+<span id="m30h" class="value yellow">WAITING</span>
 </div>
-
 <div class="row">
 <span>30M Low</span>
-<span id="m30Low" class="value yellow">WAITING</span>
+<span id="m30l" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>1H High</span>
-<span id="h1High" class="value yellow">WAITING</span>
+<span id="h1h" class="value yellow">WAITING</span>
 </div>
-
 <div class="row">
 <span>1H Low</span>
-<span id="h1Low" class="value yellow">WAITING</span>
+<span id="h1l" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>4H High</span>
-<span id="h4High" class="value yellow">WAITING</span>
+<span id="h4h" class="value yellow">WAITING</span>
 </div>
-
 <div class="row">
 <span>4H Low</span>
-<span id="h4Low" class="value yellow">WAITING</span>
+<span id="h4l" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>1D High</span>
-<span id="d1High" class="value yellow">WAITING</span>
+<span id="d1h" class="value yellow">WAITING</span>
 </div>
-
 <div class="row">
 <span>1D Low</span>
-<span id="d1Low" class="value yellow">WAITING</span>
+<span id="d1l" class="value yellow">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <div class="title">LIQUIDITY SWEEP</div>
 
-<div class="signal" id="sweep">
+<div id="sweep" class="signal yellow">
 WAITING
 </div>
 
 <div class="row">
-<span>Sweep Direction</span>
-<span id="sweepDirection" class="value yellow">WAITING</span>
+<span>Direction</span>
+<span id="sweepDir" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>Sweep Candle</span>
-<span id="sweepCandle" class="value">WAITING</span>
+<span>Candle</span>
+<span id="sweepTime" class="value">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
-<div class="title">MARKET STRUCTURE</div>
+<div class="title">MSS + DISPLACEMENT</div>
 
 <div class="row">
 <span>MSS</span>
@@ -251,50 +132,35 @@ WAITING
 
 <div class="row">
 <span>Displacement</span>
-<span id="displacement" class="value yellow">WAITING</span>
+<span id="disp" class="value yellow">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <div class="title">BIG PLAYER PROXY</div>
 
-<div class="row">
-<span>Status</span>
-<span id="bigPlayer" class="value yellow">WAITING</span>
+<div id="big" class="signal yellow">
+WAITING
 </div>
 
 <div class="row">
 <span>Direction</span>
-<span id="bigDirection" class="value yellow">WAITING</span>
+<span id="bigDir" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Entry Candle</span>
-<span id="bigCandle" class="value">WAITING</span>
-</div>
-
-<div class="row">
-<span>Entry Time</span>
 <span id="bigTime" class="value">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <div class="title">TRADE SETUP</div>
 
-<div id="tradeSignal" class="trade yellow">
+<div id="trade" class="trade yellow">
 NO ACTIVE SIGNAL
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="tradeDirection" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
@@ -311,44 +177,43 @@ NO ACTIVE SIGNAL
 <span>Take Profit</span>
 <span id="tp" class="value green">WAITING</span>
 </div>
-
 </div>
 
 
 <div class="card">
-
 <div class="title">NOTIFICATIONS</div>
 
-<button id="notifyBtn" onclick="enableNotifications()">
-🔔 ENABLE TRADE NOTIFICATIONS
+<button onclick="enableNotifications()" id="notify">
+🔔 ENABLE NOTIFICATIONS
 </button>
-
-<div class="small">
-Notification will trigger when a new liquidity sweep or big-player proxy trade is detected.
-</div>
-
 </div>
 
 
 <div class="card">
-
 <div class="title">ENGINE STATUS</div>
 
 <div class="row">
-<span>Status</span>
-<span id="engine" class="value yellow status">CONNECTING...</span>
+<span>Engine</span>
+<span id="engine" class="value yellow">STARTING...</span>
 </div>
 
 <div class="row">
 <span>Data</span>
-<span id="dataStatus" class="value yellow">WAITING</span>
+<span id="data" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
-<span>Last Update</span>
-<span id="updateTime" class="value">WAITING</span>
+<span>HTTP</span>
+<span id="http" class="value yellow">WAITING</span>
+</div>
 </div>
 
+
+<div class="card">
+<div class="title">DIAGNOSTIC</div>
+<div id="diagnostic" class="log">
+Starting diagnostic...
+</div>
 </div>
 
 </div>
@@ -356,116 +221,63 @@ Notification will trigger when a new liquidity sweep or big-player proxy trade i
 
 <script>
 
-const WORKER_URL =
+const WORKER =
 "https://icy-snow-263a.optrader06.workers.dev";
 
+const ENDPOINT =
+WORKER+
+"/api.twelvedata.com/time_series";
+
 let candles=[];
-let previousSweep="";
-let previousBigPlayer="";
-let notificationReady=false;
+
+let lastSweepKey="";
+let lastBigKey="";
+
+let notificationOn=false;
 
 
 /* =========================
-   NOTIFICATION
+   HELPERS
 ========================= */
 
-async function enableNotifications(){
+function setText(id,text,cls){
 
-if(!("Notification" in window)){
-alert("Browser notifications supported nahi hain.");
-return;
-}
+const el=document.getElementById(id);
 
-try{
+if(!el)return;
 
-const permission =
-await Notification.requestPermission();
+el.innerText=text;
 
-if(permission==="granted"){
+if(cls){
 
-notificationReady=true;
-
-document.getElementById("notifyBtn").innerText=
-"🔔 NOTIFICATIONS ON";
-
-document.getElementById("notifyBtn").classList.add(
-"notifyOn"
-);
-
-new Notification(
-"OP ROYAL TRADE",
-{
-body:"Trade notifications enabled."
-}
-);
-
-}else{
-
-document.getElementById("notifyBtn").innerText=
-"🔕 NOTIFICATIONS BLOCKED";
-
-}
-
-}catch(e){
-
-console.log(e);
+el.className="value "+cls;
 
 }
 
 }
 
 
-function sendNotification(title,body){
+function price(v){
 
-if(!notificationReady)return;
+if(
+v===undefined||
+v===null||
+isNaN(Number(v))
+)return "WAITING";
 
-if(Notification.permission!=="granted")return;
-
-try{
-
-new Notification(title,{
-body:body
-});
-
-}catch(e){
-
-console.log(e);
-
-}
+return Number(v).toFixed(2);
 
 }
 
 
-/* =========================
-   FORMAT
-========================= */
+function showTime(v){
 
-function priceFormat(value){
+if(!v)return "WAITING";
 
-if(value===null ||
-value===undefined ||
-isNaN(value)){
+const d=new Date(v);
 
-return "WAITING";
-
-}
-
-return Number(value).toFixed(2);
-
-}
-
-
-function timeFormat(value){
-
-try{
-
-const d=new Date(value);
-
-if(isNaN(d.getTime())){
-
-return String(value);
-
-}
+if(isNaN(d.getTime()))
+return String(v);
 
 return d.toLocaleString(
 "en-IN",
@@ -477,9 +289,80 @@ minute:"2-digit"
 }
 );
 
-}catch(e){
+}
 
-return String(value);
+
+function diagnostic(msg){
+
+document.getElementById(
+"diagnostic"
+).innerText=msg;
+
+console.log(msg);
+
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+async function enableNotifications(){
+
+if(!("Notification" in window)){
+
+alert(
+"Is browser me notification support nahi hai."
+);
+
+return;
+
+}
+
+const p=
+await Notification.requestPermission();
+
+if(p==="granted"){
+
+notificationOn=true;
+
+document.getElementById(
+"notify"
+).innerText=
+"🔔 NOTIFICATIONS ON";
+
+new Notification(
+"OP ROYAL TRADE",
+{
+body:"Notifications enabled"
+}
+);
+
+}else{
+
+document.getElementById(
+"notify"
+).innerText=
+"🔕 NOTIFICATIONS BLOCKED";
+
+}
+
+}
+
+
+function notify(title,body){
+
+if(
+notificationOn &&
+Notification.permission==="granted"
+){
+
+new Notification(
+title,
+{
+body:body
+}
+);
 
 }
 
@@ -487,25 +370,26 @@ return String(value);
 
 
 /* =========================
-   FETCH DATA
+   FETCH
 ========================= */
 
 async function loadData(){
 
-const engine =
-document.getElementById("engine");
+setText(
+"engine",
+"CONNECTING...",
+"yellow"
+);
 
-const dataStatus =
-document.getElementById("dataStatus");
+diagnostic(
+"Connecting to Cloudflare Worker...\n"+
+ENDPOINT
+);
 
 try{
 
-engine.innerText="CONNECTING...";
-engine.className="value yellow";
-
 const url=
-WORKER_URL+
-"/api.twelvedata.com/time_series"+
+ENDPOINT+
 "?symbol=XAU/USD"+
 "&interval=15min"+
 "&outputsize=100";
@@ -519,34 +403,39 @@ cache:"no-store"
 }
 );
 
-const raw=
-await response.text();
-
-if(!response.ok){
-
-throw new Error(
-"HTTP "+response.status+" : "+raw.slice(0,150)
+setText(
+"http",
+String(response.status),
+response.ok?"green":"red"
 );
 
-}
+const text=
+await response.text();
+
+diagnostic(
+"HTTP "+response.status+
+"\n\nRAW RESPONSE:\n"+
+text.substring(0,1000)
+);
+
 
 let data;
 
 try{
 
-data=JSON.parse(raw);
+data=JSON.parse(text);
 
 }catch(e){
 
 throw new Error(
-"Invalid JSON : "+raw.slice(0,150)
+"Worker response JSON nahi hai."
 );
 
 }
 
 
 /*
-   Flexible response parser
+   Different possible formats
 */
 
 let values=null;
@@ -562,7 +451,6 @@ values=data.values;
 
 else if(
 data &&
-data.data &&
 Array.isArray(data.data)
 ){
 
@@ -584,15 +472,14 @@ if(!values){
 if(data && data.status==="error"){
 
 throw new Error(
-data.message ||
-"Worker returned API error"
+"API ERROR: "+
+(data.message||"Unknown error")
 );
 
 }
 
 throw new Error(
-"No candle values : "+
-JSON.stringify(data).slice(0,200)
+"Candle values nahi mile."
 );
 
 }
@@ -601,58 +488,49 @@ JSON.stringify(data).slice(0,200)
 if(values.length===0){
 
 throw new Error(
-"No candle data received"
+"Worker ne 0 candles bheje."
 );
 
 }
 
 
-/*
-   Normalize candles
-*/
+candles=
+values.map(function(x){
 
-candles=values.map(function(x){
-
-return {
+return{
 
 time:
-x.datetime ||
-x.time ||
-x.date ||
-"",
+x.datetime||
+x.time||
+x.date,
 
-open:
-Number(
-x.open ??
-x.o ??
+open:Number(
+x.open||
+x.o||
 0
 ),
 
-high:
-Number(
-x.high ??
-x.h ??
+high:Number(
+x.high||
+x.h||
 0
 ),
 
-low:
-Number(
-x.low ??
-x.l ??
+low:Number(
+x.low||
+x.l||
 0
 ),
 
-close:
-Number(
-x.close ??
-x.c ??
+close:Number(
+x.close||
+x.c||
 0
 ),
 
-volume:
-Number(
-x.volume ??
-x.v ??
+volume:Number(
+x.volume||
+x.v||
 0
 )
 
@@ -660,7 +538,8 @@ x.v ??
 
 }).filter(function(x){
 
-return (
+return(
+x.time &&
 x.high>0 &&
 x.low>0 &&
 x.close>0
@@ -672,15 +551,14 @@ x.close>0
 if(candles.length===0){
 
 throw new Error(
-"Valid candles not found"
+"Valid candles parse nahi hue."
 );
 
 }
 
 
 /*
-   Twelve Data normally returns newest first.
-   Convert to oldest -> newest.
+   Oldest -> newest
 */
 
 candles.sort(function(a,b){
@@ -691,42 +569,77 @@ new Date(b.time);
 });
 
 
-dataStatus.innerText=
-candles.length+" candles LIVE";
+setText(
+"engine",
+"DATA LIVE",
+"green"
+);
 
-dataStatus.className=
-"value green";
+setText(
+"data",
+candles.length+" CANDLES",
+"green"
+);
 
-engine.innerText=
-"DATA LIVE • XAU/USD • 15M";
-
-engine.className=
-"value green";
 
 document.getElementById(
-"updateTime"
+"price"
 ).innerText=
-new Date().toLocaleTimeString();
+price(
+candles[candles.length-1].close
+);
+
+document.getElementById(
+"price"
+).className=
+"price green";
 
 
-runEngine();
+document.getElementById(
+"lastCandle"
+).innerText=
+showTime(
+candles[candles.length-1].time
+);
+
+
+diagnostic(
+"SUCCESS\n"+
+"Worker connected\n"+
+"Candles received: "+
+candles.length+
+"\nLatest price: "+
+price(
+candles[candles.length-1].close
+)+
+"\nLatest candle: "+
+candles[candles.length-1].time
+);
+
+
+runAnalysis();
 
 
 }catch(error){
 
-console.log(error);
+setText(
+"engine",
+"DATA ERROR",
+"red"
+);
 
-engine.innerText=
-"DATA ERROR";
+setText(
+"data",
+"FAILED",
+"red"
+);
 
-engine.className=
-"value red";
-
-dataStatus.innerText=
-String(error.message).slice(0,180);
-
-dataStatus.className=
-"value red";
+diagnostic(
+"ERROR:\n"+
+error.message+
+"\n\nWorker URL:\n"+
+ENDPOINT
+);
 
 }
 
@@ -739,31 +652,21 @@ dataStatus.className=
 
 function aggregate(minutes){
 
-if(candles.length===0)return[];
-
-const result=[];
-
-let current=null;
+const map={};
 
 candles.forEach(function(c){
 
-const d=new Date(c.time);
-
-const ms=
-d.getTime();
+const t=
+new Date(c.time).getTime();
 
 const bucket=
 Math.floor(
-ms/(minutes*60*1000)
-)*(minutes*60*1000);
+t/(minutes*60000)
+)*60000*minutes;
 
-if(
-!current ||
-current.bucket!==bucket
-){
+if(!map[bucket]){
 
-current={
-bucket:bucket,
+map[bucket]={
 time:new Date(bucket).toISOString(),
 open:c.open,
 high:c.high,
@@ -771,30 +674,34 @@ low:c.low,
 close:c.close
 };
 
-result.push(current);
-
 }else{
 
-current.high=
+map[bucket].high=
 Math.max(
-current.high,
+map[bucket].high,
 c.high
 );
 
-current.low=
+map[bucket].low=
 Math.min(
-current.low,
+map[bucket].low,
 c.low
 );
 
-current.close=
+map[bucket].close=
 c.close;
 
 }
 
 });
 
-return result;
+return Object.values(map)
+.sort(function(a,b){
+
+return new Date(a.time)-
+new Date(b.time);
+
+});
 
 }
 
@@ -803,25 +710,19 @@ return result;
    LIQUIDITY
 ========================= */
 
-function getLiquidity(minutes){
+function liquidity(minutes){
 
 const arr=
 aggregate(minutes);
 
 if(arr.length<2){
 
-return {
+return{
 high:null,
 low:null
 };
 
 }
-
-
-/*
-   Current candle ko liquidity calculation
-   se hata rahe hain.
-*/
 
 const previous=
 arr.slice(0,-1);
@@ -836,13 +737,13 @@ let low=Infinity;
 
 lookback.forEach(function(c){
 
-if(c.high>high)high=c.high;
+high=Math.max(high,c.high);
 
-if(c.low<low)low=c.low;
+low=Math.min(low,c.low);
 
 });
 
-return {
+return{
 high:high,
 low:low
 };
@@ -852,62 +753,39 @@ low:low
 
 function updateLiquidity(){
 
-const m15=
-getLiquidity(15);
-
-const m30=
-getLiquidity(30);
-
-const h1=
-getLiquidity(60);
-
-const h4=
-getLiquidity(240);
-
-const d1=
-getLiquidity(1440);
+const a=liquidity(15);
+const b=liquidity(30);
+const c=liquidity(60);
+const d=liquidity(240);
+const e=liquidity(1440);
 
 
-document.getElementById("m15High").innerText=
-priceFormat(m15.high);
+setText("m15h",price(a.high),"yellow");
+setText("m15l",price(a.low),"yellow");
 
-document.getElementById("m15Low").innerText=
-priceFormat(m15.low);
+setText("m30h",price(b.high),"yellow");
+setText("m30l",price(b.low),"yellow");
 
-document.getElementById("m30High").innerText=
-priceFormat(m30.high);
+setText("h1h",price(c.high),"yellow");
+setText("h1l",price(c.low),"yellow");
 
-document.getElementById("m30Low").innerText=
-priceFormat(m30.low);
+setText("h4h",price(d.high),"yellow");
+setText("h4l",price(d.low),"yellow");
 
-document.getElementById("h1High").innerText=
-priceFormat(h1.high);
-
-document.getElementById("h1Low").innerText=
-priceFormat(h1.low);
-
-document.getElementById("h4High").innerText=
-priceFormat(h4.high);
-
-document.getElementById("h4Low").innerText=
-priceFormat(h4.low);
-
-document.getElementById("d1High").innerText=
-priceFormat(d1.high);
-
-document.getElementById("d1Low").innerText=
-priceFormat(d1.low);
+setText("d1h",price(e.high),"yellow");
+setText("d1l",price(e.low),"yellow");
 
 }
 
 
 /* =========================
-   LIQUIDITY SWEEP
+   SWEEP
 ========================= */
 
-function detectSweep(){
+function findSweep(){
 
-if(candles.length<10)return null;
+if(candles.length<10)
+return null;
 
 const current=
 candles[candles.length-1];
@@ -923,52 +801,36 @@ let low=Infinity;
 
 previous.forEach(function(c){
 
-if(c.high>high)high=c.high;
+high=Math.max(high,c.high);
 
-if(c.low<low)low=c.low;
+low=Math.min(low,c.low);
 
 });
 
-
-/*
-   Bearish sweep:
-   Previous liquidity high breached
-   and candle closes back below high.
-*/
 
 if(
 current.high>high &&
 current.close<high
 ){
 
-return {
-
-type:"BEARISH",
+return{
+direction:"BEARISH",
 level:high,
 candle:current
-
 };
 
 }
 
-
-/*
-   Bullish sweep:
-   Previous liquidity low breached
-   and candle closes back above low.
-*/
 
 if(
 current.low<low &&
 current.close>low
 ){
 
-return {
-
-type:"BULLISH",
+return{
+direction:"BULLISH",
 level:low,
 candle:current
-
 };
 
 }
@@ -982,44 +844,36 @@ return null;
    MSS
 ========================= */
 
-function detectMSS(direction){
+function mss(direction){
 
-if(candles.length<8)return false;
+if(candles.length<8)
+return false;
 
 const current=
 candles[candles.length-1];
 
-const previous=
+const p=
 candles.slice(
 candles.length-7,
 candles.length-1
 );
 
-let swingHigh=-Infinity;
-let swingLow=Infinity;
+let high=-Infinity;
+let low=Infinity;
 
-previous.forEach(function(c){
+p.forEach(function(c){
 
-if(c.high>swingHigh)
-swingHigh=c.high;
-
-if(c.low<swingLow)
-swingLow=c.low;
+high=Math.max(high,c.high);
+low=Math.min(low,c.low);
 
 });
 
 
-if(direction==="BULLISH"){
+if(direction==="BULLISH")
+return current.close>high;
 
-return current.close>swingHigh;
-
-}
-
-if(direction==="BEARISH"){
-
-return current.close<swingLow;
-
-}
+if(direction==="BEARISH")
+return current.close<low;
 
 return false;
 
@@ -1030,9 +884,10 @@ return false;
    DISPLACEMENT
 ========================= */
 
-function detectDisplacement(direction){
+function displacement(direction){
 
-if(candles.length<8)return false;
+if(candles.length<8)
+return false;
 
 const current=
 candles[candles.length-1];
@@ -1053,8 +908,7 @@ candles[i].open
 
 }
 
-const average=
-total/5;
+const avg=total/5;
 
 const body=
 Math.abs(
@@ -1062,31 +916,20 @@ current.close-
 current.open
 );
 
-if(
-body<average*1.3
-){
-
+if(body<avg*1.3)
 return false;
-
-}
 
 if(
 direction==="BULLISH" &&
 current.close>current.open
-){
-
+)
 return true;
-
-}
 
 if(
 direction==="BEARISH" &&
 current.close<current.open
-){
-
+)
 return true;
-
-}
 
 return false;
 
@@ -1094,33 +937,184 @@ return false;
 
 
 /* =========================
-   BIG PLAYER PROXY
+   ANALYSIS
 ========================= */
 
-function detectBigPlayer(
-direction,
-mss,
-displacement
-){
+function runAnalysis(){
 
-if(!direction)return false;
+updateLiquidity();
 
-return (
-mss &&
-displacement
+const sweep=findSweep();
+
+
+if(!sweep){
+
+setText(
+"sweep",
+"NO NEW SWEEP",
+"yellow"
+);
+
+setText(
+"sweepDir",
+"WAITING",
+"yellow"
+);
+
+setText(
+"sweepTime",
+"WAITING",
+"yellow"
+);
+
+setText(
+"mss",
+"WAITING",
+"yellow"
+);
+
+setText(
+"disp",
+"WAITING",
+"yellow"
+);
+
+setText(
+"big",
+"WAITING",
+"yellow"
+);
+
+return;
+
+}
+
+
+/*
+   Sweep detected
+*/
+
+setText(
+"sweep",
+sweep.direction+
+" LIQUIDITY SWEEP",
+sweep.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+setText(
+"sweepDir",
+sweep.direction,
+sweep.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+setText(
+"sweepTime",
+showTime(
+sweep.candle.time
+),
+"white"
+);
+
+
+/*
+   Notification once
+*/
+
+const sweepKey=
+sweep.direction+
+sweep.candle.time;
+
+if(sweepKey!==lastSweepKey){
+
+lastSweepKey=sweepKey;
+
+notify(
+"💧 OP ROYAL LIQUIDITY SWEEP",
+"XAU/USD 15M • "+
+sweep.direction+
+" sweep"
 );
 
 }
 
 
-/* =========================
-   TRADE
-========================= */
+/*
+   MSS
+*/
 
-function createTrade(
-direction,
-sweep
+const mssOK=
+mss(sweep.direction);
+
+setText(
+"mss",
+mssOK
+?"MSS CONFIRMED"
+:"WAITING",
+mssOK
+?"green"
+:"yellow"
+);
+
+
+/*
+   Displacement
+*/
+
+const dispOK=
+displacement(
+sweep.direction
+);
+
+setText(
+"disp",
+dispOK
+?"CONFIRMED"
+:"WAITING",
+dispOK
+?"green"
+:"yellow"
+);
+
+
+/*
+   Big Player Proxy
+*/
+
+if(
+mssOK &&
+dispOK
 ){
+
+setText(
+"big",
+"⚡ BIG PLAYER PROXY CONFIRMED",
+"green"
+);
+
+setText(
+"bigDir",
+sweep.direction,
+sweep.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+setText(
+"bigTime",
+showTime(
+candles[candles.length-1].time
+),
+"white"
+);
+
+
+/*
+   Trade
+*/
 
 const current=
 candles[candles.length-1];
@@ -1130,7 +1124,9 @@ current.close;
 
 let sl;
 
-if(direction==="BULLISH"){
+if(
+sweep.direction==="BULLISH"
+){
 
 sl=sweep.candle.low;
 
@@ -1143,18 +1139,13 @@ sl=sweep.candle.high;
 const risk=
 Math.abs(entry-sl);
 
-if(
-!risk ||
-risk<=0
-){
-
-return null;
-
-}
+if(risk>0){
 
 let tp;
 
-if(direction==="BULLISH"){
+if(
+sweep.direction==="BULLISH"
+){
 
 tp=entry+(risk*2);
 
@@ -1164,348 +1155,57 @@ tp=entry-(risk*2);
 
 }
 
-return {
-
-direction:direction,
-entry:entry,
-sl:sl,
-tp:tp
-
-};
-
-}
-
-
-/* =========================
-   MAIN ENGINE
-========================= */
-
-function runEngine(){
-
-updateLiquidity();
-
-const current=
-candles[candles.length-1];
-
-document.getElementById(
-"price"
-).innerText=
-priceFormat(current.close);
-
-document.getElementById(
-"candleTime"
-).innerText=
-timeFormat(current.time);
-
-
-/*
-   Sweep
-*/
-
-const sweep=
-detectSweep();
-
-if(!sweep){
-
-document.getElementById(
-"sweep"
-).innerText=
-"NO NEW SWEEP";
-
-document.getElementById(
-"sweep"
-).className=
-"signal yellow";
-
-document.getElementById(
-"sweepDirection"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"sweepCandle"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"mss"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"displacement"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"bigPlayer"
-).innerText=
-"WAITING";
-
-return;
-
-}
-
-
-/*
-   Sweep UI
-*/
-
-document.getElementById(
-"sweep"
-).innerText=
-sweep.type+
-" LIQUIDITY SWEEP";
-
-document.getElementById(
-"sweep"
-).className=
-"sweep signal "+
-(
-sweep.type==="BULLISH"
-?"green"
-:"red"
-);
-
-document.getElementById(
-"sweepDirection"
-).innerText=
-sweep.type;
-
-document.getElementById(
-"sweepDirection"
-).className=
-"value "+
-(
-sweep.type==="BULLISH"
-?"green"
-:"red"
-);
-
-document.getElementById(
-"sweepCandle"
-).innerText=
-timeFormat(
-sweep.candle.time
-);
-
-
-/*
-   New sweep notification
-*/
-
-const sweepKey=
-sweep.type+
-"_"+
-sweep.candle.time;
-
-if(
-sweepKey!==previousSweep
-){
-
-previousSweep=sweepKey;
-
-sendNotification(
-"💧 OP ROYAL LIQUIDITY SWEEP",
-"XAUUSD 15M • "+
-sweep.type+
-" SWEEP • Price "+
-priceFormat(current.close)
-);
-
-}
-
-
-/*
-   MSS
-*/
-
-const mss=
-detectMSS(
-sweep.type
-);
-
-document.getElementById(
-"mss"
-).innerText=
-mss
-?"MSS CONFIRMED"
-:"WAITING";
-
-document.getElementById(
-"mss"
-).className=
-"value "+
-(
-mss
-?"green"
-:"yellow"
-);
-
-
-/*
-   Displacement
-*/
-
-const displacement=
-detectDisplacement(
-sweep.type
-);
-
-document.getElementById(
-"displacement"
-).innerText=
-displacement
-?"CONFIRMED"
-:"WAITING";
-
-document.getElementById(
-"displacement"
-).className=
-"value "+
-(
-displacement
-?"green"
-:"yellow"
-);
-
-
-/*
-   Big player proxy
-*/
-
-const bigPlayer=
-detectBigPlayer(
-sweep.type,
-mss,
-displacement
-);
-
-if(bigPlayer){
-
-document.getElementById(
-"bigPlayer"
-).innerText=
-"CONFIRMED";
-
-document.getElementById(
-"bigPlayer"
-).className=
-"value green";
-
-document.getElementById(
-"bigDirection"
-).innerText=
-sweep.type;
-
-document.getElementById(
-"bigDirection"
-).className=
-"value "+
-(
-sweep.type==="BULLISH"
-?"green"
-:"red"
-);
-
-document.getElementById(
-"bigCandle"
-).innerText=
-"15M DISPLACEMENT";
-
-document.getElementById(
-"bigTime"
-).innerText=
-timeFormat(
-current.time
-);
-
-
-/*
-   Trade
-*/
-
-const trade=
-createTrade(
-sweep.type,
-sweep
-);
-
-if(trade){
-
-document.getElementById(
-"tradeSignal"
-).innerText=
+setText(
+"trade",
 "⚡ "+
-trade.direction+
-" TRADE";
-
-document.getElementById(
-"tradeSignal"
-).className=
-"trade "+
-(
-trade.direction==="BULLISH"
+sweep.direction+
+" TRADE",
+sweep.direction==="BULLISH"
 ?"green"
 :"red"
 );
 
-document.getElementById(
-"tradeDirection"
-).innerText=
-trade.direction;
-
-document.getElementById(
-"tradeDirection"
-).className=
-"value "+
-(
-trade.direction==="BULLISH"
-?"green"
-:"red"
+setText(
+"entry",
+price(entry),
+"yellow"
 );
 
-document.getElementById(
-"entry"
-).innerText=
-priceFormat(trade.entry);
+setText(
+"sl",
+price(sl),
+"red"
+);
 
-document.getElementById(
-"sl"
-).innerText=
-priceFormat(trade.sl);
-
-document.getElementById(
-"tp"
-).innerText=
-priceFormat(trade.tp);
+setText(
+"tp",
+price(tp),
+"green"
+);
 
 
 /*
-   Big-player notification
+   Big notification
 */
 
 const bigKey=
-trade.direction+
-"_"+
+sweep.direction+
 current.time;
 
-if(
-bigKey!==previousBigPlayer
-){
+if(bigKey!==lastBigKey){
 
-previousBigPlayer=bigKey;
+lastBigKey=bigKey;
 
-sendNotification(
+notify(
 "⚡ OP ROYAL BIG PLAYER ENTRY",
-"XAUUSD 15M • "+
-trade.direction+
-" • Entry "+
-priceFormat(trade.entry)+
-" • SL "+
-priceFormat(trade.sl)+
-" • TP "+
-priceFormat(trade.tp)
+"XAU/USD 15M\n"+
+sweep.direction+
+"\nEntry: "+
+price(entry)+
+"\nSL: "+
+price(sl)+
+"\nTP: "+
+price(tp)
 );
 
 }
@@ -1514,60 +1214,11 @@ priceFormat(trade.tp)
 
 }else{
 
-document.getElementById(
-"bigPlayer"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"bigPlayer"
-).className=
-"value yellow";
-
-document.getElementById(
-"bigDirection"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"bigCandle"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"bigTime"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"tradeSignal"
-).innerText=
-"NO ACTIVE SIGNAL";
-
-document.getElementById(
-"tradeSignal"
-).className=
-"trade yellow";
-
-document.getElementById(
-"tradeDirection"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"entry"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"sl"
-).innerText=
-"WAITING";
-
-document.getElementById(
-"tp"
-).innerText=
-"WAITING";
+setText(
+"big",
+"WAITING FOR CONFIRMATION",
+"yellow"
+);
 
 }
 
@@ -1579,11 +1230,6 @@ document.getElementById(
 ========================= */
 
 loadData();
-
-
-/*
-   Refresh every 30 seconds.
-*/
 
 setInterval(
 loadData,
