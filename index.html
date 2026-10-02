@@ -3,132 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>OP ROYAL XAUUSD</title>
+<title>OP ROYAL TRADE</title>
 
 <style>
-*{box-sizing:border-box}
-
+*{
+box-sizing:border-box;
+}
 body{
 margin:0;
-padding:12px;
-background:#080c11;
-color:#fff;
 font-family:Arial,sans-serif;
+background:#07090d;
+color:#fff;
 }
-
-.header,.card{
-background:#111821;
-border:1px solid #283544;
-border-radius:16px;
-padding:15px;
-margin-bottom:12px;
+.header{
+padding:16px;
+text-align:center;
+background:#0d1118;
+border-bottom:1px solid #222;
 }
-
-.title{
-font-size:22px;
-font-weight:800;
+.header h1{
+margin:0;
+font-size:23px;
+letter-spacing:1px;
 }
-
-.sub{
+.header p{
+margin:5px 0 0;
 font-size:12px;
-color:#8c98a6;
-margin-top:5px;
+color:#aaa;
 }
-
-.price{
-font-size:32px;
-font-weight:900;
-margin-top:13px;
+.container{
+padding:12px;
+max-width:700px;
+margin:auto;
 }
-
-.status{
-font-size:13px;
-margin-top:5px;
-}
-
-.green{color:#35df8a}
-.red{color:#ff6262}
-.yellow{color:#f1c75b}
-.blue{color:#55aaff}
-
-.cardtitle{
-font-size:16px;
-font-weight:800;
+.card{
+background:#0d1118;
+border:1px solid #242a33;
+border-radius:12px;
+padding:14px;
 margin-bottom:12px;
 }
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
+.title{
+font-size:15px;
+font-weight:bold;
+margin-bottom:12px;
+color:#ddd;
 }
-
-.tf{
-background:#0b1118;
-border:1px solid #263241;
-border-radius:12px;
-padding:11px;
-}
-
-.tfname{
-font-weight:800;
-margin-bottom:8px;
-}
-
 .row{
 display:flex;
 justify-content:space-between;
-gap:8px;
-padding:7px 0;
-font-size:12px;
-border-bottom:1px solid #1d2732;
+align-items:center;
+padding:9px 0;
+border-bottom:1px solid #1c2129;
+font-size:13px;
 }
-
 .row:last-child{
 border-bottom:0;
 }
-
 .value{
-font-weight:700;
+font-weight:bold;
 text-align:right;
 }
-
-.signal{
-text-align:center;
-font-size:23px;
-font-weight:900;
-padding:12px;
-border-radius:10px;
-background:#0b1118;
+.green{
+color:#35e58a;
 }
-
-.big{
-font-size:18px;
-font-weight:900;
+.red{
+color:#ff5c67;
 }
-
+.yellow{
+color:#ffd45a;
+}
+.blue{
+color:#55b7ff;
+}
+.white{
+color:#fff;
+}
 button{
 width:100%;
 border:0;
-border-radius:10px;
+border-radius:9px;
 padding:13px;
-background:#1597ed;
+font-size:14px;
+font-weight:bold;
+margin-top:8px;
+background:#1d2633;
 color:#fff;
-font-size:15px;
-font-weight:800;
 }
-
+button:active{
+transform:scale(.98);
+}
+.price{
+font-size:30px;
+font-weight:bold;
+text-align:center;
+margin:5px 0 15px;
+}
+.signal{
+text-align:center;
+font-size:21px;
+font-weight:bold;
+padding:12px;
+border-radius:10px;
+background:#151b23;
+}
+.trade{
+font-size:18px;
+font-weight:bold;
+text-align:center;
+padding:10px;
+border-radius:8px;
+background:#111720;
+}
 .small{
 font-size:11px;
-color:#8793a1;
+color:#888;
 line-height:1.5;
-margin-top:8px;
 }
-
-@media(max-width:420px){
-.grid{
-grid-template-columns:1fr;
+.status{
+word-break:break-word;
 }
+.notifyOn{
+background:#143b2a;
 }
 </style>
 </head>
@@ -136,241 +132,31 @@ grid-template-columns:1fr;
 <body>
 
 <div class="header">
-
-<div class="title">
-👑 OP ROYAL XAUUSD
+<h1>⚡ OP ROYAL TRADE</h1>
+<p>XAUUSD • Liquidity Sweep • MSS • Big Player Proxy</p>
 </div>
 
-<div class="sub">
-Liquidity Sweep • MSS • Big Player Proxy
-</div>
-
-<div id="price" class="price">
-WAITING
-</div>
-
-<div id="status" class="status yellow">
-● CONNECTING
-</div>
-
-</div>
-
+<div class="container">
 
 <div class="card">
 
-<div class="cardtitle">
-🔔 Notifications
-</div>
+<div class="title">LIVE MARKET</div>
 
-<button onclick="enableNotifications()">
-ENABLE NOTIFICATIONS
-</button>
-
-<div id="notificationStatus" class="small">
-Notifications OFF
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-💧 MULTI-TIMEFRAME LIQUIDITY
-</div>
-
-<div class="grid">
-
-
-<div class="tf">
-
-<div class="tfname">
-15 MIN
-</div>
+<div id="price" class="price yellow">WAITING</div>
 
 <div class="row">
-<span>Liquidity High</span>
-<span id="h15" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Liquidity Low</span>
-<span id="l15" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s15" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m15" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">
-30 MIN
-</div>
-
-<div class="row">
-<span>Liquidity High</span>
-<span id="h30" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Liquidity Low</span>
-<span id="l30" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s30" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m30" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">
-1 HOUR
-</div>
-
-<div class="row">
-<span>Liquidity High</span>
-<span id="h60" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Liquidity Low</span>
-<span id="l60" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s60" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m60" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">
-4 HOUR
-</div>
-
-<div class="row">
-<span>Liquidity High</span>
-<span id="h240" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Liquidity Low</span>
-<span id="l240" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="s240" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="m240" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
-
-<div class="tf">
-
-<div class="tfname">
-1 DAY
-</div>
-
-<div class="row">
-<span>Liquidity High</span>
-<span id="hD" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Liquidity Low</span>
-<span id="lD" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep</span>
-<span id="sD" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="mD" class="value yellow">WAITING</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="small">
-Liquidity is calculated from available XAU/USD 15-minute candle history.
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="cardtitle">
-⚡ BIG PLAYER PROXY
-</div>
-
-<div class="row">
-<span>Status</span>
-<span id="bpStatus" class="value yellow">
-WAITING
-</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="bpDirection" class="value yellow">
-WAITING
-</span>
-</div>
-
-<div class="row">
-<span>Entry Candle</span>
-<span id="bpCandle" class="value yellow">
-WAITING
-</span>
+<span>Symbol</span>
+<span id="symbol" class="value">XAU/USD</span>
 </div>
 
 <div class="row">
 <span>Timeframe</span>
-<span id="bpTF" class="value yellow">
-WAITING
-</span>
+<span class="value blue">15M</span>
 </div>
 
-<div class="small">
-Big-player confirmation is a price-action proxy based on liquidity sweep, MSS and displacement. It does not identify a specific institution.
+<div class="row">
+<span>Last Candle</span>
+<span id="candleTime" class="value">WAITING</span>
 </div>
 
 </div>
@@ -378,40 +164,152 @@ Big-player confirmation is a price-action proxy based on liquidity sweep, MSS an
 
 <div class="card">
 
-<div class="cardtitle">
-🎯 TRADE SETUP
+<div class="title">LIQUIDITY LEVELS</div>
+
+<div class="row">
+<span>15M High</span>
+<span id="m15High" class="value yellow">WAITING</span>
 </div>
 
-<div id="signal" class="signal yellow">
+<div class="row">
+<span>15M Low</span>
+<span id="m15Low" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>30M High</span>
+<span id="m30High" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>30M Low</span>
+<span id="m30Low" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>1H High</span>
+<span id="h1High" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>1H Low</span>
+<span id="h1Low" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>4H High</span>
+<span id="h4High" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>4H Low</span>
+<span id="h4Low" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>1D High</span>
+<span id="d1High" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>1D Low</span>
+<span id="d1Low" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">LIQUIDITY SWEEP</div>
+
+<div class="signal" id="sweep">
+WAITING
+</div>
+
+<div class="row">
+<span>Sweep Direction</span>
+<span id="sweepDirection" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Sweep Candle</span>
+<span id="sweepCandle" class="value">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">MARKET STRUCTURE</div>
+
+<div class="row">
+<span>MSS</span>
+<span id="mss" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Displacement</span>
+<span id="displacement" class="value yellow">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">BIG PLAYER PROXY</div>
+
+<div class="row">
+<span>Status</span>
+<span id="bigPlayer" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Direction</span>
+<span id="bigDirection" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Entry Candle</span>
+<span id="bigCandle" class="value">WAITING</span>
+</div>
+
+<div class="row">
+<span>Entry Time</span>
+<span id="bigTime" class="value">WAITING</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">TRADE SETUP</div>
+
+<div id="tradeSignal" class="trade yellow">
 NO ACTIVE SIGNAL
 </div>
 
 <div class="row">
+<span>Direction</span>
+<span id="tradeDirection" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
 <span>Entry</span>
-<span id="entry" class="value">
-WAITING
-</span>
+<span id="entry" class="value yellow">WAITING</span>
 </div>
 
 <div class="row">
 <span>Stop Loss</span>
-<span id="sl" class="value">
-WAITING
-</span>
+<span id="sl" class="value red">WAITING</span>
 </div>
 
 <div class="row">
 <span>Take Profit</span>
-<span id="tp" class="value">
-WAITING
-</span>
-</div>
-
-<div class="row">
-<span>Risk : Reward</span>
-<span id="rr" class="value yellow">
-WAITING
-</span>
+<span id="tp" class="value green">WAITING</span>
 </div>
 
 </div>
@@ -419,12 +317,38 @@ WAITING
 
 <div class="card">
 
-<div class="cardtitle">
-🧠 ENGINE STATUS
+<div class="title">NOTIFICATIONS</div>
+
+<button id="notifyBtn" onclick="enableNotifications()">
+🔔 ENABLE TRADE NOTIFICATIONS
+</button>
+
+<div class="small">
+Notification will trigger when a new liquidity sweep or big-player proxy trade is detected.
 </div>
 
-<div id="engine" class="small">
-Starting...
+</div>
+
+
+<div class="card">
+
+<div class="title">ENGINE STATUS</div>
+
+<div class="row">
+<span>Status</span>
+<span id="engine" class="value yellow status">CONNECTING...</span>
+</div>
+
+<div class="row">
+<span>Data</span>
+<span id="dataStatus" class="value yellow">WAITING</span>
+</div>
+
+<div class="row">
+<span>Last Update</span>
+<span id="updateTime" class="value">WAITING</span>
+</div>
+
 </div>
 
 </div>
@@ -432,108 +356,59 @@ Starting...
 
 <script>
 
-/* =====================================
-   WORKING CLOUDFLARE WORKER
-===================================== */
-
 const WORKER_URL =
 "https://icy-snow-263a.optrader06.workers.dev";
 
-
-/* =====================================
-   STATE
-===================================== */
-
 let candles=[];
-
-let notificationEnabled=false;
-
-let lastSweepAlert="";
-
-let lastBigPlayerAlert="";
+let previousSweep="";
+let previousBigPlayer="";
+let notificationReady=false;
 
 
-/* =====================================
-   ELEMENT
-===================================== */
-
-function el(id){
-return document.getElementById(id);
-}
-
-
-/* =====================================
-   NUMBER
-===================================== */
-
-function num(x){
-
-const n=Number(x);
-
-return Number.isFinite(n)?n:null;
-
-}
-
-
-/* =====================================
-   FORMAT PRICE
-===================================== */
-
-function price(x){
-
-if(x===null || x===undefined)
-return "WAITING";
-
-return Number(x).toFixed(2);
-
-}
-
-
-/* =====================================
+/* =========================
    NOTIFICATION
-===================================== */
+========================= */
 
 async function enableNotifications(){
 
 if(!("Notification" in window)){
-
-el("notificationStatus").textContent=
-"Browser notifications supported nahi hain.";
-
+alert("Browser notifications supported nahi hain.");
 return;
-
 }
 
 try{
 
-const permission=
+const permission =
 await Notification.requestPermission();
 
 if(permission==="granted"){
 
-notificationEnabled=true;
+notificationReady=true;
 
-el("notificationStatus").textContent=
-"✅ Notifications ON";
+document.getElementById("notifyBtn").innerText=
+"🔔 NOTIFICATIONS ON";
+
+document.getElementById("notifyBtn").classList.add(
+"notifyOn"
+);
 
 new Notification(
-"OP ROYAL",
+"OP ROYAL TRADE",
 {
-body:"Liquidity alert system is active."
+body:"Trade notifications enabled."
 }
 );
 
 }else{
 
-el("notificationStatus").textContent=
-"❌ Notifications permission denied";
+document.getElementById("notifyBtn").innerText=
+"🔕 NOTIFICATIONS BLOCKED";
 
 }
 
-}catch(error){
+}catch(e){
 
-el("notificationStatus").textContent=
-"Notification error";
+console.log(e);
 
 }
 
@@ -542,49 +417,91 @@ el("notificationStatus").textContent=
 
 function sendNotification(title,body){
 
-if(!notificationEnabled)
-return;
+if(!notificationReady)return;
 
-if(Notification.permission!=="granted")
-return;
+if(Notification.permission!=="granted")return;
 
 try{
 
-new Notification(
-title,
-{
+new Notification(title,{
 body:body
+});
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function priceFormat(value){
+
+if(value===null ||
+value===undefined ||
+isNaN(value)){
+
+return "WAITING";
+
+}
+
+return Number(value).toFixed(2);
+
+}
+
+
+function timeFormat(value){
+
+try{
+
+const d=new Date(value);
+
+if(isNaN(d.getTime())){
+
+return String(value);
+
+}
+
+return d.toLocaleString(
+"en-IN",
+{
+day:"2-digit",
+month:"2-digit",
+hour:"2-digit",
+minute:"2-digit"
 }
 );
 
-}catch(error){
+}catch(e){
 
-console.log(error);
-
-}
+return String(value);
 
 }
 
+}
 
-/* =====================================
-   GET DATA
-===================================== */
+
+/* =========================
+   FETCH DATA
+========================= */
 
 async function loadData(){
 
+const engine =
+document.getElementById("engine");
+
+const dataStatus =
+document.getElementById("dataStatus");
+
 try{
 
-el("status").textContent=
-"● CONNECTING";
-
-el("status").className=
-"status yellow";
-
-
-/*
-THIS IS THE SAME ROUTE
-THAT WAS CONFIRMED LIVE
-*/
+engine.innerText="CONNECTING...";
+engine.className="value yellow";
 
 const url=
 WORKER_URL+
@@ -592,7 +509,6 @@ WORKER_URL+
 "?symbol=XAU/USD"+
 "&interval=15min"+
 "&outputsize=100";
-
 
 const response=
 await fetch(
@@ -603,84 +519,169 @@ cache:"no-store"
 }
 );
 
+const raw=
+await response.text();
 
 if(!response.ok){
 
 throw new Error(
-"HTTP "+response.status
+"HTTP "+response.status+" : "+raw.slice(0,150)
 );
 
 }
 
+let data;
 
-const data=
-await response.json();
+try{
 
+data=JSON.parse(raw);
 
-console.log(
-"WORKER DATA",
-data
-);
-
-
-if(
-!data.values ||
-!Array.isArray(data.values)
-){
+}catch(e){
 
 throw new Error(
-"No values received"
+"Invalid JSON : "+raw.slice(0,150)
 );
 
 }
 
 
-candles=
-data.values.map(function(c){
+/*
+   Flexible response parser
+*/
 
-return{
+let values=null;
+
+if(
+data &&
+Array.isArray(data.values)
+){
+
+values=data.values;
+
+}
+
+else if(
+data &&
+data.data &&
+Array.isArray(data.data)
+){
+
+values=data.data;
+
+}
+
+else if(
+Array.isArray(data)
+){
+
+values=data;
+
+}
+
+
+if(!values){
+
+if(data && data.status==="error"){
+
+throw new Error(
+data.message ||
+"Worker returned API error"
+);
+
+}
+
+throw new Error(
+"No candle values : "+
+JSON.stringify(data).slice(0,200)
+);
+
+}
+
+
+if(values.length===0){
+
+throw new Error(
+"No candle data received"
+);
+
+}
+
+
+/*
+   Normalize candles
+*/
+
+candles=values.map(function(x){
+
+return {
 
 time:
-c.datetime,
+x.datetime ||
+x.time ||
+x.date ||
+"",
 
 open:
-num(c.open),
+Number(
+x.open ??
+x.o ??
+0
+),
 
 high:
-num(c.high),
+Number(
+x.high ??
+x.h ??
+0
+),
 
 low:
-num(c.low),
+Number(
+x.low ??
+x.l ??
+0
+),
 
 close:
-num(c.close),
+Number(
+x.close ??
+x.c ??
+0
+),
 
 volume:
-num(c.volume)
+Number(
+x.volume ??
+x.v ??
+0
+)
 
 };
 
-}).filter(function(c){
+}).filter(function(x){
 
-return(
-c.time &&
-c.open!==null &&
-c.high!==null &&
-c.low!==null &&
-c.close!==null
+return (
+x.high>0 &&
+x.low>0 &&
+x.close>0
 );
 
 });
 
 
-if(candles.length<5){
+if(candles.length===0){
 
 throw new Error(
-"Not enough candle data"
+"Valid candles not found"
 );
 
 }
 
+
+/*
+   Twelve Data normally returns newest first.
+   Convert to oldest -> newest.
+*/
 
 candles.sort(function(a,b){
 
@@ -690,635 +691,903 @@ new Date(b.time);
 });
 
 
-const latest=
-candles[candles.length-1];
+dataStatus.innerText=
+candles.length+" candles LIVE";
+
+dataStatus.className=
+"value green";
+
+engine.innerText=
+"DATA LIVE • XAU/USD • 15M";
+
+engine.className=
+"value green";
+
+document.getElementById(
+"updateTime"
+).innerText=
+new Date().toLocaleTimeString();
 
 
-/* =====================================
-   LIVE STATUS
-===================================== */
-
-el("price").textContent=
-price(latest.close);
-
-el("status").textContent=
-"● LIVE • XAU/USD • 15M";
-
-el("status").className=
-"status green";
-
-el("engine").textContent=
-"Data LIVE • "+
-candles.length+
-" candles • Last candle: "+
-latest.time;
-
-
-/* =====================================
-   BUILD TIMEFRAMES
-===================================== */
-
-buildTimeframe(
-15,
-"h15",
-"l15",
-"s15",
-"m15",
-"15M"
-);
-
-buildTimeframe(
-30,
-"h30",
-"l30",
-"s30",
-"m30",
-"30M"
-);
-
-buildTimeframe(
-60,
-"h60",
-"l60",
-"s60",
-"m60",
-"1H"
-);
-
-buildTimeframe(
-240,
-"h240",
-"l240",
-"s240",
-"m240",
-"4H"
-);
-
-buildTimeframe(
-1440,
-"hD",
-"lD",
-"sD",
-"mD",
-"1D"
-);
+runEngine();
 
 
 }catch(error){
 
-console.log(
-"LOAD ERROR",
-error
-);
+console.log(error);
 
-el("status").textContent=
-"● DATA ERROR";
+engine.innerText=
+"DATA ERROR";
 
-el("status").className=
-"status red";
+engine.className=
+"value red";
 
-el("engine").textContent=
-"Worker error: "+
-error.message;
+dataStatus.innerText=
+String(error.message).slice(0,180);
 
-}
+dataStatus.className=
+"value red";
 
 }
 
+}
 
-/* =====================================
-   AGGREGATE 15M DATA
-===================================== */
+
+/* =========================
+   AGGREGATION
+========================= */
 
 function aggregate(minutes){
 
-const groups={};
+if(candles.length===0)return[];
 
-const size=
-minutes*60*1000;
+const result=[];
 
+let current=null;
 
-for(const c of candles){
+candles.forEach(function(c){
 
-const t=
-new Date(c.time).getTime();
+const d=new Date(c.time);
+
+const ms=
+d.getTime();
 
 const bucket=
-Math.floor(t/size)*size;
+Math.floor(
+ms/(minutes*60*1000)
+)*(minutes*60*1000);
 
+if(
+!current ||
+current.bucket!==bucket
+){
 
-if(!groups[bucket]){
-
-groups[bucket]={
-
-time:
-new Date(bucket).toISOString(),
-
+current={
+bucket:bucket,
+time:new Date(bucket).toISOString(),
 open:c.open,
-
 high:c.high,
-
 low:c.low,
-
-close:c.close,
-
-volume:c.volume||0
-
+close:c.close
 };
+
+result.push(current);
 
 }else{
 
-groups[bucket].high=
+current.high=
 Math.max(
-groups[bucket].high,
+current.high,
 c.high
 );
 
-groups[bucket].low=
+current.low=
 Math.min(
-groups[bucket].low,
+current.low,
 c.low
 );
 
-groups[bucket].close=
+current.close=
 c.close;
 
-groups[bucket].volume+=
-c.volume||0;
-
 }
-
-}
-
-
-return Object.values(groups).sort(
-function(a,b){
-
-return new Date(a.time)-
-new Date(b.time);
 
 });
 
+return result;
+
 }
 
 
-/* =====================================
-   TIMEFRAME ANALYSIS
-===================================== */
+/* =========================
+   LIQUIDITY
+========================= */
 
-function buildTimeframe(
-minutes,
-highId,
-lowId,
-sweepId,
-mssId,
-label
-){
+function getLiquidity(minutes){
 
-const data=
+const arr=
 aggregate(minutes);
 
+if(arr.length<2){
 
-/*
-Need enough candles
-*/
-
-if(data.length<6){
-
-el(highId).textContent=
-"INSUFFICIENT";
-
-el(lowId).textContent=
-"INSUFFICIENT";
-
-el(sweepId).textContent=
-"WAITING";
-
-el(mssId).textContent=
-"WAITING";
-
-return;
+return {
+high:null,
+low:null
+};
 
 }
 
 
 /*
-Previous liquidity
+   Current candle ko liquidity calculation
+   se hata rahe hain.
 */
-
-const current=
-data[data.length-1];
 
 const previous=
-data.slice(
-Math.max(0,data.length-21),
-data.length-1
+arr.slice(0,-1);
+
+const lookback=
+previous.slice(
+Math.max(0,previous.length-20)
 );
 
+let high=-Infinity;
+let low=Infinity;
 
-let liquidityHigh=
--Infinity;
+lookback.forEach(function(c){
 
-let liquidityLow=
-Infinity;
+if(c.high>high)high=c.high;
 
+if(c.low<low)low=c.low;
 
-for(const c of previous){
+});
 
-liquidityHigh=
-Math.max(
-liquidityHigh,
-c.high
-);
-
-liquidityLow=
-Math.min(
-liquidityLow,
-c.low
-);
-
-}
-
-
-el(highId).textContent=
-price(liquidityHigh);
-
-el(lowId).textContent=
-price(liquidityLow);
-
-
-/*
-Liquidity sweep
-*/
-
-let sweep=null;
-
-
-if(
-current.high>liquidityHigh &&
-current.close<liquidityHigh
-){
-
-sweep={
-direction:"SELL",
-type:"HIGH SWEPT",
-level:liquidityHigh,
-candle:current
+return {
+high:high,
+low:low
 };
 
 }
 
 
+function updateLiquidity(){
+
+const m15=
+getLiquidity(15);
+
+const m30=
+getLiquidity(30);
+
+const h1=
+getLiquidity(60);
+
+const h4=
+getLiquidity(240);
+
+const d1=
+getLiquidity(1440);
+
+
+document.getElementById("m15High").innerText=
+priceFormat(m15.high);
+
+document.getElementById("m15Low").innerText=
+priceFormat(m15.low);
+
+document.getElementById("m30High").innerText=
+priceFormat(m30.high);
+
+document.getElementById("m30Low").innerText=
+priceFormat(m30.low);
+
+document.getElementById("h1High").innerText=
+priceFormat(h1.high);
+
+document.getElementById("h1Low").innerText=
+priceFormat(h1.low);
+
+document.getElementById("h4High").innerText=
+priceFormat(h4.high);
+
+document.getElementById("h4Low").innerText=
+priceFormat(h4.low);
+
+document.getElementById("d1High").innerText=
+priceFormat(d1.high);
+
+document.getElementById("d1Low").innerText=
+priceFormat(d1.low);
+
+}
+
+
+/* =========================
+   LIQUIDITY SWEEP
+========================= */
+
+function detectSweep(){
+
+if(candles.length<10)return null;
+
+const current=
+candles[candles.length-1];
+
+const previous=
+candles.slice(
+Math.max(0,candles.length-21),
+candles.length-1
+);
+
+let high=-Infinity;
+let low=Infinity;
+
+previous.forEach(function(c){
+
+if(c.high>high)high=c.high;
+
+if(c.low<low)low=c.low;
+
+});
+
+
+/*
+   Bearish sweep:
+   Previous liquidity high breached
+   and candle closes back below high.
+*/
+
 if(
-current.low<liquidityLow &&
-current.close>liquidityLow
+current.high>high &&
+current.close<high
 ){
 
-sweep={
-direction:"BUY",
-type:"LOW SWEPT",
-level:liquidityLow,
+return {
+
+type:"BEARISH",
+level:high,
 candle:current
+
 };
 
 }
 
 
-if(!sweep){
-
-el(sweepId).textContent=
-"WAITING";
-
-el(sweepId).className=
-"value yellow";
-
-el(mssId).textContent=
-"WAITING";
-
-el(mssId).className=
-"value yellow";
-
-return;
-
-}
-
-
 /*
-SWEEP FOUND
+   Bullish sweep:
+   Previous liquidity low breached
+   and candle closes back above low.
 */
-
-el(sweepId).textContent=
-sweep.type;
-
-el(sweepId).className=
-"value green";
-
-
-/*
-Separate sweep notification
-*/
-
-const sweepKey=
-label+
-sweep.type+
-sweep.candle.time;
-
-
-if(sweepKey!==lastSweepAlert){
-
-lastSweepAlert=
-sweepKey;
-
-sendNotification(
-"💧 OP ROYAL LIQUIDITY SWEEP",
-"XAUUSD "+label+
-" • "+sweep.type+
-" • Price "+
-price(sweep.candle.close)
-);
-
-}
-
-
-/*
-MSS
-*/
-
-const before=
-data.slice(
-Math.max(0,data.length-8),
-data.length-1
-);
-
-
-const structureHigh=
-Math.max(
-...before.map(
-x=>x.high
-)
-);
-
-
-const structureLow=
-Math.min(
-...before.map(
-x=>x.low
-)
-);
-
-
-let mss=null;
-
 
 if(
-sweep.direction==="BUY" &&
-current.close>structureHigh
+current.low<low &&
+current.close>low
 ){
 
-mss={
-direction:"BUY",
+return {
+
+type:"BULLISH",
+level:low,
 candle:current
+
 };
 
 }
 
-
-if(
-sweep.direction==="SELL" &&
-current.close<structureLow
-){
-
-mss={
-direction:"SELL",
-candle:current
-};
+return null;
 
 }
 
 
-if(!mss){
+/* =========================
+   MSS
+========================= */
 
-el(mssId).textContent=
-"MSS WAITING";
+function detectMSS(direction){
 
-el(mssId).className=
-"value yellow";
+if(candles.length<8)return false;
 
-return;
+const current=
+candles[candles.length-1];
 
-}
-
-
-/*
-MSS CONFIRMED
-*/
-
-el(mssId).textContent=
-mss.direction==="BUY"?
-"BULLISH MSS":
-"BEARISH MSS";
-
-el(mssId).className=
-"value green";
-
-
-/*
-BIG PLAYER PROXY
-*/
-
-const recent=
-data.slice(
-Math.max(0,data.length-6),
-data.length-1
+const previous=
+candles.slice(
+candles.length-7,
+candles.length-1
 );
 
+let swingHigh=-Infinity;
+let swingLow=Infinity;
 
-const avgRange=
-recent.reduce(
-function(sum,c){
+previous.forEach(function(c){
 
-return sum+
-(c.high-c.low);
+if(c.high>swingHigh)
+swingHigh=c.high;
 
-},
-0
-)/recent.length;
+if(c.low<swingLow)
+swingLow=c.low;
 
-
-const currentRange=
-current.high-current.low;
+});
 
 
-const displacement=
-currentRange>
-avgRange*1.20;
+if(direction==="BULLISH"){
+
+return current.close>swingHigh;
+
+}
+
+if(direction==="BEARISH"){
+
+return current.close<swingLow;
+
+}
+
+return false;
+
+}
 
 
-if(!displacement)
-return;
+/* =========================
+   DISPLACEMENT
+========================= */
+
+function detectDisplacement(direction){
+
+if(candles.length<8)return false;
+
+const current=
+candles[candles.length-1];
+
+let total=0;
+
+for(
+let i=candles.length-6;
+i<candles.length-1;
+i++
+){
+
+total+=
+Math.abs(
+candles[i].close-
+candles[i].open
+);
+
+}
+
+const average=
+total/5;
+
+const body=
+Math.abs(
+current.close-
+current.open
+);
+
+if(
+body<average*1.3
+){
+
+return false;
+
+}
+
+if(
+direction==="BULLISH" &&
+current.close>current.open
+){
+
+return true;
+
+}
+
+if(
+direction==="BEARISH" &&
+current.close<current.open
+){
+
+return true;
+
+}
+
+return false;
+
+}
 
 
-/*
-BIG PLAYER ENTRY
-*/
+/* =========================
+   BIG PLAYER PROXY
+========================= */
 
-el("bpStatus").textContent=
-"CONFIRMED";
+function detectBigPlayer(
+direction,
+mss,
+displacement
+){
 
-el("bpStatus").className=
-"value green";
+if(!direction)return false;
 
+return (
+mss &&
+displacement
+);
 
-el("bpDirection").textContent=
-mss.direction;
-
-el("bpDirection").className=
-mss.direction==="BUY"?
-"value green":
-"value red";
-
-
-el("bpCandle").textContent=
-current.time;
-
-el("bpCandle").className=
-"value blue";
+}
 
 
-el("bpTF").textContent=
-label;
+/* =========================
+   TRADE
+========================= */
 
-el("bpTF").className=
-"value blue";
+function createTrade(
+direction,
+sweep
+){
 
-
-/*
-ENTRY
-*/
+const current=
+candles[candles.length-1];
 
 const entry=
 current.close;
 
+let sl;
 
-/*
-SL:
-BUY = sweep candle low
-SELL = sweep candle high
-*/
+if(direction==="BULLISH"){
 
-let stop;
-
-
-if(mss.direction==="BUY"){
-
-stop=
-sweep.candle.low;
+sl=sweep.candle.low;
 
 }else{
 
-stop=
-sweep.candle.high;
+sl=sweep.candle.high;
+
+}
+
+const risk=
+Math.abs(entry-sl);
+
+if(
+!risk ||
+risk<=0
+){
+
+return null;
+
+}
+
+let tp;
+
+if(direction==="BULLISH"){
+
+tp=entry+(risk*2);
+
+}else{
+
+tp=entry-(risk*2);
+
+}
+
+return {
+
+direction:direction,
+entry:entry,
+sl:sl,
+tp:tp
+
+};
+
+}
+
+
+/* =========================
+   MAIN ENGINE
+========================= */
+
+function runEngine(){
+
+updateLiquidity();
+
+const current=
+candles[candles.length-1];
+
+document.getElementById(
+"price"
+).innerText=
+priceFormat(current.close);
+
+document.getElementById(
+"candleTime"
+).innerText=
+timeFormat(current.time);
+
+
+/*
+   Sweep
+*/
+
+const sweep=
+detectSweep();
+
+if(!sweep){
+
+document.getElementById(
+"sweep"
+).innerText=
+"NO NEW SWEEP";
+
+document.getElementById(
+"sweep"
+).className=
+"signal yellow";
+
+document.getElementById(
+"sweepDirection"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"sweepCandle"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"mss"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"displacement"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"bigPlayer"
+).innerText=
+"WAITING";
+
+return;
 
 }
 
 
 /*
-2R TARGET
+   Sweep UI
 */
 
-let target;
+document.getElementById(
+"sweep"
+).innerText=
+sweep.type+
+" LIQUIDITY SWEEP";
+
+document.getElementById(
+"sweep"
+).className=
+"sweep signal "+
+(
+sweep.type==="BULLISH"
+?"green"
+:"red"
+);
+
+document.getElementById(
+"sweepDirection"
+).innerText=
+sweep.type;
+
+document.getElementById(
+"sweepDirection"
+).className=
+"value "+
+(
+sweep.type==="BULLISH"
+?"green"
+:"red"
+);
+
+document.getElementById(
+"sweepCandle"
+).innerText=
+timeFormat(
+sweep.candle.time
+);
 
 
-if(mss.direction==="BUY"){
+/*
+   New sweep notification
+*/
 
-target=
-entry+
-(entry-stop)*2;
+const sweepKey=
+sweep.type+
+"_"+
+sweep.candle.time;
 
-}else{
+if(
+sweepKey!==previousSweep
+){
 
-target=
-entry-
-(stop-entry)*2;
+previousSweep=sweepKey;
+
+sendNotification(
+"💧 OP ROYAL LIQUIDITY SWEEP",
+"XAUUSD 15M • "+
+sweep.type+
+" SWEEP • Price "+
+priceFormat(current.close)
+);
 
 }
 
 
-el("signal").textContent=
-mss.direction==="BUY"?
-"🟢 BUY":
-"🔴 SELL";
+/*
+   MSS
+*/
 
-el("signal").className=
-mss.direction==="BUY"?
-"signal green":
-"signal red";
+const mss=
+detectMSS(
+sweep.type
+);
+
+document.getElementById(
+"mss"
+).innerText=
+mss
+?"MSS CONFIRMED"
+:"WAITING";
+
+document.getElementById(
+"mss"
+).className=
+"value "+
+(
+mss
+?"green"
+:"yellow"
+);
 
 
-el("entry").textContent=
-price(entry);
+/*
+   Displacement
+*/
 
-el("sl").textContent=
-price(stop);
+const displacement=
+detectDisplacement(
+sweep.type
+);
 
-el("tp").textContent=
-price(target);
+document.getElementById(
+"displacement"
+).innerText=
+displacement
+?"CONFIRMED"
+:"WAITING";
 
-el("rr").textContent=
-"1 : 2";
+document.getElementById(
+"displacement"
+).className=
+"value "+
+(
+displacement
+?"green"
+:"yellow"
+);
 
-el("rr").className=
+
+/*
+   Big player proxy
+*/
+
+const bigPlayer=
+detectBigPlayer(
+sweep.type,
+mss,
+displacement
+);
+
+if(bigPlayer){
+
+document.getElementById(
+"bigPlayer"
+).innerText=
+"CONFIRMED";
+
+document.getElementById(
+"bigPlayer"
+).className=
 "value green";
 
+document.getElementById(
+"bigDirection"
+).innerText=
+sweep.type;
+
+document.getElementById(
+"bigDirection"
+).className=
+"value "+
+(
+sweep.type==="BULLISH"
+?"green"
+:"red"
+);
+
+document.getElementById(
+"bigCandle"
+).innerText=
+"15M DISPLACEMENT";
+
+document.getElementById(
+"bigTime"
+).innerText=
+timeFormat(
+current.time
+);
+
 
 /*
-BIG PLAYER NOTIFICATION
+   Trade
+*/
+
+const trade=
+createTrade(
+sweep.type,
+sweep
+);
+
+if(trade){
+
+document.getElementById(
+"tradeSignal"
+).innerText=
+"⚡ "+
+trade.direction+
+" TRADE";
+
+document.getElementById(
+"tradeSignal"
+).className=
+"trade "+
+(
+trade.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+document.getElementById(
+"tradeDirection"
+).innerText=
+trade.direction;
+
+document.getElementById(
+"tradeDirection"
+).className=
+"value "+
+(
+trade.direction==="BULLISH"
+?"green"
+:"red"
+);
+
+document.getElementById(
+"entry"
+).innerText=
+priceFormat(trade.entry);
+
+document.getElementById(
+"sl"
+).innerText=
+priceFormat(trade.sl);
+
+document.getElementById(
+"tp"
+).innerText=
+priceFormat(trade.tp);
+
+
+/*
+   Big-player notification
 */
 
 const bigKey=
-label+
-mss.direction+
+trade.direction+
+"_"+
 current.time;
 
+if(
+bigKey!==previousBigPlayer
+){
 
-if(bigKey!==lastBigPlayerAlert){
-
-lastBigPlayerAlert=
-bigKey;
+previousBigPlayer=bigKey;
 
 sendNotification(
 "⚡ OP ROYAL BIG PLAYER ENTRY",
-"XAUUSD "+label+
-" • "+mss.direction+
+"XAUUSD 15M • "+
+trade.direction+
 " • Entry "+
-price(entry)+
+priceFormat(trade.entry)+
 " • SL "+
-price(stop)+
+priceFormat(trade.sl)+
 " • TP "+
-price(target)+
-" • Candle "+
-current.time
+priceFormat(trade.tp)
 );
 
 }
 
 }
 
+}else{
 
-/* =====================================
+document.getElementById(
+"bigPlayer"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"bigPlayer"
+).className=
+"value yellow";
+
+document.getElementById(
+"bigDirection"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"bigCandle"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"bigTime"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"tradeSignal"
+).innerText=
+"NO ACTIVE SIGNAL";
+
+document.getElementById(
+"tradeSignal"
+).className=
+"trade yellow";
+
+document.getElementById(
+"tradeDirection"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"entry"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"sl"
+).innerText=
+"WAITING";
+
+document.getElementById(
+"tp"
+).innerText=
+"WAITING";
+
+}
+
+}
+
+
+/* =========================
    START
-===================================== */
+========================= */
 
 loadData();
 
 
 /*
-REFRESH EVERY 60 SECONDS
+   Refresh every 30 seconds.
 */
 
 setInterval(
 loadData,
-60000
+30000
 );
 
 </script>
