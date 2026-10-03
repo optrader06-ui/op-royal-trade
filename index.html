@@ -2,359 +2,106 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OP ROYAL TRADE</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-padding:12px;
-background:#071018;
-color:#fff;
-font-family:Arial,sans-serif
-}
-
-h1{
-text-align:center;
-font-size:23px;
-margin:5px 0;
-color:#f5c542
-}
-
-.sub{
-text-align:center;
-font-size:12px;
-color:#9aa7b2;
-margin-bottom:14px
-}
-
-.card{
-background:#0d1822;
-border:1px solid #263746;
-border-radius:12px;
-padding:13px;
-margin-bottom:11px
-}
-
-.title{
-font-size:15px;
-font-weight:bold;
-color:#f5c542;
-margin-bottom:9px
-}
-
-.price{
-text-align:center;
-font-size:31px;
-font-weight:bold;
-margin:8px 0 12px
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding:8px 0;
-border-bottom:1px solid #1d2b36;
-font-size:13px
-}
-
-.row:last-child{
-border-bottom:0
-}
-
-.value{
-font-weight:bold;
-text-align:right
-}
-
-.green{color:#36d98b}
-.red{color:#ff5b5b}
-.yellow{color:#f5c542}
-.blue{color:#55b7ff}
-.gray{color:#9aa7b2}
-
-.tf{
-font-size:10px;
-background:#162633;
-padding:3px 6px;
-border-radius:5px;
-color:#55b7ff
-}
-
-.setup{
-background:#101e29;
-padding:9px;
-margin:5px 0;
-border-radius:8px;
-font-size:13px
-}
-
-button{
-width:100%;
-border:0;
-border-radius:9px;
-padding:12px;
-background:#f5c542;
-color:#071018;
-font-weight:bold;
-font-size:14px
-}
-
-.small{
-font-size:11px;
-line-height:1.5;
-color:#8d9aa5
-}
-
-.statusDot{
-display:inline-block;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#f5c542;
-margin-right:5px
-}
+body{margin:0;padding:12px;background:#071018;color:#fff;font-family:Arial,sans-serif}
+h1{text-align:center;color:#f5c542;font-size:23px;margin:5px 0}
+.sub{text-align:center;color:#9aa7b2;font-size:12px;margin-bottom:14px}
+.card{background:#0d1822;border:1px solid #263746;border-radius:12px;padding:13px;margin-bottom:11px}
+.title{color:#f5c542;font-size:15px;font-weight:bold;margin-bottom:9px}
+.price{text-align:center;font-size:31px;font-weight:bold;margin:8px 0 12px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #1d2b36;font-size:13px}
+.row:last-child{border-bottom:0}
+.value{font-weight:bold;text-align:right}
+.green{color:#36d98b}.red{color:#ff5b5b}.yellow{color:#f5c542}.blue{color:#55b7ff}.gray{color:#9aa7b2}
+.setup{background:#101e29;padding:9px;margin:5px 0;border-radius:8px;font-size:13px}
+.tf{font-size:10px;background:#162633;padding:3px 6px;border-radius:5px;color:#55b7ff}
+.small{font-size:11px;line-height:1.5;color:#8d9aa5}
+button{width:100%;border:0;border-radius:9px;padding:12px;background:#f5c542;color:#071018;font-weight:bold;font-size:14px}
+.signal{font-size:22px!important}
 </style>
 </head>
 
 <body>
 
 <h1>⚡ OP ROYAL TRADE</h1>
-
-<div class="sub">
-XAU/USD • Liquidity → Sweep → MSS → Displacement
-</div>
+<div class="sub">XAU/USD • Liquidity → Sweep → MSS → Displacement → Entry</div>
 
 <div class="card">
-
 <div class="price" id="price">WAITING</div>
 
-<div class="row">
-<span>Market</span>
-<span class="value blue">XAU/USD</span>
-</div>
-
-<div class="row">
-<span>Timeframe</span>
-<span class="value blue">15 MIN</span>
-</div>
-
-<div class="row">
-<span>Data</span>
-<span id="dataStatus" class="value yellow">
-<span class="statusDot"></span>WAITING
-</span>
-</div>
-
-<div class="row">
-<span>Engine</span>
-<span id="engineStatus" class="value yellow">STARTING</span>
-</div>
-
-<div class="row">
-<span>Last Update</span>
-<span id="lastUpdate" class="value gray">--</span>
-</div>
-
+<div class="row"><span>Market</span><span class="value blue">XAU/USD</span></div>
+<div class="row"><span>Timeframe</span><span class="value blue">15 MIN</span></div>
+<div class="row"><span>Data</span><span id="dataStatus" class="value yellow">WAITING</span></div>
+<div class="row"><span>Engine</span><span id="engineStatus" class="value yellow">STARTING</span></div>
+<div class="row"><span>Last Update</span><span id="lastUpdate" class="value gray">--</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">🎯 OP ROYAL Setup</div>
-
-<div class="setup">
-1️⃣ Liquidity Levels →
-<span id="s1" class="yellow">WAITING</span>
-</div>
-
-<div class="setup">
-2️⃣ Liquidity Sweep →
-<span id="s2" class="yellow">WAITING</span>
-</div>
-
-<div class="setup">
-3️⃣ MSS →
-<span id="s3" class="yellow">WAITING</span>
-</div>
-
-<div class="setup">
-4️⃣ Displacement →
-<span id="s4" class="yellow">WAITING</span>
-</div>
-
-<div class="setup">
-5️⃣ Big Player Proxy →
-<span id="s5" class="yellow">WAITING</span>
-</div>
-
-<div class="setup">
-6️⃣ Trade Setup →
-<span id="s6" class="yellow">WAITING</span>
-</div>
-
+<div class="setup">1️⃣ Liquidity → <span id="s1" class="yellow">WAITING</span></div>
+<div class="setup">2️⃣ Sweep → <span id="s2" class="yellow">WAITING</span></div>
+<div class="setup">3️⃣ MSS → <span id="s3" class="yellow">WAITING</span></div>
+<div class="setup">4️⃣ Displacement → <span id="s4" class="yellow">WAITING</span></div>
+<div class="setup">5️⃣ Big Player Proxy → <span id="s5" class="yellow">WAITING</span></div>
+<div class="setup">6️⃣ Trade Setup → <span id="s6" class="yellow">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">💧 Liquidity Levels</div>
-
-<div class="row">
-<span>15M <span class="tf">Previous</span></span>
-<span id="l15" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>30M <span class="tf">Previous</span></span>
-<span id="l30" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>1H <span class="tf">Previous</span></span>
-<span id="l60" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>4H <span class="tf">Previous</span></span>
-<span id="l240" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>1D <span class="tf">Previous</span></span>
-<span id="l1440" class="value gray">WAITING</span>
-</div>
-
+<div class="row"><span>15M <span class="tf">Previous</span></span><span id="l15" class="value gray">WAITING</span></div>
+<div class="row"><span>30M <span class="tf">Previous</span></span><span id="l30" class="value gray">WAITING</span></div>
+<div class="row"><span>1H <span class="tf">Previous</span></span><span id="l60" class="value gray">WAITING</span></div>
+<div class="row"><span>4H <span class="tf">Previous</span></span><span id="l240" class="value gray">WAITING</span></div>
+<div class="row"><span>1D <span class="tf">Previous</span></span><span id="l1440" class="value gray">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">📌 Key Liquidity</div>
-
-<div class="row">
-<span>PDH</span>
-<span id="pdh" class="value blue">WAITING</span>
-</div>
-
-<div class="row">
-<span>PDL</span>
-<span id="pdl" class="value blue">WAITING</span>
-</div>
-
-<div class="row">
-<span>Current Price</span>
-<span id="currentPrice" class="value green">WAITING</span>
-</div>
-
+<div class="row"><span>PDH</span><span id="pdh" class="value blue">WAITING</span></div>
+<div class="row"><span>PDL</span><span id="pdl" class="value blue">WAITING</span></div>
+<div class="row"><span>Current Price</span><span id="currentPrice" class="value green">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">💧 Liquidity Sweep</div>
-
-<div class="row">
-<span>Status</span>
-<span id="sweepStatus" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Timeframe</span>
-<span id="sweepTF" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="sweepDir" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Swept Level</span>
-<span id="sweepLevel" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Sweep Candle</span>
-<span id="sweepTime" class="value gray">WAITING</span>
-</div>
-
+<div class="row"><span>Status</span><span id="sweepStatus" class="value yellow">WAITING</span></div>
+<div class="row"><span>Timeframe</span><span id="sweepTF" class="value yellow">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="sweepDir" class="value yellow">WAITING</span></div>
+<div class="row"><span>Swept Level</span><span id="sweepLevel" class="value yellow">WAITING</span></div>
+<div class="row"><span>Sweep Candle</span><span id="sweepTime" class="value gray">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">📈 Market Structure Shift</div>
-
-<div class="row">
-<span>MSS</span>
-<span id="mss" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="mssDir" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>MSS Candle</span>
-<span id="mssTime" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>Broken Structure</span>
-<span id="mssLevel" class="value blue">WAITING</span>
-</div>
-
+<div class="row"><span>MSS</span><span id="mss" class="value yellow">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="mssDir" class="value yellow">WAITING</span></div>
+<div class="row"><span>MSS Candle</span><span id="mssTime" class="value gray">WAITING</span></div>
+<div class="row"><span>Broken Structure</span><span id="mssLevel" class="value blue">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">⚡ Displacement</div>
-
-<div class="row">
-<span>Status</span>
-<span id="disp" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Body Strength</span>
-<span id="bodyStrength" class="value gray">WAITING</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="dispDir" class="value yellow">WAITING</span>
-</div>
-
+<div class="row"><span>Status</span><span id="disp" class="value yellow">WAITING</span></div>
+<div class="row"><span>Body Strength</span><span id="bodyStrength" class="value gray">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="dispDir" class="value yellow">WAITING</span></div>
 </div>
 
 <div class="card">
-
 <div class="title">🐋 Big Player Proxy</div>
-
-<div class="row">
-<span>Confirmation</span>
-<span id="big" class="value yellow">WAITING</span>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<span id="bigDir" class="value yellow">WAITING</span>
-</div>
-
-<div class="small">
-Proxy = Liquidity Sweep + MSS + Displacement.
-It does not identify actual institutional orders.
-</div>
-
+<div class="row"><span>Confirmation</span><span id="big" class="value yellow">WAITING</span></div>
+<div class="row"><span>Direction</span><span id="bigDir" class="value yellow">WAITING</span></div>
+<div class="small">Proxy = Sweep + MSS + Displacement. It does not identify actual institutional orders.</div>
 </div>
 
 <div class="card">
-
-<div class="title">💰 Trade Setup</div>
+<div class="title">💰 TRADE SETUP</div>
 
 <div class="row">
 <span>Signal</span>
-<span id="signal" class="value yellow">NO ACTIVE SIGNAL</span>
+<span id="signal" class="value yellow signal">NO ACTIVE SIGNAL</span>
 </div>
 
 <div class="row">
@@ -376,47 +123,31 @@ It does not identify actual institutional orders.
 <span>Risk : Reward</span>
 <span class="value blue">1 : 2</span>
 </div>
-
 </div>
 
 <div class="card">
-
 <div class="title">🔔 Notifications</div>
 
 <div class="row">
 <span>Liquidity Sweep</span>
-<label>
 <input type="checkbox" id="sweepAlert">
-ON
-</label>
 </div>
 
 <div class="row">
 <span>Big Player Entry</span>
-<label>
 <input type="checkbox" id="entryAlert">
-ON
-</label>
 </div>
 
-<button onclick="enableNotifications()">
-ENABLE NOTIFICATIONS
-</button>
+<button onclick="enableNotifications()">ENABLE NOTIFICATIONS</button>
 
 <div id="notificationStatus" class="small">
 Notification permission not requested.
 </div>
-
 </div>
 
 <div class="card">
-
 <div class="title">📝 System Log</div>
-
-<div id="log" class="small">
-Starting engine...
-</div>
-
+<div id="log" class="small">Starting engine...</div>
 </div>
 
 <script>
@@ -425,64 +156,42 @@ const WORKER_URL=
 "https://icy-snow-263a.optrader06.workers.dev";
 
 const ENDPOINT=
-WORKER_URL+
-"/api.twelvedata.com/time_series";
+WORKER_URL+"/api.twelvedata.com/time_series";
 
 let marketData=[];
 let lastSweepKey="";
-let lastMSSKey="";
+let lastEntryKey="";
 
-/* =========================
-HELPERS
-========================= */
+function $(id){return document.getElementById(id)}
 
-function $(id){
-return document.getElementById(id);
-}
-
-function log(text){
-$("log").innerHTML=
-new Date().toLocaleTimeString()+
-" — "+text;
-}
-
-function setEngine(text,color){
-$("engineStatus").textContent=text;
-$("engineStatus").className=
-"value "+color;
-}
-
-function setData(text,color){
-$("dataStatus").innerHTML=
-'<span class="statusDot"></span>'+text;
-$("dataStatus").className=
-"value "+color;
-}
-
-function fmt(value){
-
-if(
-value===undefined||
-value===null||
-isNaN(value)
-)return "WAITING";
-
-return Number(value).toFixed(2);
+function fmt(v){
+return v==null||isNaN(v)?"WAITING":Number(v).toFixed(2)
 }
 
 function tfText(tf){
-
-if(tf===1440)return "1D";
-if(tf===240)return "4H";
-if(tf===60)return "1H";
-if(tf===30)return "30M";
-return "15M";
-
+if(tf===1440)return"1D";
+if(tf===240)return"4H";
+if(tf===60)return"1H";
+if(tf===30)return"30M";
+return"15M"
 }
 
-/* =========================
-LIVE DATA
-========================= */
+function log(t){
+$("log").textContent=
+new Date().toLocaleTimeString()+" — "+t
+}
+
+function setEngine(t,c){
+$("engineStatus").textContent=t;
+$("engineStatus").className="value "+c
+}
+
+function setData(t,c){
+$("dataStatus").textContent=t;
+$("dataStatus").className="value "+c
+}
+
+/* DATA */
 
 async function loadData(){
 
@@ -490,41 +199,26 @@ setEngine("FETCHING...","yellow");
 
 try{
 
-const response=await fetch(
+const r=await fetch(
 ENDPOINT+
 "?symbol=XAU/USD&interval=15min&outputsize=100",
-{
-cache:"no-store"
-}
+{cache:"no-store"}
 );
 
-if(!response.ok)
-throw new Error(
-"HTTP "+response.status
-);
+if(!r.ok)throw new Error("HTTP "+r.status);
 
-const data=await response.json();
+const d=await r.json();
 
-if(
-!data.values||
-!Array.isArray(data.values)||
-!data.values.length
-){
+if(!d.values||!Array.isArray(d.values))
 throw new Error("No values received");
-}
 
-marketData=data.values
+marketData=d.values
 .map(c=>({
-
 time:c.datetime,
 open:Number(c.open),
 high:Number(c.high),
 low:Number(c.low),
-close:Number(c.close),
-volume:
-c.volume?
-Number(c.volume):null
-
+close:Number(c.close)
 }))
 .filter(c=>
 isFinite(c.open)&&
@@ -533,22 +227,16 @@ isFinite(c.low)&&
 isFinite(c.close)
 )
 .sort((a,b)=>
-new Date(a.time)-
-new Date(b.time)
+new Date(a.time)-new Date(b.time)
 );
 
 if(!marketData.length)
-throw new Error("Invalid candle data");
+throw new Error("Invalid candles");
 
-const latest=
-marketData[marketData.length-1];
+const last=marketData.at(-1);
 
-$("price").textContent=
-fmt(latest.close);
-
-$("currentPrice").textContent=
-fmt(latest.close);
-
+$("price").textContent=fmt(last.close);
+$("currentPrice").textContent=fmt(last.close);
 $("lastUpdate").textContent=
 new Date().toLocaleTimeString();
 
@@ -557,244 +245,149 @@ setEngine("DATA LIVE","green");
 
 runEngine();
 
-}catch(error){
+}catch(e){
 
 setData("ERROR","red");
 setEngine("DATA ERROR","red");
-
-log(
-"Data error: "+error.message
-);
+log("Data error: "+e.message);
 
 }
-
 }
 
-/* =========================
-BUCKET
-========================= */
+/* AGGREGATION */
 
-function bucket(time,minutes){
-
-const d=new Date(time);
-
+function bucket(t,m){
 return Math.floor(
-d.getTime()/
-(minutes*60*1000)
-)*
-(minutes*60*1000);
-
+new Date(t).getTime()/
+(m*60000)
+)*(m*60000)
 }
 
-/* =========================
-AGGREGATE
-========================= */
+function aggregate(m){
 
-function aggregate(minutes){
-
-const groups={};
+const g={};
 
 marketData.forEach(c=>{
-
-const b=bucket(c.time,minutes);
-
-if(!groups[b])
-groups[b]=[];
-
-groups[b].push(c);
-
+const b=bucket(c.time,m);
+if(!g[b])g[b]=[];
+g[b].push(c);
 });
 
-return Object.keys(groups)
-.sort((a,b)=>Number(a)-Number(b))
+return Object.keys(g)
+.sort((a,b)=>a-b)
 .map(k=>{
 
-const arr=groups[k];
+const a=g[k];
 
 return{
-
-time:new Date(
-Number(k)
-).toISOString(),
-
-open:arr[0].open,
-
-high:Math.max(
-...arr.map(x=>x.high)
-),
-
-low:Math.min(
-...arr.map(x=>x.low)
-),
-
-close:arr[arr.length-1].close
-
-};
+time:new Date(Number(k)).toISOString(),
+open:a[0].open,
+high:Math.max(...a.map(x=>x.high)),
+low:Math.min(...a.map(x=>x.low)),
+close:a.at(-1).close
+}
 
 });
-
 }
 
-/* =========================
-PREVIOUS LIQUIDITY
-========================= */
+/* LIQUIDITY */
 
-function getPreviousLiquidity(minutes){
+function previousLiquidity(m){
 
-const cs=aggregate(minutes);
+const c=aggregate(m);
 
-if(cs.length<2)
-return null;
-
-return cs[cs.length-2];
-
+return c.length>=2?c.at(-2):null
 }
-
-/* =========================
-LIQUIDITY
-========================= */
 
 function showLiquidity(){
 
-const map=[
+[
 [15,"l15"],
 [30,"l30"],
 [60,"l60"],
 [240,"l240"],
 [1440,"l1440"]
-];
+].forEach(([m,id])=>{
 
-map.forEach(item=>{
+const c=previousLiquidity(m);
 
-const c=
-getPreviousLiquidity(item[0]);
-
-if(!c){
-
-$(item[1]).textContent="WAITING";
-return;
-
-}
-
-$(item[1]).innerHTML=
-"H "+fmt(c.high)+
-" / L "+fmt(c.low);
-
-$(item[1]).className=
-"value blue";
+$(id).textContent=c?
+"H "+fmt(c.high)+" / L "+fmt(c.low):
+"WAITING";
 
 });
 
-const daily=
-getPreviousLiquidity(1440);
+const d=previousLiquidity(1440);
 
-if(daily){
-
-$("pdh").textContent=
-fmt(daily.high);
-
-$("pdl").textContent=
-fmt(daily.low);
-
+if(d){
+$("pdh").textContent=fmt(d.high);
+$("pdl").textContent=fmt(d.low);
 }
 
 $("s1").textContent="READY";
 $("s1").className="green";
-
 }
 
-/* =========================
-SWEEP
-========================= */
+/* SWEEP */
 
 function detectSweep(){
 
 let best=null;
 
-const timeframes=[
-15,30,60,240,1440
-];
+[15,30,60,240,1440].forEach(tf=>{
 
-timeframes.forEach(tf=>{
+const c=aggregate(tf);
 
-const cs=aggregate(tf);
+if(c.length<3)return;
 
-if(cs.length<3)
-return;
+for(let i=1;i<c.length;i++){
 
-for(let i=1;i<cs.length;i++){
+const p=c[i-1];
+const x=c[i];
 
-const previous=cs[i-1];
-const current=cs[i];
+if(x.high>p.high&&x.close<p.high){
 
-if(
-current.high>previous.high &&
-current.close<previous.high
-){
-
-const sweep={
-tf:tf,
+const s={
+tf,
 direction:"BEARISH",
-level:previous.high,
-candle:current,
+level:p.high,
+candle:x,
 index:i
 };
 
-if(
-!best||
-new Date(current.time)>
-new Date(best.candle.time)
-){
-best=sweep;
+if(!best||
+new Date(x.time)>
+new Date(best.candle.time))
+best=s;
 }
 
-}
+if(x.low<p.low&&x.close>p.low){
 
-if(
-current.low<previous.low &&
-current.close>previous.low
-){
-
-const sweep={
-tf:tf,
+const s={
+tf,
 direction:"BULLISH",
-level:previous.low,
-candle:current,
+level:p.low,
+candle:x,
 index:i
 };
 
-if(
-!best||
-new Date(current.time)>
-new Date(best.candle.time)
-){
-best=sweep;
+if(!best||
+new Date(x.time)>
+new Date(best.candle.time))
+best=s;
 }
 
 }
-
-}
-
 });
 
 return best;
-
 }
 
-/* =========================
-SHOW SWEEP
-========================= */
+function showSweep(s){
 
-function showSweep(sweep){
+if(!s){
 
-if(!sweep){
-
-$("sweepStatus").textContent=
-"NO CONFIRMED SWEEP";
-
-$("sweepStatus").className=
-"value yellow";
-
+$("sweepStatus").textContent="NO CONFIRMED SWEEP";
 $("sweepTF").textContent="WAITING";
 $("sweepDir").textContent="WAITING";
 $("sweepLevel").textContent="WAITING";
@@ -804,158 +397,99 @@ $("s2").textContent="WAITING";
 $("s2").className="yellow";
 
 return;
-
 }
 
 $("sweepStatus").textContent="CONFIRMED";
 $("sweepStatus").className="value green";
 
-$("sweepTF").textContent=
-tfText(sweep.tf);
-
-$("sweepDir").textContent=
-sweep.direction;
+$("sweepTF").textContent=tfText(s.tf);
+$("sweepDir").textContent=s.direction;
+$("sweepLevel").textContent=fmt(s.level);
+$("sweepTime").textContent=
+new Date(s.candle.time).toLocaleString();
 
 $("sweepDir").className=
-"value "+
-(
-sweep.direction==="BULLISH"
-?"green":"red"
-);
-
-$("sweepLevel").textContent=
-fmt(sweep.level);
-
-$("sweepTime").textContent=
-new Date(
-sweep.candle.time
-).toLocaleString();
+"value "+(s.direction==="BULLISH"?"green":"red");
 
 $("s2").textContent="CONFIRMED";
 $("s2").className="green";
 
-const key=
-sweep.tf+"_"+sweep.direction+
-"_"+sweep.candle.time;
+const key=s.tf+"_"+s.direction+"_"+s.candle.time;
 
 if(
-key!==lastSweepKey &&
-$("sweepAlert").checked &&
-"Notification" in window &&
+key!==lastSweepKey&&
+$("sweepAlert").checked&&
+window.Notification&&
 Notification.permission==="granted"
 ){
-
-try{
 
 new Notification(
 "OP ROYAL — Liquidity Sweep",
 {
 body:
-sweep.direction+
-" • "+tfText(sweep.tf)+
-" • Level "+fmt(sweep.level)
+s.direction+" • "+
+tfText(s.tf)+" • "+
+"Level "+fmt(s.level)
 }
 );
-
-}catch(e){}
-
 }
 
 lastSweepKey=key;
-
 }
 
-/* =========================
-MSS
-========================= */
+/* MSS */
 
-function detectMSS(sweep){
+function detectMSS(s){
 
-if(!sweep)
-return null;
+if(!s)return null;
 
-const cs=aggregate(sweep.tf);
+const c=aggregate(s.tf);
 
-if(
-sweep.index===undefined||
-sweep.index>=cs.length-1
-)
-return null;
+for(let i=s.index+1;i<c.length;i++){
 
-for(
-let i=sweep.index+1;
-i<cs.length;
-i++
-){
+const x=c[i];
+const structure=c.slice(Math.max(0,i-3),i);
 
-const current=cs[i];
+if(structure.length<2)continue;
 
-const start=
-Math.max(0,i-3);
-
-const structure=
-cs.slice(start,i);
-
-if(structure.length<2)
-continue;
-
-const structureHigh=
-Math.max(
-...structure.map(x=>x.high)
-);
-
-const structureLow=
-Math.min(
-...structure.map(x=>x.low)
-);
+const hi=Math.max(...structure.map(x=>x.high));
+const lo=Math.min(...structure.map(x=>x.low));
 
 if(
-sweep.direction==="BULLISH" &&
-current.close>structureHigh
+s.direction==="BULLISH"&&
+x.close>hi
 ){
-
 return{
 direction:"BULLISH",
-time:current.time,
-level:structureHigh,
-candle:current,
+time:x.time,
+level:hi,
+candle:x,
 index:i
 };
-
 }
 
 if(
-sweep.direction==="BEARISH" &&
-current.close<structureLow
+s.direction==="BEARISH"&&
+x.close<lo
 ){
-
 return{
 direction:"BEARISH",
-time:current.time,
-level:structureLow,
-candle:current,
+time:x.time,
+level:lo,
+candle:x,
 index:i
 };
-
 }
-
 }
 
 return null;
-
 }
 
-/* =========================
-SHOW MSS
-========================= */
+function showMSS(m){
 
-function showMSS(mss){
-
-if(!mss){
+if(!m){
 
 $("mss").textContent="WAITING";
-$("mss").className="value yellow";
-
 $("mssDir").textContent="WAITING";
 $("mssTime").textContent="WAITING";
 $("mssLevel").textContent="WAITING";
@@ -964,161 +498,128 @@ $("s3").textContent="WAITING";
 $("s3").className="yellow";
 
 return;
-
 }
 
 $("mss").textContent="CONFIRMED";
 $("mss").className="value green";
-
-$("mssDir").textContent=
-mss.direction;
+$("mssDir").textContent=m.direction;
+$("mssTime").textContent=
+new Date(m.time).toLocaleString();
+$("mssLevel").textContent=fmt(m.level);
 
 $("mssDir").className=
-"value "+
-(
-mss.direction==="BULLISH"
-?"green":"red"
-);
-
-$("mssTime").textContent=
-new Date(mss.time).toLocaleString();
-
-$("mssLevel").textContent=
-fmt(mss.level);
+"value "+(m.direction==="BULLISH"?"green":"red");
 
 $("s3").textContent="CONFIRMED";
 $("s3").className="green";
-
 }
 
-/* =========================
-DISPLACEMENT
-========================= */
+/* DISPLACEMENT */
 
-function detectDisplacement(mss,sweep){
+function detectDisplacement(m){
 
-if(!mss||!sweep)
-return null;
+if(!m||m.index<5)return null;
 
-const cs=
-aggregate(sweep.tf);
-
-const i=mss.index;
-
-if(i===undefined||i<5)
-return null;
-
-const current=cs[i];
-
-const currentBody=
-Math.abs(
-current.close-current.open
+const c=aggregate(
+currentSweep.tf
 );
 
-const previous=
-cs.slice(i-5,i);
+const x=c[m.index];
 
-const bodies=
-previous.map(c=>
-Math.abs(c.close-c.open)
+const body=
+Math.abs(x.close-x.open);
+
+const prev=c.slice(
+m.index-5,
+m.index
 );
 
-const average=
-bodies.reduce(
-(a,b)=>a+b,0
-)/bodies.length;
+const avg=
+prev.reduce(
+(a,x)=>a+Math.abs(x.close-x.open),0
+)/prev.length;
 
-if(!average)
-return null;
+const ratio=body/avg;
 
-const ratio=
-currentBody/average;
-
-const bullish=
-current.close>current.open;
-
-const bearish=
-current.close<current.open;
-
-let directionMatch=false;
-
-if(
-mss.direction==="BULLISH" &&
-bullish
-){
-directionMatch=true;
-}
-
-if(
-mss.direction==="BEARISH" &&
-bearish
-){
-directionMatch=true;
-}
-
-/*
-1.25x average body = displacement
-confirmation threshold.
-*/
-
-if(
-ratio>=1.25 &&
-directionMatch
-){
+const sameDirection=
+m.direction==="BULLISH"
+?x.close>x.open
+:x.close<x.open;
 
 return{
-confirmed:true,
-ratio:ratio,
-direction:mss.direction,
-candle:current
+confirmed:
+ratio>=1.25&&sameDirection,
+ratio,
+direction:m.direction,
+candle:x
 };
+}
 
+/* TRADE */
+
+function createTrade(s,m,d){
+
+if(!s||!m||!d||!d.confirmed)
+return null;
+
+const entry=d.candle.close;
+
+let sl,tp,risk;
+
+if(m.direction==="BULLISH"){
+
+sl=s.candle.low;
+risk=entry-sl;
+
+if(risk<=0)return null;
+
+tp=entry+(risk*2);
+
+}else{
+
+sl=s.candle.high;
+risk=sl-entry;
+
+if(risk<=0)return null;
+
+tp=entry-(risk*2);
 }
 
 return{
-confirmed:false,
-ratio:ratio,
-direction:mss.direction,
-candle:current
+direction:m.direction,
+entry,
+sl,
+tp,
+risk
 };
-
 }
 
-/* =========================
-SHOW DISPLACEMENT
-========================= */
+let currentSweep=null;
+let currentMSS=null;
 
-function showDisplacement(result){
+/* DISPLACEMENT DISPLAY */
 
-if(!result){
+function showDisplacement(d){
+
+if(!d){
 
 $("disp").textContent="WAITING";
-$("disp").className="value yellow";
-
 $("bodyStrength").textContent="WAITING";
 $("dispDir").textContent="WAITING";
-
 $("s4").textContent="WAITING";
 $("s4").className="yellow";
-
 return;
-
 }
 
 $("bodyStrength").textContent=
-result.ratio.toFixed(2)+"x average";
+d.ratio.toFixed(2)+"x average";
 
-$("dispDir").textContent=
-result.direction;
+$("dispDir").textContent=d.direction;
 
 $("dispDir").className=
-"value "+
-(
-result.direction==="BULLISH"
-?"green":"red"
-);
+"value "+(d.direction==="BULLISH"?"green":"red");
 
-if(result.confirmed){
+if(d.confirmed){
 
 $("disp").textContent="CONFIRMED";
 $("disp").className="value green";
@@ -1133,79 +634,125 @@ $("disp").className="value yellow";
 
 $("s4").textContent="WAITING";
 $("s4").className="yellow";
-
+}
 }
 
-}
+/* TRADE DISPLAY */
 
-/* =========================
-ENGINE
-========================= */
+function showTrade(t){
 
-function runEngine(){
-
-showLiquidity();
-
-const sweep=
-detectSweep();
-
-showSweep(sweep);
-
-if(!sweep){
-
-showMSS(null);
-
-showDisplacement(null);
+if(!t){
 
 $("big").textContent="WAITING";
 $("bigDir").textContent="WAITING";
-
 $("s5").textContent="WAITING";
-$("s6").textContent="WAITING";
+$("s5").className="yellow";
 
-$("signal").textContent=
-"NO ACTIVE SIGNAL";
+$("signal").textContent="NO ACTIVE SIGNAL";
+$("signal").className="value yellow signal";
 
 $("entry").textContent="WAITING";
 $("sl").textContent="WAITING";
 $("tp").textContent="WAITING";
 
-log(
-"Liquidity active • No confirmed sweep"
-);
+$("s6").textContent="WAITING";
+$("s6").className="yellow";
 
 return;
-
 }
 
-const mss=
-detectMSS(sweep);
+$("big").textContent="CONFIRMED";
+$("big").className="value green";
 
-showMSS(mss);
+$("bigDir").textContent=t.direction;
+$("bigDir").className=
+"value "+(t.direction==="BULLISH"?"green":"red");
 
-if(!mss){
+$("s5").textContent="CONFIRMED";
+$("s5").className="green";
+
+$("signal").textContent=
+t.direction==="BULLISH"?"BUY":"SELL";
+
+$("signal").className=
+"value "+
+(t.direction==="BULLISH"?"green":"red")+
+" signal";
+
+$("entry").textContent=fmt(t.entry);
+$("sl").textContent=fmt(t.sl);
+$("tp").textContent=fmt(t.tp);
+
+$("s6").textContent="ACTIVE";
+$("s6").className="green";
+
+/* ENTRY NOTIFICATION */
+
+const key=
+t.direction+"_"+t.entry.toFixed(2);
+
+if(
+key!==lastEntryKey&&
+$("entryAlert").checked&&
+window.Notification&&
+Notification.permission==="granted"
+){
+
+new Notification(
+"OP ROYAL — BIG PLAYER ENTRY",
+{
+body:
+(t.direction==="BULLISH"?"BUY":"SELL")+
+" • Entry "+fmt(t.entry)+
+" • SL "+fmt(t.sl)+
+" • TP "+fmt(t.tp)
+}
+);
+}
+
+lastEntryKey=key;
+}
+
+/* ENGINE */
+
+function runEngine(){
+
+showLiquidity();
+
+currentSweep=detectSweep();
+
+showSweep(currentSweep);
+
+if(!currentSweep){
+
+showMSS(null);
+showDisplacement(null);
+showTrade(null);
+
+log("Waiting for liquidity sweep");
+return;
+}
+
+currentMSS=detectMSS(currentSweep);
+
+showMSS(currentMSS);
+
+if(!currentMSS){
 
 showDisplacement(null);
+showTrade(null);
 
-$("big").textContent="WAITING";
-$("bigDir").textContent="WAITING";
-
-$("s5").textContent="WAITING";
-$("s6").textContent="WAITING";
-
-log(
-"SWEEP CONFIRMED • Waiting for MSS"
-);
-
+log("SWEEP CONFIRMED • Waiting for MSS");
 return;
-
 }
 
+/*
+IMPORTANT:
+MSS must occur after sweep.
+*/
+
 const displacement=
-detectDisplacement(
-mss,
-sweep
-);
+detectDisplacement(currentMSS);
 
 showDisplacement(displacement);
 
@@ -1214,93 +761,60 @@ if(
 !displacement.confirmed
 ){
 
-$("big").textContent="WAITING";
-$("bigDir").textContent="WAITING";
-
-$("s5").textContent="WAITING";
-$("s6").textContent="WAITING";
+showTrade(null);
 
 log(
 "SWEEP + MSS • Waiting for displacement"
 );
 
 return;
-
 }
 
-/*
-All 3 conditions now confirmed.
-*/
-
-$("big").textContent=
-"CONFIRMED";
-
-$("big").className=
-"value green";
-
-$("bigDir").textContent=
-mss.direction;
-
-$("bigDir").className=
-"value "+
-(
-mss.direction==="BULLISH"
-?"green":"red"
+const trade=
+createTrade(
+currentSweep,
+currentMSS,
+displacement
 );
 
-$("s5").textContent=
-"CONFIRMED";
+showTrade(trade);
 
-$("s5").className=
-"green";
-
-$("s6").textContent=
-"READY";
-
-$("s6").className=
-"green";
+if(trade){
 
 log(
-"SWEEP + MSS + DISPLACEMENT CONFIRMED"
+"TRADE ACTIVE • "+
+(trade.direction==="BULLISH"?"BUY":"SELL")+
+" • Entry "+fmt(trade.entry)
 );
 
+}else{
+
+log(
+"Confirmation complete • Trade calculation waiting"
+);
+}
 }
 
-/* =========================
-NOTIFICATIONS
-========================= */
+/* NOTIFICATION PERMISSION */
 
 async function enableNotifications(){
 
 if(!("Notification" in window)){
 
 $("notificationStatus").textContent=
-"Notifications not supported.";
+"Notifications not supported";
 
 return;
-
 }
 
-try{
-
-const permission=
+const p=
 await Notification.requestPermission();
 
 $("notificationStatus").textContent=
-"Permission: "+permission;
-
-}catch(error){
-
-$("notificationStatus").textContent=
-"Notification error.";
-
+"Permission: "+p;
 }
 
-}
-
-/* =========================
-START
-========================= */
+/* START */
 
 loadData();
 
